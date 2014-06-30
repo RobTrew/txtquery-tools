@@ -1,7 +1,7 @@
 txtquery-tools
 ==========
 
-Various scripts for generating grouped, sorted and hyperlinked custom reports and perspectives from _key@value_ tagged text files in the [FoldingText](www.foldingtext.com) and [TaskPaper](http://www.hogbaysoftware.com) formats.
+Various scripts for generating grouped, sorted and hyperlinked custom reports and perspectives from _key@value_ tagged text files in the [FoldingText](http://www.foldingtext.com) and [TaskPaper](http://www.hogbaysoftware.com) formats.
 
 License for the code in this repository:
 
