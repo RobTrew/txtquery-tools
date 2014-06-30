@@ -55,7 +55,7 @@ Easier, of course, in Javascript:  `encodeURI()` for a whole link, or `encodeURI
 
 For the _ftdoc://_ url scheme to be registered, [OpenFTDocAtLine](./OpenFTDocAtLine.app) needs to be on your system, and needs to have been run at least once.
 To do this:
-- EITHER extract the copy from the [txtquery-tools](https://github.com/RobTrew/txtquery-tools) repository [zip file](https://github.com/RobTrew/txtquery-tools/archive/master.zip), and ctrl-click to allow the OS X Gate Keep security system to run it
+- EITHER extract the copy from the [txtquery-tools](https://github.com/RobTrew/txtquery-tools) repository [zip file](https://github.com/RobTrew/txtquery-tools/archive/master.zip), and ctrl-click to allow the OS X Gate Keeper security system to run it
 - OR:
 	- open the .applescript text version Applescript editor,
 	- save as an .app bundle
