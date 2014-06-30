@@ -17,7 +17,7 @@ Note that the file path and any node path are automatically uri-encoded by the s
 
 ### Applications
 - As a kind of bookmark to a particular point in a document
-- As a way, when using the [FoldingText CLI](https://www.npmjs.org/package/foldingtext) to generate a single perspective or report from several documents, of creating links which jump back from the perspective to a specific document and line.
+- As a way (when using the [FoldingText CLI](https://www.npmjs.org/package/foldingtext) to generate a single perspective or report from several documents) of creating links which jump back from the perspective to a specific document and line.
 
 ### Use
 - Select a line or phrase in FoldingText
