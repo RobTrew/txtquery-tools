@@ -12,6 +12,17 @@
 	<string>applet</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.complexpoint.OpenFTDocAtLine</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>Links to FoldingText docs</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>ftdoc</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
