@@ -20,7 +20,7 @@
 		<real>0.80000001192092896</real>
 		<key>viewControllers</key>
 		<dict>
-			<key>66DD126C-739F-4209-9DDA-CDAFF0DA3B3F-10482-00006BCF22D9C8BA</key>
+			<key>86CD6CD1-E449-4F1E-A8BD-057C53A8F8BB-765-00001FBBA8D6B40E</key>
 			<dict>
 				<key>debuggerViewState</key>
 				<dict>
@@ -47,9 +47,9 @@
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>441</integer>
-								<integer>565</integer>
-								<integer>227</integer>
+								<integer>309</integer>
+								<integer>395</integer>
+								<integer>160</integer>
 							</array>
 							<key>5</key>
 							<array>
@@ -177,7 +177,7 @@
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>7044</integer>
+								<integer>4289</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -189,7 +189,7 @@
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 2404}, {1282, 1241}}</string>
+						<string>{{0, 1963}, {721, 872}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
@@ -214,9 +214,9 @@
 				<key>tabsHidden</key>
 				<false/>
 				<key>windowControllerID</key>
-				<string>66DD126C-739F-4209-9DDA-CDAFF0DA3B3F-10482-00006BCF22D9C8BA</string>
+				<string>86CD6CD1-E449-4F1E-A8BD-057C53A8F8BB-765-00001FBBA8D6B40E</string>
 				<key>windowFrame</key>
-				<string>45 224 1750 1334 0 0 2560 1578 </string>
+				<string>45 593 1189 965 0 0 2560 1578 </string>
 			</dict>
 		</dict>
 		<key>windowControllers</key>
@@ -225,13 +225,13 @@
 				<key>controllerClass</key>
 				<string>ScriptWindowController</string>
 				<key>controllerID</key>
-				<string>66DD126C-739F-4209-9DDA-CDAFF0DA3B3F-10482-00006BCF22D9C8BA</string>
+				<string>86CD6CD1-E449-4F1E-A8BD-057C53A8F8BB-765-00001FBBA8D6B40E</string>
 				<key>controllerState</key>
 				<dict>
 					<key>miniaturized</key>
 					<false/>
 					<key>windowFrame</key>
-					<string>45 224 1750 1334 0 0 2560 1578 </string>
+					<string>45 593 1189 965 0 0 2560 1578 </string>
 				</dict>
 			</dict>
 		</array>

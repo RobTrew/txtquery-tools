@@ -47,8 +47,8 @@
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>510</integer>
-								<integer>649</integer>
+								<integer>511</integer>
+								<integer>648</integer>
 								<integer>264</integer>
 							</array>
 							<key>5</key>
@@ -194,7 +194,7 @@
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>2810</integer>
+								<integer>4307</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
