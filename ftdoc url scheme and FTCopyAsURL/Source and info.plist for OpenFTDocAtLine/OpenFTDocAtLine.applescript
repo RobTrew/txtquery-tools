@@ -1,4 +1,4 @@
-property pTitle : "Register and handle ftdoc:// url scheme"property pVer : "0.02"property pAuthor : "Rob Trew"property pDescription : "
+property pTitle : "Register and handle ftdoc:// url scheme"property pVer : "0.03"property pAuthor : "Rob Trew"property pDescription : "
 
 	Use in conjunction with the 'FTCopyAsURL' Applescript to get
 	a URL which opens the specified document, optionally restoring selection and filter state.
@@ -42,7 +42,7 @@ function(editor, options) {
 		if (strSelnPath) {
 			lstMatches = tree.evaluateNodePath(strSelnPath);
 		}
-		if (lstMatches.length == 0) {
+		if (strFind && (lstMatches.length == 0)) {
 			lstMatches = tree.evaluateNodePath('//\"' + strFind + '\"');
 		}
 		if (lstMatches.length) {

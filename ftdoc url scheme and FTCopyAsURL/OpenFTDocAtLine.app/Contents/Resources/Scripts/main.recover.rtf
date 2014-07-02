@@ -9,7 +9,7 @@
 \b0  \cf3 pTitle\cf2  : "Register and handle ftdoc:// url scheme"\
 
 \b property
-\b0  \cf3 pVer\cf2  : "0.02"\
+\b0  \cf3 pVer\cf2  : "0.03"\
 
 \b property
 \b0  \cf3 pAuthor\cf2  : "Rob Trew"\
@@ -110,7 +110,7 @@ function(editor, options) \{\
 		if (strSelnPath) \{\
 			lstMatches = tree.evaluateNodePath(strSelnPath);\
 		\}\
-		if (lstMatches.length == 0) \{\
+		if (strFind && (lstMatches.length == 0)) \{\
 			lstMatches = tree.evaluateNodePath('//\\"' + strFind + '\\"');\
 		\}\
 		if (lstMatches.length) \{\

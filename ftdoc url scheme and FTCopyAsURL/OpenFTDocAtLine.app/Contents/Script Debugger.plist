@@ -20,7 +20,7 @@
 		<real>0.80000001192092896</real>
 		<key>viewControllers</key>
 		<dict>
-			<key>A0309377-14C1-4934-858E-17777A6ABBA8-10482-000069712B298CD6</key>
+			<key>66DD126C-739F-4209-9DDA-CDAFF0DA3B3F-10482-00006BCF22D9C8BA</key>
 			<dict>
 				<key>debuggerViewState</key>
 				<dict>
@@ -47,9 +47,9 @@
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>312</integer>
-								<integer>394</integer>
-								<integer>158</integer>
+								<integer>441</integer>
+								<integer>565</integer>
+								<integer>227</integer>
 							</array>
 							<key>5</key>
 							<array>
@@ -177,7 +177,7 @@
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>520</integer>
+								<integer>7044</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -189,7 +189,7 @@
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 210}, {721, 872}}</string>
+						<string>{{0, 2404}, {1282, 1241}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
@@ -207,16 +207,16 @@
 					<key>tab.bps</key>
 					<real>433</real>
 					<key>tab.debug</key>
-					<real>439</real>
+					<real>433</real>
 					<key>tab.rsrcs</key>
 					<real>433</real>
 				</dict>
 				<key>tabsHidden</key>
 				<false/>
 				<key>windowControllerID</key>
-				<string>A0309377-14C1-4934-858E-17777A6ABBA8-10482-000069712B298CD6</string>
+				<string>66DD126C-739F-4209-9DDA-CDAFF0DA3B3F-10482-00006BCF22D9C8BA</string>
 				<key>windowFrame</key>
-				<string>45 593 1189 965 0 0 2560 1578 </string>
+				<string>45 224 1750 1334 0 0 2560 1578 </string>
 			</dict>
 		</dict>
 		<key>windowControllers</key>
@@ -225,13 +225,13 @@
 				<key>controllerClass</key>
 				<string>ScriptWindowController</string>
 				<key>controllerID</key>
-				<string>A0309377-14C1-4934-858E-17777A6ABBA8-10482-000069712B298CD6</string>
+				<string>66DD126C-739F-4209-9DDA-CDAFF0DA3B3F-10482-00006BCF22D9C8BA</string>
 				<key>controllerState</key>
 				<dict>
 					<key>miniaturized</key>
 					<false/>
 					<key>windowFrame</key>
-					<string>45 593 1189 965 0 0 2560 1578 </string>
+					<string>45 224 1750 1334 0 0 2560 1578 </string>
 				</dict>
 			</dict>
 		</array>
