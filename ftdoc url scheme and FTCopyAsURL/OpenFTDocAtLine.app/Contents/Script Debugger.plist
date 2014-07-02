@@ -20,7 +20,7 @@
 		<real>0.80000001192092896</real>
 		<key>viewControllers</key>
 		<dict>
-			<key>23749825-FF92-4B7E-8A53-8CD8DB69C491-2739-00003186CDA39CEB</key>
+			<key>A0309377-14C1-4934-858E-17777A6ABBA8-10482-000069712B298CD6</key>
 			<dict>
 				<key>debuggerViewState</key>
 				<dict>
@@ -47,9 +47,9 @@
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>320</integer>
-								<integer>403</integer>
-								<integer>162</integer>
+								<integer>312</integer>
+								<integer>394</integer>
+								<integer>158</integer>
 							</array>
 							<key>5</key>
 							<array>
@@ -175,9 +175,9 @@
 						<array>
 							<dict>
 								<key>length</key>
-								<integer>171</integer>
+								<integer>0</integer>
 								<key>location</key>
-								<integer>816</integer>
+								<integer>520</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -189,14 +189,14 @@
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 0}, {721, 893}}</string>
+						<string>{{0, 210}, {721, 872}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
 						<false/>
 					</dict>
 					<key>instanceID</key>
-					<string>C9D5C106-BCB3-48F2-8E03-350F491908BE-2739-000031938512EAB9</string>
+					<string>8BA8BD34-90E7-496B-944A-226819E6AAFC-10482-000069888A391A4A</string>
 					<key>resultBarVisible</key>
 					<false/>
 				</dict>
@@ -214,7 +214,7 @@
 				<key>tabsHidden</key>
 				<false/>
 				<key>windowControllerID</key>
-				<string>23749825-FF92-4B7E-8A53-8CD8DB69C491-2739-00003186CDA39CEB</string>
+				<string>A0309377-14C1-4934-858E-17777A6ABBA8-10482-000069712B298CD6</string>
 				<key>windowFrame</key>
 				<string>45 593 1189 965 0 0 2560 1578 </string>
 			</dict>
@@ -225,7 +225,7 @@
 				<key>controllerClass</key>
 				<string>ScriptWindowController</string>
 				<key>controllerID</key>
-				<string>23749825-FF92-4B7E-8A53-8CD8DB69C491-2739-00003186CDA39CEB</string>
+				<string>A0309377-14C1-4934-858E-17777A6ABBA8-10482-000069712B298CD6</string>
 				<key>controllerState</key>
 				<dict>
 					<key>miniaturized</key>

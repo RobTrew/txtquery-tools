@@ -12,6 +12,14 @@
 	<string>applet</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.complexpoint.OpenFTDocAtLine</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>OpenFTDocAtLine</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>aplt</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -23,14 +31,6 @@
 			</array>
 		</dict>
 	</array>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>OpenFTDocAtLine</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleSignature</key>
-	<string>aplt</string>
 	<key>LSMinimumSystemVersionByArchitecture</key>
 	<dict>
 		<key>x86_64</key>

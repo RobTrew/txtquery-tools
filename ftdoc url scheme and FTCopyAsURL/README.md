@@ -5,15 +5,17 @@ The [FTCopyAsURL](./FTCopyAsURL.applescript) applescript copies the currently se
 - restores the current selection, and: 
 - also restores any filters that are currently applied to the document.
 
-For example, the following link:
+For example, the following link, which has various optional switches
 
-`ftdoc:///Users/houthakker/Library/Application%20Support/Notational%20Velocity/notes-2014-06-29.txt?nodepath=//@priority%20=%201?line=23?startoffset=36?endoffset=62`
+`ftdoc:///Users/robintrew/Library/Application%20Support/Notational%20Velocity/notes-2014-06-30.txt?nodepath=///@priority?selnpath=/heil/a%20se/why/who/inte?find=Intermediaries?line=10?startoffset=5?endoffset=19`
 
-1. Reopens a particular document in a Notational Velocity text file folder
-2. selects text positions 36 to 62 within line 23,
-3. and restores the **@//priority=1** filter  (=lines tagged priority one at **any** (//) outline level)
+1. Reopens a particular document in a Notational Velocity text file folder,
+2. restores the `//@priority`  filter path from the `?nodepath=` switch
+3. attempts to restore the selection by looking for a node which matches the `?selnpath=` nodepath 
+4. if it finds nothing matched by the `?selnpath=` switch, selects the first node with text matching the `?find=` switch
+4. and if all else fails selects whatever is specified by the optional `?line=`, `?startoffset` and `?endoffset=` switches
 
-Note that the file path and any node path are automatically uri-encoded by the script.
+Note that the file path and any other text or node paths are automatically uri-encoded by the script.
 
 ### Applications
 - As a kind of bookmark to a particular point in a document
