@@ -27,8 +27,8 @@ Note that the file path and any other text or node paths are automatically uri-e
 The tp3doc:// url-scheme is registered and handled by an Applescript, [OpenTP3docAtLine](./OpenTP3docAtLine.app):
 
 ###### OpenTP3docAtLine.app
-- Is an [applescript](Source%20and%20info.plist%20for%20OpenTP3docAtLine/OpenTP3docAtLine.applescript) saved as an .app bundle
-- contains an [Info.plist](Source%20and%20info.plist%20for%20OpenTP3docAtLine/Info.plist) which registers `tp3doc://`
+- Is an [applescript](https://github.com/RobTrew/txtquery-tools/blob/master/tp3doc%20url%20scheme%20and%20TP3CopyAsURL/Source%20and%20info.plist%20for%20OpenTP3DocAtLine/OpenTP3DocAtLine.applescript) saved as an .app bundle
+- contains an [Info.plist](https://github.com/RobTrew/txtquery-tools/blob/master/tp3doc%20url%20scheme%20and%20TP3CopyAsURL/Source%20and%20info.plist%20for%20OpenTP3DocAtLine/Info.plist) which registers `tp3doc://`
 - contains an open url handler which:
 	- Opens a specified text document in [TaskPaper](http://www.hogbaysoftware.com)
 	- applies any filter given in a `?nodepath=`

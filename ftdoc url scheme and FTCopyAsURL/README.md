@@ -31,8 +31,8 @@ Note that the file path and any other text or node paths are automatically uri-e
 The ftdoc:// url-scheme is registered and handled by an Applescript, [OpenFTDocAtLine](./OpenFTDocAtLine.app):
 
 ###### OpenFTDocAtLine.app
-- Is an [applescript](Source%20and%20info.plist%20for%20OpenFTDocAtLine/OpenFTDocAtLine.applescript) saved as an .app bundle
-- contains an [Info.plist](Source%20and%20info.plist%20for%20OpenFTDocAtLine/Info.plist) which registers `ftdoc://`
+- Is an [applescript](https://github.com/RobTrew/txtquery-tools/blob/master/ftdoc%20url%20scheme%20and%20FTCopyAsURL/Source%20and%20info.plist%20for%20OpenFTDocAtLine/OpenFTDocAtLine.applescript) saved as an .app bundle
+- contains an [Info.plist](https://github.com/RobTrew/txtquery-tools/blob/master/ftdoc%20url%20scheme%20and%20FTCopyAsURL/Source%20and%20info.plist%20for%20OpenFTDocAtLine/Info.plist) which registers `ftdoc://`
 - contains an open url handler which:
 	- Opens a specified text document in [FoldingText](http://www.foldingtext.com)
 	- applies any filter given in a `?nodepath=`
