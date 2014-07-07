@@ -47,8 +47,8 @@
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>511</integer>
-								<integer>648</integer>
+								<integer>512</integer>
+								<integer>647</integer>
 								<integer>264</integer>
 							</array>
 							<key>5</key>
@@ -194,7 +194,7 @@
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>4307</integer>
+								<integer>5497</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -206,7 +206,7 @@
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 1346}, {1125, 1431}}</string>
+						<string>{{0, 1963}, {1125, 1431}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
@@ -233,7 +233,7 @@
 				<key>windowControllerID</key>
 				<string>35E6BA35-D159-49A8-8BAD-C751B177C3D9-765-000018D9C51B4F15</string>
 				<key>windowFrame</key>
-				<string>45 55 1690 1503 0 0 2560 1578 </string>
+				<string>280 -66 1690 1503 0 0 2560 1578 </string>
 			</dict>
 		</dict>
 		<key>windowControllers</key>
@@ -248,7 +248,7 @@
 					<key>miniaturized</key>
 					<false/>
 					<key>windowFrame</key>
-					<string>45 55 1690 1503 0 0 2560 1578 </string>
+					<string>280 -66 1690 1503 0 0 2560 1578 </string>
 				</dict>
 			</dict>
 		</array>

@@ -7,8 +7,9 @@
 
 \f0\b\fs24 \cf2 property
 \b0  \cf3 pTitle\cf2  : "Register and handle tp3doc:// url scheme"\
+\pard\pardeftab480\slleading20\pardirnatural
 
-\b property
+\b \cf2 property
 \b0  \cf3 pVer\cf2  : "0.03"\
 
 \b property
@@ -22,7 +23,6 @@
 \
 "\
 \
-\pard\pardeftab480\slleading20\pardirnatural
 \cf4 -- Registers the url-scheme tp3doc://encoded-file-path with optional switches:\cf2 \
 \cf4 --[?nodepath=//@due] -- nodepath used to apply a filter\cf2 \
 \cf4 --[?selnpath=] -- nodepath used to specify a selection\cf2 \
@@ -42,9 +42,8 @@
 \cf4 -- for the approach to registering and handling a url with an applescript.app and the .plist in its bundle,\cf2 \
 \cf4 -- see http://www.macosxautomation.com/applescript/linktrigger/\cf2 \
 \
-\pard\pardeftab480\slleading20\pardirnatural
 
-\b \cf2 property
+\b property
 \b0  \cf3 piNodePath\cf2  : 1\
 
 \b property
@@ -244,7 +243,12 @@ function(editor, options) \{\
 \b0  \cf3 pathAndSwitches\cf2 (\cf3 strURL\cf2 )\
 	\cf4 -- we can't simply split on '?' as there may be '?' in the text\cf2 \
 	\cf4 -- extracting the file in .js would require an active document, \cf2 \
-	\cf4 -- so we do it here to save the time and distraction caused by creating one \cf2 \
+	\cf4 -- so we do it here to save the time and distraction caused by creating one\cf2 \
+	
+\b set
+\b0  \cf3 strSwitches\cf2  
+\b to
+\b0  ""\
 	
 \b set
 \b0  \{\cf3 dlm\cf2 , 
@@ -253,7 +257,7 @@ function(editor, options) \{\
 \b to
 \b0  \{
 \b my
-\b0  \cf5 text item delimiters\cf2 , "tp3doc://"\}\
+\b0  \cf5 text item delimiters\cf2 , "ftdoc://"\}\
 	
 \b set
 \b0  \cf3 lstParts\cf2  
@@ -291,11 +295,16 @@ function(editor, options) \{\
 \b0  \cf3 lstParts\cf2 \
 		
 \b set
-\b0  \cf3 lngClosest\cf2  
+\b0  \cf3 lngFull\cf2  
 \b to
 \b0  \cf5 length\cf2  
 \b of
 \b0  \cf3 strTarget\cf2 \
+		
+\b set
+\b0  \cf3 lngClosest\cf2  
+\b to
+\b0  \cf3 lngFull\cf2 \
 		
 \b repeat
 \b0  
@@ -368,6 +377,11 @@ function(editor, options) \{\
 \b of
 \b0  \cf3 strTarget\cf2 \
 		
+\b if
+\b0  \cf3 lngClosest\cf2  < \cf3 lngFull\cf2  
+\b then
+\b0 \
+			
 \b set
 \b0  \cf3 strSwitches\cf2  
 \b to
@@ -378,6 +392,11 @@ function(editor, options) \{\
 \b0  -1 
 \b of
 \b0  \cf3 strTarget\cf2 \
+		
+\b end
+\b0  
+\b if
+\b0 \
 		
 \b set
 \b0  \cf3 varParse\cf2  
@@ -402,11 +421,9 @@ function(editor, options) \{\
 \b end
 \b0  \cf3 pathAndSwitches\cf2 \
 \
-\pard\pardeftab480\slleading20\pardirnatural
 \cf4 -- based on http://harvey.nu/applescript_url_decode_routine.html\cf2 \
-\pard\pardeftab480\slleading20\pardirnatural
 
-\b \cf2 on
+\b on
 \b0  \cf3 urldecode\cf2 (\cf3 theText\cf2 )\
 	
 \b set
@@ -583,7 +600,6 @@ function(editor, options) \{\
 \b0  \cf3 urldecode\cf2 \
 \
 \
-\pard\pardeftab480\slleading20\pardirnatural
 \cf4 -- "tp3doc://encoded-file-path[?nodepath=//@due][?line=N][?startoffset=0][?endoffset=-1]"\cf2 \
 \
 }
