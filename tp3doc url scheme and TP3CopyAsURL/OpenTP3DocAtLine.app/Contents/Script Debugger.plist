@@ -20,7 +20,7 @@
 		<real>0.80000001192092896</real>
 		<key>viewControllers</key>
 		<dict>
-			<key>35E6BA35-D159-49A8-8BAD-C751B177C3D9-765-000018D9C51B4F15</key>
+			<key>A0309377-14C1-4934-858E-17777A6ABBA8-10482-000069712B298CD6</key>
 			<dict>
 				<key>debuggerViewState</key>
 				<dict>
@@ -47,17 +47,17 @@
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>512</integer>
-								<integer>647</integer>
-								<integer>264</integer>
+								<integer>317</integer>
+								<integer>403</integer>
+								<integer>165</integer>
 							</array>
 							<key>5</key>
 							<array>
-								<integer>271</integer>
-								<integer>293</integer>
-								<integer>507</integer>
-								<integer>133</integer>
-								<integer>202</integer>
+								<integer>163</integer>
+								<integer>177</integer>
+								<integer>306</integer>
+								<integer>80</integer>
+								<integer>122</integer>
 							</array>
 						</dict>
 					</dict>
@@ -91,6 +91,56 @@
 						</dict>
 						<key>prettyPrint</key>
 						<false/>
+						<key>sourceState</key>
+						<dict>
+							<key>text</key>
+							<dict>
+								<key>LNSSelection</key>
+								<array>
+									<dict>
+										<key>length</key>
+										<integer>0</integer>
+										<key>location</key>
+										<integer>3</integer>
+									</dict>
+								</array>
+								<key>LNSTextViewShowInvisibles</key>
+								<false/>
+								<key>LNSTextViewShowSpaces</key>
+								<false/>
+								<key>LNSTextViewShowTabStops</key>
+								<false/>
+								<key>LNSTextViewWrapLines</key>
+								<true/>
+								<key>LNSVisibleRect</key>
+								<string>{{0, 0}, {285, 132}}</string>
+							</dict>
+						</dict>
+						<key>textState</key>
+						<dict>
+							<key>text</key>
+							<dict>
+								<key>LNSSelection</key>
+								<array>
+									<dict>
+										<key>length</key>
+										<integer>0</integer>
+										<key>location</key>
+										<integer>108</integer>
+									</dict>
+								</array>
+								<key>LNSTextViewShowInvisibles</key>
+								<false/>
+								<key>LNSTextViewShowSpaces</key>
+								<false/>
+								<key>LNSTextViewShowTabStops</key>
+								<false/>
+								<key>LNSTextViewWrapLines</key>
+								<true/>
+								<key>LNSVisibleRect</key>
+								<string>{{0, 0}, {285, 132}}</string>
+							</dict>
+						</dict>
 					</dict>
 					<key>stackVisible</key>
 					<false/>
@@ -159,7 +209,7 @@
 					</dict>
 				</dict>
 				<key>mainSplitPosition</key>
-				<real>537</real>
+				<real>301</real>
 				<key>modeIdentifier</key>
 				<string>tab.debug</string>
 				<key>resourcesViewState</key>
@@ -194,7 +244,7 @@
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>5497</integer>
+								<integer>1221</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -206,7 +256,7 @@
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 1963}, {1125, 1431}}</string>
+						<string>{{0, 18}, {1278, 893}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
@@ -231,9 +281,9 @@
 				<key>tabsHidden</key>
 				<false/>
 				<key>windowControllerID</key>
-				<string>35E6BA35-D159-49A8-8BAD-C751B177C3D9-765-000018D9C51B4F15</string>
+				<string>A0309377-14C1-4934-858E-17777A6ABBA8-10482-000069712B298CD6</string>
 				<key>windowFrame</key>
-				<string>280 -66 1690 1503 0 0 2560 1578 </string>
+				<string>45 593 1607 965 0 0 2560 1578 </string>
 			</dict>
 		</dict>
 		<key>windowControllers</key>
@@ -242,13 +292,13 @@
 				<key>controllerClass</key>
 				<string>ScriptWindowController</string>
 				<key>controllerID</key>
-				<string>35E6BA35-D159-49A8-8BAD-C751B177C3D9-765-000018D9C51B4F15</string>
+				<string>A0309377-14C1-4934-858E-17777A6ABBA8-10482-000069712B298CD6</string>
 				<key>controllerState</key>
 				<dict>
 					<key>miniaturized</key>
 					<false/>
 					<key>windowFrame</key>
-					<string>280 -66 1690 1503 0 0 2560 1578 </string>
+					<string>45 593 1607 965 0 0 2560 1578 </string>
 				</dict>
 			</dict>
 		</array>

@@ -1,16 +1,15 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
 {\fonttbl\f0\fnil\fcharset0 Verdana;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red64\green128\blue0;\red76\green78\blue78;
-\red108\green5\blue211;\red0\green22\blue176;\red0\green0\blue255;}
+\red108\green5\blue211;\red0\green0\blue255;\red0\green22\blue176;}
 \deftab480
 \pard\pardeftab480\slleading20\pardirnatural
 
 \f0\b\fs24 \cf2 property
 \b0  \cf3 pTitle\cf2  : "Register and handle tp3doc:// url scheme"\
-\pard\pardeftab480\slleading20\pardirnatural
 
-\b \cf2 property
-\b0  \cf3 pVer\cf2  : "0.03"\
+\b property
+\b0  \cf3 pVer\cf2  : "0.04"\
 
 \b property
 \b0  \cf3 pAuthor\cf2  : "Rob Trew"\
@@ -165,7 +164,21 @@ function(editor, options) \{\
 
 \b on
 \b0  
-\b \cf6 open location
+\b \cf6 run
+\b0 \cf2 \
+	
+\b \cf7 open location
+\b0 \cf2  "tp3doc:///Users/robintrew/Desktop/Here%20we%20have%20a%20doc.taskpaper"\
+
+\b end
+\b0  
+\b \cf6 run
+\b0 \cf2 \
+\
+
+\b on
+\b0  
+\b \cf7 open location
 \b0 \cf2  \cf3 strURL\cf2 \
 	
 \b set
@@ -179,7 +192,7 @@ function(editor, options) \{\
 \b0  
 \b not
 \b0  
-\i \cf7 missing value
+\i \cf6 missing value
 \i0 \cf2  
 \b then
 \b0 \
@@ -194,14 +207,14 @@ function(editor, options) \{\
 		
 \b tell
 \b0  
-\i \cf7 application
+\i \cf6 application
 \i0 \cf2  "TaskPaper"\
 			
 \b set
 \b0  \cf3 oDoc\cf2  
 \b to
 \b0  (
-\b \cf7 open
+\b \cf6 open
 \b0 \cf2  \cf3 strPath\cf2 )\
 			
 \b tell
@@ -211,10 +224,10 @@ function(editor, options) \{\
 \b0  \cf3 varResult\cf2  
 \b to
 \b0  (
-\b \cf7 evaluate
-\b0 \cf2  \cf7 script\cf2  \cf3 pjsSelect\cf2  \cf7 with options\cf2  (\cf3 recParse\cf2  & \{\cf3 keys\cf2 :\cf3 plstKeys\cf2 \}))\
+\b \cf6 evaluate
+\b0 \cf2  \cf6 script\cf2  \cf3 pjsSelect\cf2  \cf6 with options\cf2  (\cf3 recParse\cf2  & \{\cf3 keys\cf2 :\cf3 plstKeys\cf2 \}))\
 				
-\b \cf7 activate
+\b \cf6 activate
 \b0 \cf2 \
 			
 \b end
@@ -234,7 +247,7 @@ function(editor, options) \{\
 
 \b end
 \b0  
-\b \cf6 open location
+\b \cf7 open location
 \b0 \cf2 \
 \
 \
@@ -257,13 +270,13 @@ function(editor, options) \{\
 \b to
 \b0  \{
 \b my
-\b0  \cf5 text item delimiters\cf2 , "ftdoc://"\}\
+\b0  \cf5 text item delimiters\cf2 , "tp3doc://"\}\
 	
 \b set
 \b0  \cf3 lstParts\cf2  
 \b to
 \b0  
-\i \cf7 text items
+\i \cf6 text items
 \i0 \cf2  
 \b of
 \b0  \cf3 strURL\cf2 \
@@ -279,7 +292,7 @@ function(editor, options) \{\
 \b0  \cf3 varParse\cf2  
 \b to
 \b0  
-\i \cf7 missing value
+\i \cf6 missing value
 \i0 \cf2 \
 	
 \b else
@@ -289,7 +302,7 @@ function(editor, options) \{\
 \b0  \cf3 strTarget\cf2  
 \b to
 \b0  
-\i \cf7 item
+\i \cf6 item
 \i0 \cf2  2 
 \b of
 \b0  \cf3 lstParts\cf2 \
@@ -324,7 +337,7 @@ function(editor, options) \{\
 \b0  \cf3 lstParts\cf2  
 \b to
 \b0  
-\i \cf7 text items
+\i \cf6 text items
 \i0 \cf2  
 \b of
 \b0  \cf3 strTarget\cf2 \
@@ -342,7 +355,7 @@ function(editor, options) \{\
 \b0  \cf5 length\cf2  
 \b of
 \b0  
-\i \cf7 item
+\i \cf6 item
 \i0 \cf2  1 
 \b of
 \b0  \cf3 lstParts\cf2 \
@@ -370,7 +383,7 @@ function(editor, options) \{\
 \b0  \cf3 strPath\cf2  
 \b to
 \b0  
-\i \cf7 text
+\i \cf6 text
 \i0 \cf2  1 
 \b thru
 \b0  \cf3 lngClosest\cf2  
@@ -386,7 +399,7 @@ function(editor, options) \{\
 \b0  \cf3 strSwitches\cf2  
 \b to
 \b0  
-\i \cf7 text
+\i \cf6 text
 \i0 \cf2  (\cf3 lngClosest\cf2  + 1) 
 \b thru
 \b0  -1 
@@ -452,7 +465,7 @@ function(editor, options) \{\
 \b0  \cf3 c\cf2  
 \b to
 \b0  
-\i \cf7 character
+\i \cf6 character
 \i0 \cf2  \cf3 i\cf2  
 \b of
 \b0  \cf3 theText\cf2 \
@@ -483,14 +496,14 @@ function(editor, options) \{\
 				
 \b tell
 \b0  
-\i \cf7 application
+\i \cf6 application
 \i0 \cf2  "System Events"\
 					
-\b \cf7 activate
+\b \cf6 activate
 \b0 \cf2 \
 					
-\b \cf6 display dialog
-\b0 \cf2  ("Invalid URL Encoded string - missing hex char") \cf6 buttons\cf2  \{"OK"\} \cf6 default button\cf2  "OK" \cf6 with title\cf2  \cf3 pTitle\cf2  & "  ver. " & \cf3 pVer\cf2 \
+\b \cf7 display dialog
+\b0 \cf2  ("Invalid URL Encoded string - missing hex char") \cf7 buttons\cf2  \{"OK"\} \cf7 default button\cf2  "OK" \cf7 with title\cf2  \cf3 pTitle\cf2  & "  ver. " & \cf3 pVer\cf2 \
 				
 \b end
 \b0  
@@ -509,23 +522,23 @@ function(editor, options) \{\
 \b0  \cf3 iCVal1\cf2  
 \b to
 \b0  (
-\b \cf6 offset
-\b0 \cf2  \cf6 of\cf2  (
-\i \cf7 character
+\b \cf7 offset
+\b0 \cf2  \cf7 of\cf2  (
+\i \cf6 character
 \i0 \cf2  (\cf3 i\cf2  + 1) 
 \b of
-\b0  \cf3 theText\cf2 ) \cf6 in\cf2  \cf3 sHex\cf2 ) - 1\
+\b0  \cf3 theText\cf2 ) \cf7 in\cf2  \cf3 sHex\cf2 ) - 1\
 			
 \b set
 \b0  \cf3 iCVal2\cf2  
 \b to
 \b0  (
-\b \cf6 offset
-\b0 \cf2  \cf6 of\cf2  (
-\i \cf7 character
+\b \cf7 offset
+\b0 \cf2  \cf7 of\cf2  (
+\i \cf6 character
 \i0 \cf2  (\cf3 i\cf2  + 2) 
 \b of
-\b0  \cf3 theText\cf2 ) \cf6 in\cf2  \cf3 sHex\cf2 ) - 1\
+\b0  \cf3 theText\cf2 ) \cf7 in\cf2  \cf3 sHex\cf2 ) - 1\
 			
 \b if
 \b0  \cf3 iCVal1\cf2  = -1 
@@ -536,14 +549,14 @@ function(editor, options) \{\
 				
 \b tell
 \b0  
-\i \cf7 application
+\i \cf6 application
 \i0 \cf2  "System Events"\
 					
-\b \cf7 activate
+\b \cf6 activate
 \b0 \cf2 \
 					
-\b \cf6 display dialog
-\b0 \cf2  ("Invalid URL Encoded string - not 2 hex chars after % sign") \cf6 buttons\cf2  \{"OK"\} \cf6 default button\cf2  "OK" \cf6 with title\cf2  \cf3 pTitle\cf2  & "  ver. " & \cf3 pVer\cf2 \
+\b \cf7 display dialog
+\b0 \cf2  ("Invalid URL Encoded string - not 2 hex chars after % sign") \cf7 buttons\cf2  \{"OK"\} \cf7 default button\cf2  "OK" \cf7 with title\cf2  \cf3 pTitle\cf2  & "  ver. " & \cf3 pVer\cf2 \
 				
 \b end
 \b0  
@@ -562,7 +575,7 @@ function(editor, options) \{\
 \b0  \cf3 sDst\cf2  
 \b to
 \b0  \cf3 sDst\cf2  & (
-\b \cf6 ASCII character
+\b \cf7 ASCII character
 \b0 \cf2  (\cf3 iCVal1\cf2  * 16 + \cf3 iCVal2\cf2 ))\
 			
 \b set
