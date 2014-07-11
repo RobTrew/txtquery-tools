@@ -11,7 +11,7 @@ The **Shell script** uses the [FoldingText CLI tool](https://www.npmjs.org/packa
 
 ###### Shared ViewMenu.json
 
-Both (plugin/applescript and shell script) can use the same ViewMenu.json file (created in the script folder when either is first run). You can inspect this file in a text editor, and tweak existing report templates (FLOWR queries), or even add new ones).
+Both (plugin/applescript and shell script) can use the same [ViewMenu.json](./ViewMenu.json]) file (created in the script folder when either is first run). You can inspect this file in a text editor, and tweak existing report templates (FLOWR queries), or even add new ones).
 
 (Probably simplest, of course, to make a duplicate of an existing FLOWR, give it a new name, and adjust and test it incrementally).
 
@@ -20,10 +20,10 @@ Both (plugin/applescript and shell script) can use the same ViewMenu.json file (
 #### SHELL SCRIPT DESCRIPTION
 **txtquery** generates Markdown-formatted custom reports by applying FLWOR-style queries to sets of `@key(value)` tagged text files.
 
-The FLWOR queries which it uses are stored in .json menu files. These use [FoldingText](http://www.foldingtext.com) nodepath syntax (FoldingText > Help > NodePaths Guide) to filter text nodes by their tags, values, and text content, and can also include clauses like:
+The [FLWOR](http://en.wikipedia.org/wiki/FLWOR) queries which it uses are stored in .json menu files. These use [FoldingText](http://www.foldingtext.com) nodepath syntax (FoldingText > Help > NodePaths Guide) to filter text nodes by their tags, values, and text content, and can also include clauses like:
 
 - Let
-- Grouped By (as in Xquery 3)
+- Grouped By ([as in Xquery 3](http://www.w3.org/TR/xquery-30-use-cases/#groupby))
 - Order by
 - Return (optionally nested)
 
