@@ -7,7 +7,7 @@
 
 The **plugin** and its **Applescript** are useful for experimentation with TXTQUERY custom reports, but only generate perspectives for the current document that is open in FoldingText.
 
-The **Shell script** uses the https://www.npmjs.org/package/foldingtext and the TXTQuery.js file, and generates grouped and sorted reports by querying sets of several files.
+The **Shell script** uses the [FoldingText CLI tool](https://www.npmjs.org/package/foldingtext) and the [TXTQuery.js](https://github.com/RobTrew/txtquery-tools/tree/master/perspectives.ftplugin) file, and generates grouped and sorted reports across several different text files.
 
 ###### Shared ViewMenu.json
 
