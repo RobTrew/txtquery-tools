@@ -1615,7 +1615,11 @@ function TextQuery(tree) {
 	}
 
 	function specString(dctSpec) {
-		return JSON.stringify(dctSpec, null, "\t");
+		if (dctSpec) {
+			return JSON.stringify(dctSpec, null, "\t");
+		} else {
+			return "";
+		}
 	}
 
 	this.customJSONByName = function(_, strViewName, strJSON) {
@@ -1654,7 +1658,8 @@ function TextQuery(tree) {
 			prepareSourceList();
 			if (blnInfo) {
 				strHTMLComment =
-					htmlComment(dctView, strViewName, dctOptions.sourcespec);
+					htmlComment(dctView, strViewName,
+						dctOptions['sourcespec']);
 				strHTMLCloseTag = "<!-- REPORT OUTPUT ENDS -->";
 			}
 			strReport = buildView(dctView, strViewName);
