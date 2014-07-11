@@ -11,7 +11,7 @@ The **Shell script** uses the [FoldingText CLI tool](https://www.npmjs.org/packa
 
 ###### Shared ViewMenu.json
 
-Both (plugin/applescript and shell script) can use the same [ViewMenu.json](./ViewMenu.json]) file (created in the script folder when either is first run). You can inspect this file in a text editor, and tweak existing report templates (FLOWR queries), or even add new ones).
+Both (plugin/applescript and shell script) can use the same [ViewMenu.json](./ViewMenu.json) file (created in the script folder when either is first run). You can inspect this file in a text editor, and tweak existing report templates (FLOWR queries), or even add new ones).
 
 (Probably simplest, of course, to make a duplicate of an existing FLOWR, give it a new name, and adjust and test it incrementally).
 
