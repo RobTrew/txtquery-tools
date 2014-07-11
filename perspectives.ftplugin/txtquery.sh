@@ -129,9 +129,9 @@ MENUFILE="ViewMenu.json"
 # INPUTS
 DEFAULTCOLLECTION="~/Library/Application Support/Notational Velocity/project*"
 DEFAULTDOC="~/Library/Application Support/Notational Velocity/inbox.txt"
-DEFAULT_LASTMOD="90d" # only query files modified in last 30 days N[smhdw]
+DEFAULT_LASTMOD="30d" # only query files modified in last 30 days N[smhdw]
 DEFAULT_IN_TYPES="txt,md,ft" #use comma-delimited list, no spaces
-DEFAULT_SWITCHES="-maxdepth 1" # any additional bash find switches like
+DEFAULT_SWITCHES="-maxdepth 1" # any additional bash find switches
 
 # OUTPUTS (should be outside the scope of INPUTS above)
 VIEWFOLDER="~/ViewFolder"

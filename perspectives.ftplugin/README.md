@@ -9,6 +9,12 @@ The **plugin** and its **Applescript** are useful for experimentation with TXTQU
 
 The **Shell script** uses the https://www.npmjs.org/package/foldingtext and the TXTQuery.js file, and generates grouped and sorted reports by querying sets of several files.
 
+###### Shared ViewMenu.json
+
+Both (plugin/applescript and shell script) can use the same ViewMenu.json file (created in the script folder when either is first run). You can inspect this file in a text editor, and tweak existing report templates (FLOWR queries), or even add new ones).
+
+(Probably simplest, of course, to make a duplicate of an existing FLOWR, give it a new name, and adjust and test it incrementally).
+
 #### SHELL SCRIPT SYNOPSIS
 	txtquery.sh [-m] [-r report name|index] [-q query name|index] [options]
 #### SHELL SCRIPT DESCRIPTION
