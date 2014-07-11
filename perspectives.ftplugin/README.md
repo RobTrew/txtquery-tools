@@ -11,7 +11,7 @@ The **Shell script** uses the https://www.npmjs.org/package/foldingtext and the 
 
 #### SHELL SCRIPT SYNOPSIS
 	txtquery.sh [-m] [-r report name|index] [-q query name|index] [options]
-#### SHELL SCRIPT SYNOPSISDESCRIPTION
+#### SHELL SCRIPT DESCRIPTION
 **txtquery** generates Markdown-formatted custom reports by applying FLWOR-style queries to sets of `@key(value)` tagged text files.
 
 The FLWOR queries which it uses are stored in .json menu files. These use [FoldingText](http://www.foldingtext.com) nodepath syntax (FoldingText > Help > NodePaths Guide) to filter text nodes by their tags, values, and text content, and can also include clauses like:
@@ -35,7 +35,7 @@ including `-mtime` (last modified) and other Bash `find` command filter switches
 
 For installation, and more detail on sources etc, see below.
 
-#### SHELL SCRIPT SYNOPSISOPTIONS
+#### SHELL SCRIPT OPTIONS
 
 	-h help - display this help string
 	-c collections (paths or globs) - sets of text files to query
