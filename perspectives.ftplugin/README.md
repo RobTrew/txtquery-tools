@@ -64,7 +64,7 @@ Requires: [.ftplugin folder](https://github.com/RobTrew/txtquery-tools) and its 
 4. Open a @key(value) tagged document in FoldingText
 4. Run the Perspectives Applescript, and choose one of the Group by Tags perspectives from the menu
 
-Requires: [TXTQuery.js](https://github.com/RobTrew/txtquery-tools), [ftdoc:// url scheme](https://github.com/RobTrew/txtquery-tools), [FoldingText CLI plugin](https://www.npmjs.org/package/foldingtext)
+Requires: [TXTQuery.js](https://github.com/RobTrew/txtquery-tools/tree/master/perspectives.ftplugin), [ftdoc:// url scheme](https://github.com/RobTrew/txtquery-tools), [FoldingText CLI plugin](https://www.npmjs.org/package/foldingtext)
 
 1. Copy TXTQuery.js to the same folder as this script
 2. Follow instructions at https://www.npmjs.org/package/foldingtext to install the FT CLI
