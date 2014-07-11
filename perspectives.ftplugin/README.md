@@ -62,13 +62,15 @@ For installation, and more detail on sources etc, see below.
 
 ##### FoldingText plugin and Applescript
 
-Requires: [.ftplugin folder](https://github.com/RobTrew/txtquery-tools) and its contents, [ftdoc:// url scheme]((https://github.com/RobTrew/txtquery-tools) )
+Requires: [Perspectives.ftplugin folder](https://github.com/RobTrew/txtquery-tools) and its contents, [ftdoc:// url scheme]((https://github.com/RobTrew/txtquery-tools) )
 
 1. Copy the Perspectives.ftplugin folder and its contents to the FT ‘Application Folder’ (FoldingText > File > Application Folder)
 2. Close and restart FoldingText
 3. Check in FoldingText > Plugin manager that the Perspectives plugin installed without errors
 4. Open a @key(value) tagged document in FoldingText
 4. Run the Perspectives Applescript, and choose one of the Group by Tags perspectives from the menu
+
+##### txtquery.sh shell script for FT CLI
 
 Requires: [TXTQuery.js](https://github.com/RobTrew/txtquery-tools/tree/master/perspectives.ftplugin), [ftdoc:// url scheme](https://github.com/RobTrew/txtquery-tools), [FoldingText CLI plugin](https://www.npmjs.org/package/foldingtext)
 
