@@ -34,7 +34,7 @@ Each query FLWOR may also contain a description of the set(s) of text files to w
 If a query lacks a 'Sources' clause, then it can fall back to:
 
 1.	Any defaults sources clause in the menu file, or (in the absence of a menu-level sources clause)
-2.	and thence to any defaults sources defined at the head of this script.
+2.	to any defaults sources defined at the head of this script.
 
 All of these defaults for source text files can, however, be overriden by command line source switches (see below)
 including `-mtime` (last modified) and other Bash `find` command filter switches.
