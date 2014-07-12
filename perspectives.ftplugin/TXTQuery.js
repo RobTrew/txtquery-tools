@@ -283,7 +283,7 @@ function TextQuery(tree) {
 			"return": [
 				"#### fn:sentence_case({$tag})  (fn:count($all))",
 				{
-					"for": "$i in //@{$tag}",
+					"for": "$i in $all",
 					"return": "- {$i}"
 				},
 				""
