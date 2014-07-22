@@ -2,7 +2,7 @@
 # Puts one of the 8 emoji moon phase glyphs to (stdout|clipboard).
 # Accepts three integer arguments in the order: YEAR CAL_MONTH DAY,
 # If no arguments are given, it returns the phase of the moon matching the system time
-# moon of the Unix epoch in January 1970
+# (Calculated by simple modulo arithmetic from the first moon of the Unix epoch in January 1970)
 # Call at command line with *three* integer parameters ($1 for yyyy year, $2 for calendar month (1-12), $3 for day)
 # e.g. chmod +x emomoon.sh; emomoon.sh 2014 8 10 (for Aug 10 2014)
 YEAR=$1; MONTH=$2; DAY=$3
