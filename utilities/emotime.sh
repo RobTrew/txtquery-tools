@@ -2,6 +2,9 @@
 # Gets emoji clockface (stdout|clipboard) with specified time (to nearest preceding half hour)
 # Call at command line with *two* integer parameters ($1 for hours, $2 for minutes)
 # e.g. chmod +x emotime.sh; emotime.sh 16 30
+HRS=$1; MINS=$2
+if [[ -z $HRS ]]; then HRS=0; fi
+if [[ -z $MINS ]]; then MINS=0; fi
 JSC="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc"
 EMOTIME=$("$JSC" -e "
 function emoTime(dteJS) {
@@ -18,7 +21,7 @@ function asUnicode(c) {
 	return String.fromCharCode( (lngClear >> 10) + 0xD800) +
 		String.fromCharCode( (lngClear & 0x3FF) + 0xDC00);
 }
-dteJS = new Date(); dteJS.setHours($1, $2);
+dteJS = new Date(); dteJS.setHours($HRS, $MINS);
 print(emoTime(dteJS));")
 echo "$EMOTIME"
 echo "$EMOTIME" | pbcopy
