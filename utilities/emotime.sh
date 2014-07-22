@@ -1,6 +1,6 @@
 #!/bin/bash
 # Gets emoji clockface (stdout|clipboard) with specified time (to nearest preceding half hour)
-# Call at command line with *two* integer parameters ($1 for hours, $2 for minutes)
+# Call at command line with *on or two* integer parameters ($1 for hours, $2 for minutes)
 # e.g. chmod +x emotime.sh; emotime.sh 16 30
 HRS=$1; MINS=$2
 if [[ -z $HRS ]]; then HRS=0; fi
