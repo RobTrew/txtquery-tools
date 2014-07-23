@@ -1,4 +1,6 @@
 #!/bin/bash
+# Author: Rob Trew, https://github.com/RobTrew/txtquery-tools
+# Ver: 0.2
 # Puts one of the 8 emoji moon phase glyphs to (stdout|clipboard).
 # Accepts three integer arguments in the order: YEAR CAL_MONTH DAY,
 # If no arguments are given, it returns the phase of the moon matching the system time
@@ -24,10 +26,13 @@ function emoMoon(dteJS) {
 	nsAll = (dteJS.getTime()-dteBase.getTime()) /1000,
 
 	// and there are a number of seconds between this date and the preceding new moon,
-	nsPhase= nsAll % nMonth;
+	nsPhase= nsAll % nMonth,
 	
-	// which can be rewritten as a proportion of a lunar month, and used an index into an ordered Emoji set
-	return asUnicode(0x1f311+((Math.floor((nsPhase / nMonth) * 8) + 1) % 8));
+	// which can be rewritten as a proportion of a lunar month (n/8), 
+	nPropn=(nsPhase / nMonth) * 8;
+	
+	//and used as a rounded index into an ordered Emoji set
+	return asUnicode(0x1f311 + (Math.round(nPropn) % 8));
 }
 
 function asUnicode(c) {
