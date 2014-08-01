@@ -37,8 +37,8 @@ function emoMoon(dteJS) {
 
 function asUnicode(c) {
 	var lngClear = c - 0x10000;
-	return String.fromCharCode( (lngClear >> 10) + 0xD800) +
-		String.fromCharCode( (lngClear & 0x3FF) + 0xDC00);
+	return String.fromCharCode((lngClear >> 10) + 0xD800) +
+		String.fromCharCode((lngClear & 0x3FF) + 0xDC00);
 }
 dteJS = new Date($YEAR, $(($MONTH-1)), $DAY);
 print(emoMoon(dteJS));")
