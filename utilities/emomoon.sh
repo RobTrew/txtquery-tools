@@ -9,8 +9,8 @@
 # e.g. chmod +x emomoon.sh; emomoon.sh 2014 8 10 (for Aug 10 2014)
 YEAR=$1; MONTH=$2; DAY=$3
 if [[ -z $YEAR ]]; then YEAR=$(date +"%Y"); fi
-if [[ -z $MONTH ]]; then MONTH=$(date +"%m"); fi
-if [[ -z $DAY ]]; then DAY=$(date +"%d"); fi
+if [[ -z $MONTH ]]; then MONTH=$(date +"%-m"); fi
+if [[ -z $DAY ]]; then DAY=$(date +"%-d"); fi
 JSC="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc"
 EMOMOON=$("$JSC" -e "
 function emoMoon(dteJS) {
