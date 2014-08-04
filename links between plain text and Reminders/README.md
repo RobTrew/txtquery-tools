@@ -2,7 +2,7 @@
 ### Plain text project files with links to and from Reminders.app
 Nothing beats plain text outlines for quickly and flexibly gathering thoughts and developing project structure, and well synched databases like Reminders.app are very good for automating alerts.
 
-Plain text and Reminders can be linked to each other, and we can script the creation these links (and the exchange of dates and other details between our notes and our reminders).
+Plain text and Reminders can be linked to each other, and we can script the creation of these links (and the exchange of dates and other details between our notes and our reminders).
 
 #### Creating links back and forth between plain text and reminders,
 
