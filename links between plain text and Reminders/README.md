@@ -76,6 +76,7 @@ can be sent back and forth by script between text and Reminders.app.
 
 1. Make some edits in FoldingText to the value(s) of any @alert or @priority tag(s) 
 	![](./Edits%20to%20date%20and%20priority.png)
+	
 	(any new dates or times can be relative or informal)
 
 2. then run the create/update script again.
@@ -88,14 +89,14 @@ can be sent back and forth by script between text and Reminders.app.
 
 
 #### Using relative date / time expressions
-The update script understands the same set of relative and informal date time expressions as the [Relative dates and date ajustment](../relative%20dates%20and%20date%20adjustments.ftplugin/README.md) plugin for FoldingText.
+The update script understands the same set of relative and informal date time expressions as the [Relative dates and date adjustment](../relative%20dates%20and%20date%20adjustments.ftplugin/README.md) plugin for FoldingText.
 
 
 #### Installation
 The applescripts require installation of [smalltime.ftplugin](../smalltime.ftplugin) and [reminder tools.ftplugin](../reminder%20tools.ftplugin) plugins for FoldingText.
 
-[txtQuery Tools repository](https://github.com/RobTrew/txtquery-tools)
-[Download .zip](https://github.com/RobTrew/txtquery-tools/archive/master.zip)
+- [txtQuery Tools repository](https://github.com/RobTrew/txtquery-tools)
+- [Download .zip](https://github.com/RobTrew/txtquery-tools/archive/master.zip)
 
 
 
