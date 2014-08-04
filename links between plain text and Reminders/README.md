@@ -10,7 +10,7 @@ Plain text and Reminders can be linked to each other, and we can script the crea
 
 ![](./PlainTextToReminders.png)
 	
-This is made possible by the [x-apple-reminder://](x-apple-reminder://) URL scheme of Reminders.app
+These links are made possible by the [x-apple-reminder://](x-apple-reminder://) URL scheme of Reminders.app
 
 *FoldingText > View > Show Syntax*
 
@@ -42,7 +42,7 @@ Alternatively, we can automatically push details from plain text entries to crea
 1. Select a line which contains an `@alert(date/time) tag (the date/time can be informal or relative) ...
 	![](./SelectLineWithAlert.png)
 
-2. Run the script FTMakeOrUpdateReminder.scpt in Applescript Editor
+2. Run the script [FTMakeOrUpdateReminder.scpt](./FTMakeOrUpdateReminder.applescript) in Applescript Editor
 	![](./FTMakeOrUpdateReminder.png)
 
 	A clock-faced link to a new reminder is created:
@@ -62,18 +62,21 @@ Alternatively, we can automatically push details from plain text entries to crea
 #### Synching adjusted details
 
 The values of various `@key(value` tags in plain text notes,
-	 `@alert(yyyy-mm-dd HH:MM)`
-	 `@priority(1|2|3)`
-	 `@done(yyyy-mm-dd HH:MM)`
-	 `@cal(list name)`
+
+- `@alert(yyyy-mm-dd HH:MM)`
+- `@priority(1|2|3)`
+- `@done(yyyy-mm-dd HH:MM)`
+- `@cal(list name)`
 
 can be sent back and forth by script between text and Reminders.app.
-	- [Pushing details from FoldingText to Reminders](./FTMakeOrUpdateReminder.applescript)
-	- [Pulling details from Reminders to FoldingText](./FTPullDetailsFROMLinkedReminder.applescript)
-	- [Toggling @done status at both ends](./FTToggleDoneUpdateReminders.applescript)
 
-1. Make some edits in FoldingText to the value of an @alert or @priority tag (any new dates or times can be relative or informal)
+- [Pushing details from FoldingText to Reminders](./FTMakeOrUpdateReminder.applescript)
+- [Pulling details from Reminders to FoldingText](./FTPullDetailsFROMLinkedReminder.applescript)
+- [Toggling @done status at both ends](./FTToggleDoneUpdateReminders.applescript)
+
+1. Make some edits in FoldingText to the value(s) of any @alert or @priority tag(s) 
 	![](./Edits%20to%20date%20and%20priority.png)
+	(any new dates or times can be relative or informal)
 
 2. then run the create/update script again.
 
@@ -91,7 +94,8 @@ The update script understands the same set of relative and informal date time ex
 #### Installation
 The applescripts require installation of [smalltime.ftplugin](../smalltime.ftplugin) and [reminder tools.ftplugin](../reminder%20tools.ftplugin) plugins for FoldingText.
 
-
+[txtQuery Tools repository](https://github.com/RobTrew/txtquery-tools)
+[Download .zip](https://github.com/RobTrew/txtquery-tools/archive/master.zip)
 
 
 
