@@ -11,18 +11,22 @@ Plain text and Reminders work well with each other, and we can script the creati
 	- This is made possible by the URL scheme of Reminders.app,
 		- x-apple-reminder://
 				![x-apple-reminder.png](./x-apple-reminder.png)
+				
 	- and we can copy/make links automatically.
 		- We can either copy from existing Reminders
+				
 				![CopyReminderAsMD.png](./CopyReminderAsMD.png)
 
 
 			- EITHER as TaskPaper / FoldingText entries, [with this script,](./CopyReminderAsTaskPaperOrFT.applescript)
+					
 					![CopyReminderAsTaskPaperorFT.png](./CopyReminderAsTaskPaperorFT.png)
 					- Result with MD link and TaskPaper-style tags:
 
 					    - Release a raven and a dove after 40 days  [🕖](x-apple-reminder://144D021C-06D7-4FE0-AE28-76295FDCB08C) @list(voyage) @alert(2015-03-29 07:00) @priority(2)
 
 			- OR simply as MD links, [with another script.](./CopyReminderAsLink.applescript)
+					
 					![CopyReminderAsLink.png](./CopyReminderAsLink.png)
 					- Resulting link to a reminder:
 					   
@@ -30,14 +34,19 @@ Plain text and Reminders work well with each other, and we can script the creati
 	
 		- or we can automatically push details from plain text entries to create new reminders (or update existing reminders)
 			1. Select a line which contains an `@alert(date/time) tag (the date/time can be informal or relative) ...
+					
 					![./SelectLineWithAlert.png](./SelectLineWithAlert.png)
+					
 			2. Run the script FTMakeOrUpdateReminder.scpt in Applescript Editor
+					
 					![FTMakeOrUpdateReminder.png](./FTMakeOrUpdateReminder.png)
 
 				- A clock-faced link to a new reminder is created
+						
 						![PlainTextToReminders.png](./PlainTextToReminders.png)
 
 				- and the note of the new reminder also contains a link **back** to the FoldingText entry.
+						
 						![LinkBackFromReminder.png](./LinkBackFromReminder.png)
 				
 ### The links from Reminders.app back to plain text
