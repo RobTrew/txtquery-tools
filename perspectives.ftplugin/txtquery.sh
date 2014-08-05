@@ -302,13 +302,18 @@ function addFileOrFlagError () {
 			# Add the text file to the snowball, recording its starting character offset and start line
 			if [[ $1 == *"\""* ]]; then fName="${1//\"/\\\"}"
 			else fName="$1"; fi  # escape any double quotes for json
-
+			
 			# CONCATENATE ADDITIONAL FILE INTO WORKING SNOWBALL
 			cat $1 >> $2
 			# ADD A 10 Byte FILE SEGMENTATION BREAK (for FT parsing)
 			printf "\n\n\n# ---\n\n" >> $2
-
+			
+			
 			IFS=' ' read -ra STATS <<< $(wc -lm "$1") # get line and character size from wc
+			###
+			echo $STATS
+			exit
+			###
 			FileTriplets=("${FileTriplets[@]}" "\"$fName\"" $STARTPOSN $STARTLINE) # record starting position
 			LINECOUNT=${STATS[0]} # and increment position to file end for any following file
 			CHARCOUNT=${STATS[1]}
@@ -421,7 +426,8 @@ function writeReport () {
 	### AND PACK THE SNOWBALL, MAKING A PACKING LIST AS WE GO
 
 	for i in ${SourceArray[@]}
-		do addFileOrFlagError $i $tmp_file
+		do addFileOrFlagError "$i" "$tmp_file"
+		#do echo $i
 	done
 
 	# Assemble file paths and their start positions (character and line)

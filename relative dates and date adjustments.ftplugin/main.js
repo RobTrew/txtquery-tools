@@ -37,12 +37,10 @@ define(function(require, exports, module) {
 	}
 
 	function show_date_panel() {
-
 		var strText = selectDate(),
 			cm = Editor.cm(),
 			charWidth = cm.defaultCharWidth(),
 			coords = cm.cursorCoords(true);
-		//debugger;
 
 		panel.element.style.left = (coords.left - charWidth) + 'px';
 		panel.element.style.top = coords.bottom + 'px';

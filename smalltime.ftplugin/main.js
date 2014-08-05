@@ -7,11 +7,83 @@
 define(function(require, exports, module) {
 	'use strict';
 
+	var dctEmoji = {
+		"seedling":"🌱",
+		"alarmclock":"⏰",
+		"watch":"⌚",
+		"hourglass":"⏳",
+		"bellcancelled":"🔕",
+		"bell":"🔔",
+		"cjkday":"日",
+		"cjkmonth":"月️",
+		"cjkweek":"周",
+		"{clock}":"❓", // fallback if dateless
+		"{moon}":"️🍌" // ditto
+	};
+
+	function timeEmoji(strKey, varDate) {
+		var dte, strChar="", varValue;
+		if (varDate) {
+			if (varDate instanceof Date) dte=varDate;
+			else dte=phraseToDate(varDate);
+			if (dte) {
+				if (strKey.indexOf('{moon}') !== -1) strChar+=emoMoon(dte);
+				if (strKey.indexOf('{clock}') !== -1) strChar+=emoTime(dte);
+			}
+		} else {
+			varValue=dctEmoji[strKey];
+			if (varValue) strChar=varValue;
+		}
+		if (!strChar) strChar=strKey;
+		return strChar;
+	}
+	// Emoji clockface to nearest preceding half hour, commented at:
+	// https://github.com/RobTrew/txtquery-tools/tree/master/utilities
+	function emoTime(e){
+		var t=128335,n=e.getHours()%12,r=e.getMinutes(),i,s;
+		if(n)i=t+n;else i=t+12;if(r>=30)s=i+12;else s=i;
+		return asUnicode(s);
+	}
+
+	// Emoji moonphase to nearest 1/, , commented at:
+	// https://github.com/RobTrew/txtquery-tools/tree/master/utilities
+	function emoMoon(e){
+		var t=new Date(Date.UTC(1970,0,7,20,37)),n=2551442.8,
+				r=(e.getTime()-t.getTime())/1e3,i=r%n,s=i/n*8;
+		return asUnicode(127761+Math.round(s)%8);
+	}
+
+	function asUnicode(e){
+		var t=e-65536;
+		return String.fromCharCode((t>>10)+55296)+
+			String.fromCharCode((t&1023)+56320);
+	}
+
+		// preprocess a nodePath to translate curly-bracketed date phrases to ISO
+	this.translatePathDates = function (strPath) {
+		var strDblQuote = String.fromCharCode(34);
+		return strPath.replace(
+			/{[^}]+}/g, strDblQuote +
+				datePhraseToISO(strPath) + strDblQuote);
+	};
+
+		// preprocess a nodePath to translate curly-bracketed date phrases to ISO
+	function translatePathDates(strPath) {
+		var strDblQuote = String.fromCharCode(34);
+		return strPath.replace(
+			/{[^}]+}/g, strDblQuote +
+				datePhraseToISO(strPath) + strDblQuote);
+	}
+
+	this.readDatePhrase = function(strPhrase, iWeekStart) {
+		return phraseToDate(strPhrase, iWeekStart);
+	};
+
 	// informal phrases like 'now +7d', 'thu', jan 12 2pm' to ISO string
 	// yyyy-mm-dd [HH:MM] (unless 00:00)
 	// returns strPhrase itself if can not be parsed
 	function datePhraseToISO(strPhrase, iWeekStart) {
-		if (typeof iWeekStart === "undefined" || iWeekStart === null) {
+		if (typeof iWeekStart === 'undefined' || iWeekStart === null) {
 			iWeekStart = 1; //Monday=1 (or Sunday=0)
 		}
 		var dte = phraseToDate(strPhrase, iWeekStart);
@@ -44,10 +116,8 @@ define(function(require, exports, module) {
 		}
 	}
 
-	// preprocess a nodePath to translate curly-bracketed date phrases to ISO
-	function translatePathDates(strPath) {
-		return strPath.replace(/{[^}]+}/g, datePhraseToISO(strPath));
-	}
+
+
 
 	// if a time specified for today has already passed, assume tomorrow
 	function adjustDay(dteAnchor) {
@@ -60,7 +130,7 @@ define(function(require, exports, module) {
 
 	// informal phrases like 'now +7d', 'thu', jan 12 2pm' to .js Date()
 	function phraseToDate(strPhrase, iWeekStart) {
-		if (typeof iWeekStart === "undefined" || iWeekStart === null) {
+		if (typeof iWeekStart === 'undefined' || iWeekStart === null) {
 			iWeekStart = 1; //Monday
 		}
 
@@ -84,11 +154,12 @@ define(function(require, exports, module) {
 			dctOrd = {'first':1, 'second':2, 'third':3, 'fifth':5,
 				'eighth':8, 'twelfth':12},
 			lstNth = ['st','nd','rd','th'],
-			dctAnchor = extractISODate(strPhrase),
-			dteAnchor = dctAnchor['date'],
+			dctAnchor, //= extractISODate(strPhrase),
+			dteAnchor, //= dctAnchor['date'],
+			lstTokens, //= tokens(dctAnchor['rest']),
+			lngTokens, // = lstTokens.length,
 			rDelta = 0, dteResult = null,
-			lstTokens = tokens(dctAnchor['rest']),
-			lngTokens = lstTokens.length, blnOrd = false,
+			blnOrd = false,
 			strBase = '', strAffix = '',
 			strTkn = '', strLower = '', iToday, iWkDay, iDay,
 			lngSign =+1, rQuant = 0, strUnit='d', i,
@@ -166,7 +237,14 @@ define(function(require, exports, module) {
 			default:
 				if (strUnit.length >= 3) {
 					if (strUnit in dctMonths) {
-						dteAnchor.setMonth(dctMonths[strUnit]);
+						iMonth=dctMonths[strUnit];
+						dteAnchor.setMonth(iMonth);
+						// if short month hits inherited high day: overflow
+						if (dteAnchor.getMonth() > iMonth) {
+							// set Day to 1 and try again
+							dteAnchor.setDate(1);
+							dteAnchor.setMonth(iMonth);
+						}
 						if (rQuant <= 31) {
 							if (rQuant) {
 								dteAnchor.setDate(rQuant);
@@ -179,7 +257,8 @@ define(function(require, exports, module) {
 						}
 						dteToday = new Date(); dteToday.setHours(0,0,0,0);
 						if (dteAnchor < dteToday) {
-							dteAnchor.setFullYear(dteAnchor.getFullYear()+1);
+							dteAnchor.setFullYear(
+								dteAnchor.getFullYear()+1);
 						}
 					}
 				}
@@ -187,6 +266,41 @@ define(function(require, exports, module) {
 			blnNewUnit = blnNewQuant = false; blnNextLast = false; rQuant = 0;
 			blnDate = true; lngSign = 1; //scope of sign limited to one number
 		}
+
+		function extractWeekPhrase(strDate) {
+			var match = /(mon|tue|wed|thu|fri|sat|sun)\w*\s+(la|last|th|this|ne|nxt|next)\s+we*k/i.exec(strDate),
+				dte=null, strRest=strDate;
+
+			if (match !== null) {
+				var dteThen, strRel, lngStartDate, iMatch;
+				dteThen= new Date();
+				iToday = dteThen.getDay();
+				lngStartDate=dteThen.getDate()-(iToday-iWeekStart);
+				dteThen.setHours(0,0,0,0);
+				dteThen.setDate(lngStartDate+(weekDay(match[1])-iWeekStart));
+				strRel=match[2].charAt(0);
+				if (strRel !== 't') {
+					if (strRel !== 'l') dte=new Date(dteThen.valueOf() + WEEK_MSECS);
+					else dte=new Date(dteThen.valueOf() - WEEK_MSECS);
+				} else dte=dteThen;
+
+				iMatch = match.index;
+				strRest = strDate.substring(0, iMatch) +
+					strDate.substring(iMatch+match[0].length);
+			}
+			return {'date':dte, 'rest':strRest.trim()};
+		}
+
+		/////////////
+		// START OF phraseToDate MAIN code: ISO date ?
+		/////////////
+		dctAnchor = extractISODate(strPhrase);
+		dteAnchor = dctAnchor['date'];
+		// if not, WeekdayName+(last|this|this)+'week' ?
+		if (!dteAnchor) dctAnchor = extractWeekPhrase(strPhrase);
+		dteAnchor = dctAnchor['date'];
+		lstTokens = tokens(dctAnchor['rest']);
+		lngTokens = lstTokens.length;
 
 		if (lngTokens) { // get a base date,
 			if (dteAnchor) {
@@ -203,11 +317,10 @@ define(function(require, exports, module) {
 				strLower = strTkn.toLowerCase();
 				if (strLower.length > 1) {
 					strAffix = strLower.slice(-2);
-					if (strAffix === 'th') {strBase = strLower.slice(0,-2);}
+					if (strAffix === 'th') strBase = strLower.slice(0,-2);
 				}
 
 				// normalise any numeric
-				//debugger;
 				if (strLower in dctNum) {
 					strLower = dctNum[strLower].toString();
 				} else if (strLower in dctOrd) {
@@ -270,6 +383,7 @@ define(function(require, exports, module) {
 						rQuant = 7 - (iToday - iWkDay);
 					}
 					if (blnNextLast && (iToday !== iWkDay)) {
+						//
 						rQuant += 7 * lngSign; lngSign=1;
 					}
 				} else if (lstSign.indexOf(strTkn) !== -1) {
@@ -283,7 +397,7 @@ define(function(require, exports, module) {
 					rQuant = 0;
 					blnNewQuant = false; blnNewUnit = true;
 				} else if (strLower in dctShift) {
-					if (dctShift[strLower]) { // unles 'ago'
+					if (dctShift[strLower]) { // unless 'ago'
 						blnNextLast = blnNewQuant = true; rQuant = 1;
 						if (strTkn !== 'next') {lngSign = -1;}
 					} else if (rDelta > 0) { // 'ago: reflect around now'
@@ -313,19 +427,20 @@ define(function(require, exports, module) {
 		}
 		return dteResult;
 	}
+
 	// separate any token which looks like yyyy-mm-dd from the rest
 	function extractISODate(strDate) {
 		var match = /((\d{4})-(\d{2})-(\d{2}))/.exec(strDate),
-			lngYear, lngMonth, lngDay,
-			dte = null, strRest = strDate, iMatch;
+			dte=null, strRest=strDate;
 
 		if (match !== null) {
+			var lngYear, lngMonth, lngDay, iMatch;
 			lngYear = parseInt(match[2],10);
 			lngMonth = parseInt(match[3],10) -1; //zero based
 			lngDay = parseInt(match[4],10);
 			dte = new Date(lngYear, lngMonth, lngDay);
 			iMatch = match.index;
-			strRest = strDate.substring(0, iMatch) + ' ' +
+			strRest = strDate.substring(0, iMatch) +
 				strDate.substring(iMatch+10);
 		}
 		return {'date':dte, 'rest':strRest.trim()};
@@ -368,12 +483,11 @@ define(function(require, exports, module) {
 	}
 
 	// PROPERTIES AND FUNCTION(S) TO EXPORT
-	exports.version = 0.2;
+	exports.version = 0.3;
 	exports.datePhraseToISO = datePhraseToISO; //Phrase to ISO string
 	exports.phraseToDate = phraseToDate; // Phrase to JS Date()
 	exports.fmtTP = fmtTP; // JS Date() to ISO string
 	// search and replace for date phrases enclosed in curly brackets
 	exports.translatePathDates = translatePathDates;
-
-
+	exports.timeEmoji = timeEmoji;
 });

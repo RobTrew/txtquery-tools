@@ -16,8 +16,8 @@ define(function(require, exports, module) {
 
 		var	lstResults = translateDateTags(Editor, dctArgs),
 			node = lstResults[0], strLine = node.line(),
-			strText = node.text(),
-			dctReturn = lstResults[1], strTag='', oMatch,
+			strText = node.text(), strLabel=dctArgs['linklabel'],
+			dctReturn = lstResults[1], strTag='', oMatch, dteAlarm,
 			lstHeat = dctArgs.heat || [], lngHeat = 0, i,
 			rgxReminder = /\[[^\]]*\]\((x-apple-reminder:\/\/[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12})\)/;
 
@@ -41,7 +41,20 @@ define(function(require, exports, module) {
 		} else {
 			dctReturn.text = strText;
 		}
+
+		//translate any linklabel
+		if (strLabel) {
+			dteAlarm=dctReturn['alarmtime'];
+			if (dteAlarm) {
+				strLabel=dateLogic.timeEmoji(strLabel, dteAlarm);
+			} else {
+				strLabel=dateLogic.timeEmoji(strLabel);
+			}
+		} else strLabel='??';
+		dctReturn['linklabel']=strLabel;
+
 		// return the harvest for any calling Applescript
+
 		return dctReturn;
 	}
 
@@ -53,7 +66,7 @@ define(function(require, exports, module) {
 			tree = Editor.tree(),
 			node = Editor.selectedRange().startNode,
 			dctReturn = {'uuid':null, 'text':null, 'alarm':null,
-				'datetext':null, 'iso':null, 'heat':null},
+				'alarmlist':null,'datetext':null, 'iso':null, 'heat':null},
 			dctNodeTags = node.tags(),
 			lstNodeTags = Object.keys(dctNodeTags), strKey='', strVal,
 			lngSeconds=0, lstKeySet, lngTag,
@@ -96,12 +109,14 @@ define(function(require, exports, module) {
 					}
 					// collect dates for calling script
 					lngSeconds = ~~(dteUpdated.valueOf() / 1000);
+					dctReturn['alarmlist']=dateList(dteUpdated);
 					if (strKey !== strAlarmKey) {
 						dctReturn[strKey] = lngSeconds;
 					} else {
 						dctReturn.alarm = lngSeconds;
 						dctReturn.datetext = strVal;
 						dctReturn.iso = strTrans;
+						dctReturn.alarmtime=dteUpdated;
 					}
 				}
 
@@ -113,8 +128,14 @@ define(function(require, exports, module) {
 	}
 
 
+	function dateList(dteJS) {
+		return [dteJS.getFullYear(), dteJS.getMonth()+1,
+				dteJS.getDate(), dteJS.getHours(), dteJS.getMinutes()];
+	}
+
+
 	//translate date tag(s) to ISO and return UUID, date(s), priorty, text
-	exports.version = 0.2;
+	exports.version = 0.3;
 	exports.updateAndReadForLink = updateAndReadForLink;
 
 	Extensions.add('com.foldingtext.editor.commands', {
