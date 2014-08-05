@@ -5,11 +5,16 @@
 # Written by Rob Trew 2014
 # https://github.com/RobTrew/txtquery-tools
 Title="txtQuery"
-Ver="0.24"
+Ver="0.25"
 DEPENDENCIES="TXTQuery.js, https://www.npmjs.org/package/foldingtext"
 
 # EDIT THIS LINE TO MATCH THE PATH OF The FoldingText CLI executable FT ON YOUR INSTALLATION
 PathToFT=/usr/local/lib/node_modules/foldingtext/bin/ft
+
+# A shell run by tools like KeyBoard Maestro, LaunchBar, Alfred etc may not pick up the user's bash paths
+if [[ ":$PATH:" != *":/usr/local/bin:"* ]]; then
+	export PATH=$PATH:/usr/local/bin 
+fi
 # ( install from https://www.npmjs.org/package/foldingtext )
 
 HelpString="NAME
@@ -308,15 +313,11 @@ function addFileOrFlagError () {
 			# ADD A 10 Byte FILE SEGMENTATION BREAK (for FT parsing)
 			printf "\n\n\n# ---\n\n" >> $2
 			
-			
-			IFS=' ' read -ra STATS <<< $(wc -lm "$1") # get line and character size from wc
-			###
-			echo $STATS
-			exit
-			###
 			FileTriplets=("${FileTriplets[@]}" "\"$fName\"" $STARTPOSN $STARTLINE) # record starting position
-			LINECOUNT=${STATS[0]} # and increment position to file end for any following file
-			CHARCOUNT=${STATS[1]}
+			
+			IFS=' ' read -ra LINECOUNT <<< $(wc -l "$1") # get line count from wc
+			IFS=' ' read -ra CHARCOUNT <<< $(wc -m "$1") # get line count from wc
+
 			STARTPOSN=$(($STARTPOSN + $CHARCOUNT + 10)) #(see the segmentation
 			STARTLINE=$(($STARTLINE + $LINECOUNT + 5)) #  break above ...)
 		#else

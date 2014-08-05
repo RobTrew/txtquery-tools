@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>IsActive</key>
+		<true/>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>SetVariableToText</string>
+						<key>Text</key>
+						<string>-r 13</string>
+						<key>Variable</key>
+						<string>TXTQUERY_SWITCHES</string>
+					</dict>
+					<dict>
+						<key>DisplayKind</key>
+						<string>Window</string>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>ExecuteShellScript</string>
+						<key>Path</key>
+						<string>/Users/robintrew/Desktop/txtquery025.sh</string>
+						<key>Text</key>
+						<string>#!/bin/bash
+
+TXTQUERYPATH="$HOME/txtquery-tools/perspectives.ftplugin/txtquery.sh"
+chmod +x $TXTQUERYPATH #only needed once, if at all
+cd $(dirname "$TXTQUERYPATH")
+
+ResultLines=$("$TXTQUERYPATH" $KMVAR_TXTQUERY_SWITCHES)
+for i in "${ResultLines[@]}"
+	do printf "$i\n"
+done</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>TrimResultsNew</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+					</dict>
+				</array>
+				<key>IsActive</key>
+				<true/>
+				<key>ModificationDate</key>
+				<real>428951851.63480902</real>
+				<key>Name</key>
+				<string>Example: TXTQUERY.sh from KM</string>
+				<key>Triggers</key>
+				<array/>
+				<key>UID</key>
+				<string>2C37DC07-3D11-45B9-84E3-ED76AA1E9A15</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>FT2 from anywhere</string>
+		<key>UID</key>
+		<string>5BECAE0E-168C-4929-B065-DB44EC24D418</string>
+	</dict>
+</array>
+</plist>
