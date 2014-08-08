@@ -20,7 +20,7 @@
 						<key>MacroActionType</key>
 						<string>SetVariableToText</string>
 						<key>Text</key>
-						<string>-r 21</string>
+						<string>-m</string>
 						<key>Variable</key>
 						<string>TXTQUERY_SWITCHES</string>
 					</dict>
@@ -67,7 +67,7 @@ echo "$("$TXTQUERYPATH" $KMVAR_TXTQUERY_SWITCHES)"</string>
 				<key>IsActive</key>
 				<true/>
 				<key>ModificationDate</key>
-				<real>429232654.96809399</real>
+				<real>429232747.86864299</real>
 				<key>Name</key>
 				<string>Example: TXTQUERY.sh from KM</string>
 				<key>Triggers</key>
