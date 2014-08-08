@@ -20,7 +20,7 @@
 						<key>MacroActionType</key>
 						<string>SetVariableToText</string>
 						<key>Text</key>
-						<string>-m</string>
+						<string>-r 21</string>
 						<key>Variable</key>
 						<string>TXTQUERY_SWITCHES</string>
 					</dict>
@@ -38,7 +38,12 @@
 						<key>Text</key>
 						<string>#!/bin/bash
 
-# Ensure that the locale is a UTF-8 setting
+# A shell run by tools like KeyBoard Maestro, LaunchBar, Alfred etc may not pick up the user's bash paths
+if [[ ":$PATH:" != *":/usr/local/bin:"* ]]; then
+	export PATH=$PATH:/usr/local/bin 
+fi
+
+# Also ensure that the locale is a UTF-8 setting
 if [[ "$LC_CTYPE" != *"UTF-8"* ]]; then
 	export LC_CTYPE="UTF-8" 
 fi
@@ -62,7 +67,7 @@ echo "$("$TXTQUERYPATH" $KMVAR_TXTQUERY_SWITCHES)"</string>
 				<key>IsActive</key>
 				<true/>
 				<key>ModificationDate</key>
-				<real>429231570.86193699</real>
+				<real>429232654.96809399</real>
 				<key>Name</key>
 				<string>Example: TXTQUERY.sh from KM</string>
 				<key>Triggers</key>
