@@ -20,7 +20,7 @@
 						<key>MacroActionType</key>
 						<string>SetVariableToText</string>
 						<key>Text</key>
-						<string>-r 13</string>
+						<string>-m</string>
 						<key>Variable</key>
 						<string>TXTQUERY_SWITCHES</string>
 					</dict>
@@ -38,11 +38,15 @@
 						<key>Text</key>
 						<string>#!/bin/bash
 
-LC_CTYPE=UTF-8
+# Ensure that the locale is a UTF-8 setting
+if [[ "$LC_CTYPE" != *"UTF-8"* ]]; then
+	export LC_CTYPE="UTF-8" 
+fi
 
-TXTQUERYPATH="$HOME//Library/Application Support/FoldingText/Plug-Ins/perspectives.ftplugin/txtquery.sh"
-chmod +x "$TXTQUERYPATH" #only needed once, if at all
+TXTQUERYPATH="$HOME/Library/Application Support/FoldingText/Plug-Ins/perspectives.ftplugin/txtquery.sh"
 cd "$(dirname "$TXTQUERYPATH")"
+chmod +x "$TXTQUERYPATH" #only needed once, if at all
+
 
 echo "$("$TXTQUERYPATH" $KMVAR_TXTQUERY_SWITCHES)"</string>
 						<key>TimeOutAbortsMacro</key>
@@ -58,19 +62,30 @@ echo "$("$TXTQUERYPATH" $KMVAR_TXTQUERY_SWITCHES)"</string>
 				<key>IsActive</key>
 				<true/>
 				<key>ModificationDate</key>
-				<real>429211048.07624203</real>
+				<real>429231570.86193699</real>
 				<key>Name</key>
 				<string>Example: TXTQUERY.sh from KM</string>
 				<key>Triggers</key>
-				<array/>
+				<array>
+					<dict>
+						<key>FireType</key>
+						<string>Pressed</string>
+						<key>KeyCode</key>
+						<integer>17</integer>
+						<key>MacroTriggerType</key>
+						<string>HotKey</string>
+						<key>Modifiers</key>
+						<integer>6400</integer>
+					</dict>
+				</array>
 				<key>UID</key>
-				<string>5859C144-94BB-405E-B69A-4E8910558C27</string>
+				<string>2C37DC07-3D11-45B9-84E3-ED76AA1E9A15</string>
 			</dict>
 		</array>
 		<key>Name</key>
-		<string>FT2 from anywhere</string>
+		<string>Global Macro Group</string>
 		<key>UID</key>
-		<string>5BECAE0E-168C-4929-B065-DB44EC24D418</string>
+		<string>B8D29C96-172A-44B1-A9DD-75E509D56722</string>
 	</dict>
 </array>
 </plist>

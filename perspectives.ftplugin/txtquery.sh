@@ -5,7 +5,7 @@
 # Written by Rob Trew 2014
 # https://github.com/RobTrew/txtquery-tools
 Title="txtQuery"
-Ver="0.29"
+Ver="0.31"
 DEPENDENCIES="TXTQuery.js, https://www.npmjs.org/package/foldingtext"
 
 # EDIT THIS LINE TO MATCH THE PATH OF The FoldingText CLI executable FT ON YOUR INSTALLATION
@@ -15,6 +15,12 @@ PathToFT=/usr/local/lib/node_modules/foldingtext/bin/ft
 if [[ ":$PATH:" != *":/usr/local/bin:"* ]]; then
 	export PATH=$PATH:/usr/local/bin 
 fi
+# Ensure that the locale is a UTF-8 setting
+if [[ "$LC_CTYPE" != *"UTF-8"* ]]; then
+	export LC_CTYPE="UTF-8" 
+fi
+
+
 # ( install from https://www.npmjs.org/package/foldingtext )
 
 HelpString="NAME
