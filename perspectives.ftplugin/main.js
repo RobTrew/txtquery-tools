@@ -1,6 +1,8 @@
 //This code Copyright Robin Trew 2014
 //FoldingText is Copyright Jesse Grosjean at HogBay Software
 
+// Version 0.2
+
 define(function(require, exports, module) {
 	'use strict';
 
@@ -1292,7 +1294,7 @@ function TextQuery(tree) {
 
 		if (typeof(oNode) !== "object") return oNode.toString();
 
-		var varNode = oNode, dctSource,
+		var varNode = oNode, dctSource, lstNotes=[],
 			lstEnvelope = ["heading", "project", "root"],
 			strValue = "", strType, lngFileStart,
 			lngLevel = 0, iStartChar;
@@ -1327,6 +1329,16 @@ function TextQuery(tree) {
 			break;
 		case "index":
 			strValue = (varNode.indexToSelf(true)+1).toString();
+			break;
+		case "note":
+			if (varNode.hasChildren()) {
+				varNode.children().forEach(function (oChild) {
+					if (oChild.type() === 'body') {
+						lstNotes.push('\t' + oChild.text());
+					}
+				});
+				strValue=lstNotes.join('\n');
+			}
 			break;
 		case "location":
 			if (lngSourceFiles > 1) {

@@ -5,7 +5,7 @@
 # Written by Rob Trew 2014
 # https://github.com/RobTrew/txtquery-tools
 Title="txtQuery"
-Ver="0.25"
+Ver="0.29"
 DEPENDENCIES="TXTQuery.js, https://www.npmjs.org/package/foldingtext"
 
 # EDIT THIS LINE TO MATCH THE PATH OF The FoldingText CLI executable FT ON YOUR INSTALLATION
@@ -309,9 +309,9 @@ function addFileOrFlagError () {
 			else fName="$1"; fi  # escape any double quotes for json
 			
 			# CONCATENATE ADDITIONAL FILE INTO WORKING SNOWBALL
-			cat $1 >> $2
+			cat "$1" >> "$2"
 			# ADD A 10 Byte FILE SEGMENTATION BREAK (for FT parsing)
-			printf "\n\n\n# ---\n\n" >> $2
+			printf "\n\n\n# ---\n\n" >> "$2"
 			
 			FileTriplets=("${FileTriplets[@]}" "\"$fName\"" $STARTPOSN $STARTLINE) # record starting position
 			
@@ -319,8 +319,7 @@ function addFileOrFlagError () {
 			IFS=' ' read -ra CHARCOUNT <<< $(wc -m "$1") # get line count from wc
 
 			STARTPOSN=$(($STARTPOSN + $CHARCOUNT + 10)) #(see the segmentation
-			STARTLINE=$(($STARTLINE + $LINECOUNT + 5)) #  break above ...)
-		#else
+			STARTLINE=$(($STARTLINE + $LINECOUNT + 5)) #  break above ...)		#else
 		#	isNotText=1
 		#	MSG="FILE TYPE APPEARS TO BE: \"$fType\" (as reported by BASH 'file -b' command)"
 		#fi
@@ -791,4 +790,4 @@ done
 		echo "$Title ver $Ver"
 		echo "FoldingText CLI ver."$($PathToFT -v)
 	fi
-
+	

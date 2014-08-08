@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>IsActive</key>
+		<true/>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>SetVariableToText</string>
+						<key>Text</key>
+						<string>-r 13</string>
+						<key>Variable</key>
+						<string>TXTQUERY_SWITCHES</string>
+					</dict>
+					<dict>
+						<key>DisplayKind</key>
+						<string>Window</string>
+						<key>IsActive</key>
+						<true/>
+						<key>IsDisclosed</key>
+						<true/>
+						<key>MacroActionType</key>
+						<string>ExecuteShellScript</string>
+						<key>Path</key>
+						<string>/Users/robintrew/Desktop/txtquery025.sh</string>
+						<key>Text</key>
+						<string>#!/bin/bash
+
+LC_CTYPE=UTF-8
+
+TXTQUERYPATH="$HOME//Library/Application Support/FoldingText/Plug-Ins/perspectives.ftplugin/txtquery.sh"
+chmod +x "$TXTQUERYPATH" #only needed once, if at all
+cd "$(dirname "$TXTQUERYPATH")"
+
+echo "$("$TXTQUERYPATH" $KMVAR_TXTQUERY_SWITCHES)"</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>TrimResultsNew</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+					</dict>
+				</array>
+				<key>IsActive</key>
+				<true/>
+				<key>ModificationDate</key>
+				<real>429211048.07624203</real>
+				<key>Name</key>
+				<string>Example: TXTQUERY.sh from KM</string>
+				<key>Triggers</key>
+				<array/>
+				<key>UID</key>
+				<string>5859C144-94BB-405E-B69A-4E8910558C27</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>FT2 from anywhere</string>
+		<key>UID</key>
+		<string>5BECAE0E-168C-4929-B065-DB44EC24D418</string>
+	</dict>
+</array>
+</plist>

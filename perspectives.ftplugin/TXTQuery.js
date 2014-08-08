@@ -1,13 +1,23 @@
 //This code Copyright Robin Trew 2014
 //FoldingText is Copyright Jesse Grosjean at HogBay Software
 
+// Also includes some date-formatting functions from:
+//	 * Date Format 1.2.3
+//	 * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
+//	 * MIT license
+//	(See further down)
+
+// Version 0.4
 
 function txtFLOWR(tree, param) {
 	'use strict';
 
+	var oReport;
+
 function TextQuery(tree) {
 
-	var dctArgtFLWORs,
+	var strVersionNumber = "0.4",
+		dctArgtFLWORs,
 		lstPackList,
 		varActiveDoc,
 		lstFileStarts=[], //(sorted start positions [chars] in concat files)
@@ -194,14 +204,14 @@ function TextQuery(tree) {
 				""
 			]
 		},
-		"Overdue (with ftdoc:// links)": {
+		"Overdue with ftdoc links": {
 			"title": "## This WEEK",
 			"for": "$item in //@due < {now}",
 			"let": "$day = fn:daypart($item@due)",
 			"groupby": "$day",
 			"orderby": "$day",
 			"return": [
-				"### {$day}",
+				"### fn:format_date({$day}, [FNn] [D] [MNn] [Y])",
 				{
 					"for": "$i in $item",
 					"orderby": "$i@due",
@@ -272,6 +282,13 @@ function TextQuery(tree) {
 			"orderby": "$text desc",
 			"return": "- {$text}"
 		},
+		"Sorted list with NOTES": {
+			"for": "$line in //@type=unordered",
+			"orderby": "$line desc",
+			"return": [
+				"- {$line}{$line@note}"
+			]
+		},
 		"Numbers in sorted in sequence": {
 			"for": "$num in (10,9,234, 1,2,    5   ,6,7,3,4,8,9)",
 			"orderby": "$num asc",
@@ -318,6 +335,40 @@ function TextQuery(tree) {
 	},
 
 	dctViewFn = {
+		"format_date":function format_date(varArg) {
+			var varDate, strDate, strMask;
+			if (varArg instanceof Array) {
+				if (varArg.length > 1) {
+					strDate = varArg[0];
+					if (!oSmallTime) oSmallTime = new SmallTime();
+					varDate = oSmallTime.readDatePhrase(strDate);
+					if (! isNaN(varDate)) {
+						strMask = xQueryPicToDateJSMask(varArg[1]);
+						strDate = varDate.format(strMask);
+					}
+				}
+			} else {
+				strDate = varArg.toString();
+			}
+			return strDate;
+		},
+		"timepart" : function timepart(varArg) {
+			//last five characters of yyyy-mm-dd hh:mm
+			var varValue = varArg.toString(),
+				strTime = varValue.slice(11);
+			if (strTime) {
+				return "**" + strTime + "**";
+			} else {
+				return "";
+			}
+		},
+
+		"daypart" : function daypart(varArg) {
+			//first 10 characters of yyyy-mm-dd hh:mm
+			var varValue = varArg.toString();
+			return varValue.slice(0, 10);
+		},
+
 		"tagSet":function tagSet() {
 			tree.ensureClassified();
 			return tree.tags(true);
@@ -425,23 +476,6 @@ function TextQuery(tree) {
 			}
 		},
 
-		"timepart" : function timepart(varArg) {
-			//last five characters of yyyy-mm-dd hh:mm
-			var varValue = varArg.toString(),
-				strTime = varValue.slice(11);
-
-			if (strTime) {
-				return "**" + strTime + "**";
-			} else {
-				return "";
-			}
-		},
-
-		"daypart" : function daypart(varArg) {
-			//first 10 characters of yyyy-mm-dd hh:mm
-			var varValue = varArg.toString();
-			return varValue.slice(0, 10);
-		},
 		"encode_for_uri" : function encode_for_uri(varArg) {
 			var varValue = varArg.toString();
 			return encodeURIComponent(varValue);
@@ -455,6 +489,216 @@ function TextQuery(tree) {
 			}
 		}
 	};
+
+	//// DATE FORMAT BY STEVEN LEVITHAN BEGINS
+
+		/*
+	 * Date Format 1.2.3
+	 * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
+	 * MIT license
+	 *
+	 * Includes enhancements by Scott Trenda <scott.trenda.net>
+	 * and Kris Kowal <cixar.com/~kris.kowal/>
+	 *
+	 * Accepts a date, a mask, or a date and a mask.
+	 * Returns a formatted version of the given date.
+	 * The date defaults to the current date/time.
+	 * The mask defaults to dateFormat.masks.default.
+	 */
+
+	var dateFormat = (function () {
+		var	token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g,
+			timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[\-+]\d{4})?)\b/g,
+			timezoneClip = /[^\-+\dA-Z]/g,
+			pad = function (val, len) {
+				val = String(val);
+				len = len || 2;
+				while (val.length < len) {
+					val = '0' + val;
+				}
+				return val;
+			};
+
+		// Regexes and supporting functions are cached through closure
+		return function (date, mask, utc) {
+			var dF = dateFormat;
+
+			// You can't provide utc if you skip other args (use the 'UTC:' mask prefix)
+			if (arguments.length === 1 && Object.prototype.toString.call(date) === '[object String]' && !/\d/.test(date)) {
+				mask = date;
+				date = undefined;
+			}
+
+			// Passing date through Date applies Date.parse, if necessary
+			date = date ? new Date(date) : new Date();
+			if (isNaN(date)) {
+				throw new SyntaxError('invalid date');
+			}
+
+			mask = String(dF.masks[mask] || mask || dF.masks['default']);
+
+			// Allow setting the utc argument via the mask
+			if (mask.slice(0, 4) === 'UTC:') {
+				mask = mask.slice(4);
+				utc = true;
+			}
+
+			var	_ = utc ? 'getUTC' : 'get',
+				d = date[_ + 'Date'](),
+				D = date[_ + 'Day'](),
+				m = date[_ + 'Month'](),
+				y = date[_ + 'FullYear'](),
+				H = date[_ + 'Hours'](),
+				M = date[_ + 'Minutes'](),
+				s = date[_ + 'Seconds'](),
+				L = date[_ + 'Milliseconds'](),
+				o = utc ? 0 : date.getTimezoneOffset(),
+				flags = {
+					d:    d,
+					dd:   pad(d),
+					ddd:  dF.i18n.dayNames[D],
+					dddd: dF.i18n.dayNames[D + 7],
+					m:    m + 1,
+					mm:   pad(m + 1),
+					mmm:  dF.i18n.monthNames[m],
+					mmmm: dF.i18n.monthNames[m + 12],
+					yy:   String(y).slice(2),
+					yyyy: y,
+					h:    H % 12 || 12,
+					hh:   pad(H % 12 || 12),
+					H:    H,
+					HH:   pad(H),
+					M:    M,
+					MM:   pad(M),
+					s:    s,
+					ss:   pad(s),
+					l:    pad(L, 3),
+					L:    pad((L > 99) ? Math.round(L / 10) : L),
+					t:    ((H < 12) ? 'a':'p'),
+					tt:   ((H < 12) ? 'am':'pm'),
+					T:    ((H < 12) ? 'A':'P'),
+					TT:   ((H < 12) ? 'AM':'PM'),
+					Z:    (utc ? 'UTC' : (String(date).match(timezone) || ['']).pop().replace(timezoneClip, '')),
+					o:    ((o > 0) ? '-':'+') + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4),
+					S:    ['th', 'st', 'nd', 'rd'][(d % 10 > 3) ? 0:(d % 100 - d % 10 !== 10) * d % 10]
+				};
+
+			return mask.replace(token, function ($0) {
+				return $0 in flags ? flags[$0] : $0.slice(1, $0.length - 1);
+			});
+		};
+	})();
+
+	// Some common format strings
+	dateFormat.masks = {
+		'default':      'ddd mmm dd yyyy HH:MM:ss',
+		shortDate:      'm/d/yy',
+		mediumDate:     'mmm d, yyyy',
+		longDate:       'mmmm d, yyyy',
+		fullDate:       'dddd, mmmm d, yyyy',
+		shortTime:      'h:MM TT',
+		mediumTime:     'h:MM:ss TT',
+		longTime:       'h:MM:ss TT Z',
+		isoDate:        'yyyy-mm-dd',
+		isoTime:        'HH:MM:ss',
+		isoDateTime:    'yyyy-mm-dd\'T\'HH:MM:ss',
+		isoUtcDateTime: 'UTC:yyyy-mm-dd\'T\'HH:MM:ss\'Z\''
+	};
+
+	// Internationalization strings
+	dateFormat.i18n = {
+		dayNames: [
+			'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
+			'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+		],
+		monthNames: [
+			'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+			'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+		]
+	};
+
+	// For convenience...
+	Date.prototype.format = function (mask, utc) {
+		return dateFormat(this, mask, utc);
+	};
+
+	//// DATE FORMAT BY STEVEN LEVITHAN ENDS (SEE LICENSE ABOVE)
+
+	function xQueryPicToDateJSMask(strPic) {
+		var lstPic=[], lstParts, strSubMask, strLiteral;
+		strPic.split('[').forEach(function (strPart) {
+			lstParts=strPart.split(']');
+			if (lstParts.length > 1) {
+				strSubMask = picTrans(lstParts[0]);
+				strLiteral=lstParts[1];
+				if (strLiteral) strSubMask += ('\'' + strLiteral + '\'');
+				lstPic.push(strSubMask );
+			}
+		});
+		return lstPic.join('');
+	}
+
+	function picTrans(strPic) {
+		// from xquery date picture conventions to those of FT date.js
+		var lngChars=strPic.length,strHead, strNext='', strMask='';
+		if (lngChars) {
+			strHead=strPic.charAt(0);
+			if (lngChars > 1) strNext=strPic.charAt(1);
+			switch (strHead) {
+				case 'Y':
+					strMask='yyyy';
+					break;
+				case 'M':
+					if ((strNext !== 'N') && (strNext !== 'n')) strMask='mm';
+					else {
+						if (strPic.indexOf(',') !== -1) strMask='mmm';
+						else strMask='mmmm';
+					}
+					break;
+				case 'D':
+					if (strNext !== '1') strMask = 'dd';
+					else strMask = 'd';
+					if (strPic.slice(-1) == 'o') strMask += 'S';
+					break;
+				case 'F':
+					if (strPic.indexOf(',') !== -1) strMask='ddd';
+					else strMask='dddd';
+					break;
+				case 'H':
+					if (strNext !== '1') strMask='HH';
+					else strMask='H';
+					break;
+				case 'h':
+					if (strNext !== '1') strMask='hh';
+					else strMask='h';
+					break;
+				case 'P':
+					if (strNext !== '1') {
+						if (strNext !== 'N') strMask='tt';
+						else strMask='TT';
+					} else strMask='t';
+					break;
+				case 'm':
+					if (strNext !== '1') strMask='MM';
+					else strMask='M';
+					break;
+				case 's':
+					if (strNext !== '1') strMask='ss';
+					else strMask='s';
+					break;
+				case 'f':
+					strMask = 'l';
+					break;
+				case 'Z':
+				case 'z':
+					strMask='Z';
+					break;
+				default:
+					strMask='';
+			}
+		}
+		return strMask;
+	}
 
 	this.translateView = function () {
 		var dctView, dctFLWOR, key, strReport = "", strTitle;
@@ -544,7 +788,6 @@ function TextQuery(tree) {
 			lstFileStarts.sort(function (a, b) {return a - b;});
 		}
 	}
-
 
 	//dctFLWOR is assumed to contain all the information needed for
 	//expansion into a grouping tree
@@ -1290,7 +1533,7 @@ function TextQuery(tree) {
 
 		if (typeof(oNode) !== "object") return oNode.toString();
 
-		var varNode = oNode, dctSource,
+		var varNode = oNode, dctSource, lstChiln, lstNotes=[],
 			lstEnvelope = ["heading", "project", "root"],
 			strValue = "", strType, lngFileStart,
 			lngLevel = 0, iStartChar;
@@ -1325,6 +1568,17 @@ function TextQuery(tree) {
 			break;
 		case "index":
 			strValue = (varNode.indexToSelf(true)+1).toString();
+			break;
+		case "note":
+			if (varNode.hasChildren()) {
+				lstChiln = varNode.children();
+				lstChiln.forEach(function (oChild) {
+					if (oChild.type() === "body") {
+						lstNotes.push("\t\t" + oChild.text());
+					}
+				});
+				if (lstNotes.length > 0) strValue="\n"+lstNotes.join("\n");
+			}
 			break;
 		case "location":
 			if (lngSourceFiles > 1) {
@@ -1396,11 +1650,11 @@ function TextQuery(tree) {
 	function expandFns(strLines, dctNames) {
 		var rgxFnArgs = /fn:(\w*)\(([^\)]*)\)/,
 			rgxIsPath = /^[\/\()]/,
-			oMatch=null, lstParts, lstNodes, lstValues,
-			strFn="", strArg="", strAttrib,
+			oMatch=null, lstParts, lstSubParts, lstNodes, lstValues,
+			strFn="", strArg="", strAttrib, strPart,
 			strFull = strLines, strMatch, fn,
 			strFnResult="", strFor, varArg="",
-			lstFnNames, lstFns;
+			lstFnNames, lstFns, lngParts, lngSubParts;
 
 		oMatch = rgxFnArgs.exec(strFull);
 		while (oMatch) {
@@ -1412,11 +1666,7 @@ function TextQuery(tree) {
 				lstFns.push(dctViewFn[lstFnNames[i]]);
 			}
 			fn = fnComposed(lstFns);
-			//strFn = oMatch[1];
 
-			//fn = dctViewFn[strFn];
-
-			//strArg = oMatch[2];
 			if (strArg !== undefined && (strArg.charAt(0) == DOLLAR)) {
 				lstParts = strArg.split("@");
 				if (lstParts.length > 1) {
@@ -1448,10 +1698,23 @@ function TextQuery(tree) {
 				}
 			} else {
 				if (strArg) {
-					varArg = strArg.trim().split(/\s*,\s*/);
-				} else {
-					varArg = [];
-				}
+					varArg=[]; // split on commas except between quotes
+					lstParts=strArg.trim().split(/\s*\'\s*/);
+					lngParts = lstParts.length;
+					for (i=0; i<lngParts; i+=1) {
+						if (i % 2) {
+							strPart=lstParts[i];
+							if (strPart) varArg.push(strPart);
+						} else {
+							lstSubParts=lstParts[i].split(/\s*,\s*/);
+							lngSubParts=lstSubParts.length;
+							for (var j=0; j < lngSubParts; j+=1) {
+								strPart= lstSubParts[j];
+								if (strPart) varArg.push(strPart);
+							}
+						}
+					}
+				} else varArg = [];
 			}
 
 			if (typeof(fn) !== "function") {
@@ -1555,8 +1818,11 @@ function TextQuery(tree) {
 		return JSON.stringify(dctDefaultSettings, null, "\t");
 	};
 
+	this.versionNumber=function () {
+		return strVersionNumber;
+	};
+
 	function buildView(dctView, strKey) {
-		//debugger;
 		var dctFLWOR, varTitle,
 			strView = "";
 
@@ -1670,11 +1936,21 @@ function TextQuery(tree) {
 	};
 }
 
-
 /// END OF TextQuery
 
 function SmallTime() {
-	// SMALL TIME FUNCTIONS
+		// preprocess a nodePath to translate curly-bracketed date phrases to ISO
+	this.translatePathDates = function (strPath) {
+		var strDblQuote = String.fromCharCode(34);
+		return strPath.replace(
+			/{[^}]+}/g, strDblQuote +
+				datePhraseToISO(strPath) + strDblQuote);
+	};
+
+	this.readDatePhrase = function(strPhrase, iWeekStart) {
+		return phraseToDate(strPhrase, iWeekStart);
+	};
+
 		// informal phrases like "now +7d", "thu", jan 12 2pm" to ISO string
 	// yyyy-mm-dd [HH:MM] (unless 00:00)
 	// returns strPhrase itself if can not be parsed
@@ -1757,6 +2033,8 @@ function SmallTime() {
 			lstNth = ["st","nd","rd","th"],
 			dctAnchor = extractISODate(strPhrase),
 			dteAnchor = dctAnchor["date"],
+			lstTokens, //= tokens(dctAnchor['rest']),
+			lngTokens, // = lstTokens.length,
 			rDelta = 0, dteResult = null,
 			lstTokens = tokens(dctAnchor["rest"]),
 			lngTokens = lstTokens.length, blnOrd = false,
@@ -1850,7 +2128,8 @@ function SmallTime() {
 						}
 						dteToday = new Date(); dteToday.setHours(0,0,0,0);
 						if (dteAnchor < dteToday) {
-							dteAnchor.setFullYear(dteAnchor.getFullYear()+1);
+							dteAnchor.setFullYear(
+								dteAnchor.getFullYear()+1);
 						}
 					}
 				}
@@ -1858,6 +2137,41 @@ function SmallTime() {
 			blnNewUnit = blnNewQuant = false; blnNextLast = false; rQuant = 0;
 			blnDate = true; lngSign = 1; //scope of sign limited to one number
 		}
+
+		function extractWeekPhrase(strDate) {
+			var match = /(mon|tue|wed|thu|fri|sat|sun)\w*\s+(la|last|th|this|ne|nxt|next)\s+we*k/i.exec(strDate),
+				dte=null, strRest=strDate;
+
+			if (match !== null) {
+				var dteThen, strRel, lngStartDate, iMatch;
+				dteThen= new Date();
+				iToday = dteThen.getDay();
+				lngStartDate=dteThen.getDate()-(iToday-iWeekStart);
+				dteThen.setHours(0,0,0,0);
+				dteThen.setDate(lngStartDate+(weekDay(match[1])-iWeekStart));
+				strRel=match[2].charAt(0);
+				if (strRel !== 't') {
+					if (strRel !== 'l') dte=new Date(dteThen.valueOf() + WEEK_MSECS);
+					else dte=new Date(dteThen.valueOf() - WEEK_MSECS);
+				} else dte=dteThen;
+
+				iMatch = match.index;
+				strRest = strDate.substring(0, iMatch) +
+					strDate.substring(iMatch+match[0].length);
+			}
+			return {'date':dte, 'rest':strRest.trim()};
+		}
+
+		/////////////
+		// START OF phraseToDate MAIN code: ISO date ?
+		/////////////
+		dctAnchor = extractISODate(strPhrase);
+		dteAnchor = dctAnchor['date'];
+		// if not, WeekdayName+(last|this|this)+'week' ?
+		if (!dteAnchor) dctAnchor = extractWeekPhrase(strPhrase);
+		dteAnchor = dctAnchor['date'];
+		lstTokens = tokens(dctAnchor['rest']);
+		lngTokens = lstTokens.length;
 
 		if (lngTokens) { // get a base date,
 			if (dteAnchor) {
@@ -1983,13 +2297,14 @@ function SmallTime() {
 		}
 		return dteResult;
 	}
+
 	// separate any token which looks like yyyy-mm-dd from the rest
 	function extractISODate(strDate) {
 		var match = /((\d{4})-(\d{2})-(\d{2}))/.exec(strDate),
-			lngYear, lngMonth, lngDay,
-			dte = null, strRest = strDate, iMatch;
+			dte = null, strRest = strDate;
 
 		if (match !== null) {
+			var lngYear, lngMonth, lngDay, iMatch;
 			lngYear = parseInt(match[2],10);
 			lngMonth = parseInt(match[3],10) -1; //zero based
 			lngDay = parseInt(match[4],10);
@@ -2071,6 +2386,8 @@ function SmallTime() {
 			// Two passes: json string nested in json object
 			dctFLWOR=JSON.parse(JSON.stringify(options.viewjson));
 			return oReport.customViewByName(null, options, dctFLWOR);
+		case "version":
+			return oReport.versionNumber();
 		default:
 			return "Command not recognised: " + varCmd;
 		}
@@ -2078,5 +2395,4 @@ function SmallTime() {
 		return "Expected JSON string as parameter {cmd:commandName, args:[]}";
 	}
 }
-
 
