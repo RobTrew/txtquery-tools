@@ -1,4 +1,4 @@
-property pTitle : "Copy FT selection as ftdoc:// url"property pVer : "0.02"property pAuthor : "Rob Trew"property pDescription : "
+property pTitle : "Copy FT selection as ftdoc:// url"property pVer : "0.04"property pAuthor : "Rob Trew"property pDescription : "
 
 	Copies the selected text in FoldingText as an ftdoc:// URL 
 	linking back to the current document, filter state, 
@@ -30,6 +30,8 @@ var	libNodePath = require('ft/core/nodepath').NodePath,
 	lngStartOffset=dctStartOffset.ch,
 	lngEndOffset=-1,
 	lnPosn;
+
+	
 	
 	if (dctEndOffset.line === lngLine) {
 		lngEndOffset = dctEndOffset.ch;

@@ -7,9 +7,10 @@
 
 \f0\b\fs24 \cf2 property
 \b0  \cf3 pTitle\cf2  : "Register and handle ftdoc:// url scheme"\
+\pard\pardeftab480\slleading20\pardirnatural
 
-\b property
-\b0  \cf3 pVer\cf2  : "0.03"\
+\b \cf2 property
+\b0  \cf3 pVer\cf2  : "0.04"\
 
 \b property
 \b0  \cf3 pAuthor\cf2  : "Rob Trew"\
@@ -186,7 +187,7 @@ function(editor, options) \{\
 \b set
 \b0  \cf3 strPath\cf2  
 \b to
-\b0  \cf3 urldecode\cf2 (\cf3 filepath\cf2  
+\b0  \cf3 Decode\cf2 (\cf3 filepath\cf2  
 \b of
 \b0  \cf3 recParse\cf2 )\
 		\
@@ -236,23 +237,25 @@ function(editor, options) \{\
 \b \cf6 open location
 \b0 \cf2 \
 \
-\cf4 --on getDoc(strPath)\cf2 \
-\cf4 --	tell application "FoldingText"\cf2 \
-\cf4 --		set lstDoc to documents\cf2 \
-\cf4 --		repeat with oDoc in lstDoc\cf2 \
-\cf4 --			set oFile to file of oDoc\cf2 \
-\cf4 --			if oFile is not missing value then\cf2 \
-\cf4 --				if (POSIX path of ((oFile) as alias)) = strPath then\cf2 \
-\cf4 --					activate\cf2 \
-\cf4 --					return oDoc\cf2 \
-\cf4 --				end if\cf2 \
-\cf4 --			end if\cf2 \
-\cf4 --		end repeat\cf2 \
-\cf4 --		set oDoc to (open strPath)\cf2 \
-\cf4 --		activate\cf2 \
-\cf4 --		return oDoc\cf2 \
-\cf4 --	end tell\cf2 \
-\cf4 --end getDoc\cf2 \
+
+\b on
+\b0  \cf3 Decode\cf2 (\cf3 strEncodedPath\cf2 )\
+\pard\pardeftab480\slleading20\pardirnatural
+\cf2 	
+\b set
+\b0  \cf3 strCMD\cf2  
+\b to
+\b0  "JSC=/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc\
+\pard\pardeftab480\slleading20\pardirnatural
+\cf2 \\"$JSC\\" -e \\"print(decodeURI('" & \cf3 strEncodedPath\cf2  & "'));\\""\
+	
+\b return
+\b0  
+\b \cf6 do shell script
+\b0 \cf2  \cf3 strCMD\cf2 \
+
+\b end
+\b0  \cf3 Decode\cf2 \
 \
 
 \b on
@@ -437,185 +440,7 @@ function(editor, options) \{\
 \b end
 \b0  \cf3 pathAndSwitches\cf2 \
 \
-\cf4 -- based on http://harvey.nu/applescript_url_decode_routine.html\cf2 \
-
-\b on
-\b0  \cf3 urldecode\cf2 (\cf3 theText\cf2 )\
-	
-\b set
-\b0  \cf3 sDst\cf2  
-\b to
-\b0  ""\
-	
-\b set
-\b0  \cf3 sHex\cf2  
-\b to
-\b0  "0123456789ABCDEF"\
-	
-\b set
-\b0  \cf3 i\cf2  
-\b to
-\b0  1\
-	
-\b repeat
-\b0  
-\b while
-\b0  \cf3 i\cf2  \uc0\u8804  \cf5 length\cf2  
-\b of
-\b0  \cf3 theText\cf2 \
-		
-\b set
-\b0  \cf3 c\cf2  
-\b to
-\b0  
-\i \cf7 character
-\i0 \cf2  \cf3 i\cf2  
-\b of
-\b0  \cf3 theText\cf2 \
-		
-\b if
-\b0  \cf3 c\cf2  = "+" 
-\b then
-\b0 \
-			
-\b set
-\b0  \cf3 sDst\cf2  
-\b to
-\b0  \cf3 sDst\cf2  & " "\
-		
-\b else
-\b0  
-\b if
-\b0  \cf3 c\cf2  = "%" 
-\b then
-\b0 \
-			
-\b if
-\b0  \cf3 i\cf2  > ((\cf5 length\cf2  
-\b of
-\b0  \cf3 theText\cf2 ) - 2) 
-\b then
-\b0 \
-				
-\b tell
-\b0  
-\i \cf7 application
-\i0 \cf2  "System Events"\
-					
-\b \cf7 activate
-\b0 \cf2 \
-					
-\b \cf6 display dialog
-\b0 \cf2  ("Invalid URL Encoded string - missing hex char") \cf6 buttons\cf2  \{"OK"\} \cf6 default button\cf2  "OK" \cf6 with title\cf2  \cf3 pTitle\cf2  & "  ver. " & \cf3 pVer\cf2 \
-				
-\b end
-\b0  
-\b tell
-\b0 \
-				
-\b return
-\b0  ""\
-			
-\b end
-\b0  
-\b if
-\b0 \
-			
-\b set
-\b0  \cf3 iCVal1\cf2  
-\b to
-\b0  (
-\b \cf6 offset
-\b0 \cf2  \cf6 of\cf2  (
-\i \cf7 character
-\i0 \cf2  (\cf3 i\cf2  + 1) 
-\b of
-\b0  \cf3 theText\cf2 ) \cf6 in\cf2  \cf3 sHex\cf2 ) - 1\
-			
-\b set
-\b0  \cf3 iCVal2\cf2  
-\b to
-\b0  (
-\b \cf6 offset
-\b0 \cf2  \cf6 of\cf2  (
-\i \cf7 character
-\i0 \cf2  (\cf3 i\cf2  + 2) 
-\b of
-\b0  \cf3 theText\cf2 ) \cf6 in\cf2  \cf3 sHex\cf2 ) - 1\
-			
-\b if
-\b0  \cf3 iCVal1\cf2  = -1 
-\b or
-\b0  \cf3 iCVal2\cf2  = -1 
-\b then
-\b0 \
-				
-\b tell
-\b0  
-\i \cf7 application
-\i0 \cf2  "System Events"\
-					
-\b \cf7 activate
-\b0 \cf2 \
-					
-\b \cf6 display dialog
-\b0 \cf2  ("Invalid URL Encoded string - not 2 hex chars after % sign") \cf6 buttons\cf2  \{"OK"\} \cf6 default button\cf2  "OK" \cf6 with title\cf2  \cf3 pTitle\cf2  & "  ver. " & \cf3 pVer\cf2 \
-				
-\b end
-\b0  
-\b tell
-\b0 \
-				
-\b return
-\b0  ""\
-			
-\b end
-\b0  
-\b if
-\b0 \
-			
-\b set
-\b0  \cf3 sDst\cf2  
-\b to
-\b0  \cf3 sDst\cf2  & (
-\b \cf6 ASCII character
-\b0 \cf2  (\cf3 iCVal1\cf2  * 16 + \cf3 iCVal2\cf2 ))\
-			
-\b set
-\b0  \cf3 i\cf2  
-\b to
-\b0  \cf3 i\cf2  + 2\
-		
-\b else
-\b0 \
-			
-\b set
-\b0  \cf3 sDst\cf2  
-\b to
-\b0  \cf3 sDst\cf2  & \cf3 c\cf2 \
-		
-\b end
-\b0  
-\b if
-\b0 \
-		
-\b set
-\b0  \cf3 i\cf2  
-\b to
-\b0  \cf3 i\cf2  + 1\
-	
-\b end
-\b0  
-\b repeat
-\b0 \
-	
-\b return
-\b0  \cf3 sDst\cf2 \
-
-\b end
-\b0  \cf3 urldecode\cf2 \
 \
-\
-\cf4 -- "ftdoc://encoded-file-path[?nodepath=//@due][?line=N][?startoffset=0][?endoffset=-1]"\cf2 \
+\cf4 ---- "ftdoc://encoded-file-path[?nodepath=//@due][?line=N][?startoffset=0][?endoffset=-1]"\cf2 \
 \
 }
