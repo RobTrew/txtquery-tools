@@ -47,17 +47,17 @@
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>317</integer>
-								<integer>404</integer>
-								<integer>164</integer>
+								<integer>389</integer>
+								<integer>493</integer>
+								<integer>201</integer>
 							</array>
 							<key>5</key>
 							<array>
-								<integer>240</integer>
-								<integer>100</integer>
-								<integer>307</integer>
-								<integer>79</integer>
-								<integer>122</integer>
+								<integer>302</integer>
+								<integer>126</integer>
+								<integer>386</integer>
+								<integer>99</integer>
+								<integer>154</integer>
 							</array>
 						</dict>
 					</dict>
@@ -126,7 +126,7 @@
 										<key>length</key>
 										<integer>0</integer>
 										<key>location</key>
-										<integer>87</integer>
+										<integer>32</integer>
 									</dict>
 								</array>
 								<key>LNSTextViewShowInvisibles</key>
@@ -138,7 +138,7 @@
 								<key>LNSTextViewWrapLines</key>
 								<true/>
 								<key>LNSVisibleRect</key>
-								<string>{{0, 0}, {255, 221}}</string>
+								<string>{{0, 0}, {439, 271}}</string>
 							</dict>
 						</dict>
 					</dict>
@@ -209,7 +209,7 @@
 					</dict>
 				</dict>
 				<key>mainSplitPosition</key>
-				<real>271</real>
+				<real>455</real>
 				<key>modeIdentifier</key>
 				<string>tab.debug</string>
 				<key>resourcesViewState</key>
@@ -244,7 +244,7 @@
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>4631</integer>
+								<integer>81</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -256,7 +256,7 @@
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 2247}, {890, 893}}</string>
+						<string>{{0, 0}, {1732, 1051}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
@@ -283,7 +283,7 @@
 				<key>windowControllerID</key>
 				<string>E07DB206-4FD6-4C36-8390-34DD24760CB3-28599-0000EBDCF92CFF67</string>
 				<key>windowFrame</key>
-				<string>45 593 1189 965 0 0 2560 1578 </string>
+				<string>460 65 2215 1184 0 0 2560 1578 </string>
 			</dict>
 		</dict>
 		<key>windowControllers</key>
@@ -298,7 +298,7 @@
 					<key>miniaturized</key>
 					<false/>
 					<key>windowFrame</key>
-					<string>45 593 1189 965 0 0 2560 1578 </string>
+					<string>460 65 2215 1184 0 0 2560 1578 </string>
 				</dict>
 			</dict>
 		</array>
