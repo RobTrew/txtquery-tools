@@ -237,6 +237,12 @@ function(editor, options) \{\
 \b \cf6 open location
 \b0 \cf2 \
 \
+\cf4 --on Decode(strEncodedPath)\cf2 \
+\cf4 --	set strCMD to "JSC=/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc\cf2 \
+\cf4 --\\"$JSC\\" -e \\"print(decodeURI('" & strEncodedPath & "'));\\""\cf2 \
+\cf4 --	return do shell script strCMD\cf2 \
+\cf4 --end Decode\cf2 \
+\
 
 \b on
 \b0  \cf3 Decode\cf2 (\cf3 strEncodedPath\cf2 )\
@@ -245,9 +251,13 @@ function(editor, options) \{\
 \b set
 \b0  \cf3 strCMD\cf2  
 \b to
-\b0  "JSC=/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc\
+\b0  "\
 \pard\pardeftab480\slleading20\pardirnatural
-\cf2 \\"$JSC\\" -e \\"print(decodeURI('" & \cf3 strEncodedPath\cf2  & "'));\\""\
+\cf2 urldecode() \{\
+	local url_encoded=\\"$\{1//+/ \}\\"\
+	printf '%b' \\"$\{url_encoded//%/\\\\x\}\\"\
+\}\
+urldecode '" & \cf3 strEncodedPath\cf2  & "'"\
 	
 \b return
 \b0  
