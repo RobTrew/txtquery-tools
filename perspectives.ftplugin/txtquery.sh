@@ -16,8 +16,8 @@ if [[ ":$PATH:" != *":/usr/local/bin:"* ]]; then
 	export PATH=$PATH:/usr/local/bin 
 fi
 # Ensure that the locale is a UTF-8 setting
-if [[ "$LC_CTYPE" != *"UTF-8"* ]]; then
-	export LC_CTYPE="UTF-8" 
+if [[ $LC_CTYPE != *"UTF-8" ]]; then
+	export LC_ALL=$(defaults read -g AppleLocale).UTF-8 
 fi
 
 
@@ -321,11 +321,11 @@ function addFileOrFlagError () {
 			
 			FileTriplets=("${FileTriplets[@]}" "\"$fName\"" $STARTPOSN $STARTLINE) # record starting position
 			
-			IFS=' ' read -ra LINECOUNT <<< $(wc -l "$1") # get line count from wc
-			IFS=' ' read -ra CHARCOUNT <<< $(wc -m "$1") # get line count from wc
+			IFS=' ' read -ra STATS <<< $(wc -lm "$1") # get line count from wc
+			#IFS=' ' read -ra CHARCOUNT <<< $(wc -m "$1") # get line count from wc
 
-			STARTPOSN=$(($STARTPOSN + $CHARCOUNT + 10)) #(see the segmentation
-			STARTLINE=$(($STARTLINE + $LINECOUNT + 5)) #  break above ...)		#else
+			STARTPOSN=$(($STARTPOSN + ${STATS[1]} + 10)) #(see the segmentation
+			STARTLINE=$(($STARTLINE + ${STATS[0]} + 5)) #  break above ...)		#else
 		#	isNotText=1
 		#	MSG="FILE TYPE APPEARS TO BE: \"$fType\" (as reported by BASH 'file -b' command)"
 		#fi
