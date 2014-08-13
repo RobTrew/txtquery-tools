@@ -2,10 +2,10 @@
 //FoldingText is Copyright Jesse Grosjean at HogBay Software
 
 // Also includes some date-formatting functions from:
-//	 * Date Format 1.2.3
-//	 * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
-//	 * MIT license
-//	(See further down)
+//  * Date Format 1.2.3
+//  * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
+//  * MIT license
+// (See further down)
 
 define(function(require, exports, module) {
 	'use strict';
@@ -210,7 +210,7 @@ function TextQuery(tree) {
 			"groupby": "$day",
 			"orderby": "$day",
 			"return": [
-				"### fn:format_date({$day}, [FNn] [D] [MNn] [Y])",
+				"### fn:format_date({$day}, '[FNn,] [D] [MNn] [Y]')",
 				{
 					"for": "$i in $item",
 					"orderby": "$i@due",
@@ -335,14 +335,21 @@ function TextQuery(tree) {
 
 	dctViewFn = {
 		"format_date":function format_date(varArg) {
-			var varDate, strDate, strMask;
+			var varDate, strDate, strMask, strArg;
 			if (varArg instanceof Array) {
 				if (varArg.length > 1) {
 					strDate = varArg[0];
 					if (!oSmallTime) oSmallTime = new SmallTime();
 					varDate = oSmallTime.readDatePhrase(strDate);
 					if (! isNaN(varDate)) {
-						strMask = xQueryPicToDateJSMask(varArg[1]);
+						if (varArg.length > 2) {
+							strArg = '[' + varArg.slice(1).join('] [') + ']';
+						} else {
+							strArg=varArg[1];
+						}
+						strMask = xQueryPicToDateJSMask(strArg);
+
+
 						strDate = varDate.format(strMask);
 					}
 				}
@@ -632,7 +639,7 @@ function TextQuery(tree) {
 				strLiteral=lstParts[1];
 				if (strLiteral) strSubMask += ('\'' + strLiteral + '\'');
 				lstPic.push(strSubMask );
-			}
+			} else lstPic.push(('\'' + lstParts[0] + '\''));
 		});
 		return lstPic.join('');
 	}
@@ -1393,7 +1400,9 @@ function TextQuery(tree) {
 			} else {
 				strExpanded = varLine;
 			}
-			if (strExpanded && (strExpanded !== "")) {
+			if (strExpanded) {
+				// loop through { phrase } pairs translating
+				// date expressions
 				if (strExpanded.indexOf("{") !== -1) {
 					if (! oSmallTime) oSmallTime = new SmallTime();
 					strExpanded = oSmallTime.translatePathDates(strExpanded);
@@ -1705,7 +1714,7 @@ function TextQuery(tree) {
 				}
 			} else {
 				if (strArg) {
-					varArg=[]; // split on commas except between quotes
+					varArg=[]; // split on commas except between '',[]
 					lstParts=strArg.trim().split(/\s*\'\s*/);
 					lngParts = lstParts.length;
 					for (i=0; i<lngParts; i+=1) {
@@ -1724,6 +1733,7 @@ function TextQuery(tree) {
 				} else varArg = [];
 			}
 
+
 			if (typeof(fn) !== "function") {
 				strFull = strFull.replace(
 					strMatch, strMatch +"=UNKNOWN FUNCTION", "g");
@@ -1735,6 +1745,7 @@ function TextQuery(tree) {
 		}
 		return strFull;
 	}
+
 
 	//Can be a string expansion,
 	//or getting a reference to an object,
@@ -2014,19 +2025,37 @@ function SmallTime() {
 
 		// preprocess a nodePath to translate curly-bracketed date phrases to ISO
 	this.translatePathDates = function (strPath) {
-		var strDblQuote = String.fromCharCode(34);
-		return strPath.replace(
-			/{[^}]+}/g, strDblQuote +
-				datePhraseToISO(strPath) + strDblQuote);
+		var strDblQuote = String.fromCharCode(34),
+			strExpand=strPath,
+			rgxBracketed = /{[^{}]+}/, oMatch, strMatch, strDate;
+
+		oMatch=rgxBracketed.exec(strExpand);
+		while (oMatch) {
+			strMatch = oMatch[0];
+			strDate = datePhraseToISO(strMatch);
+			strExpand = strExpand.replace(
+					strMatch, strDblQuote + strDate + strDblQuote, "g");
+			oMatch=rgxBracketed.exec(strExpand);
+		}
+		return strExpand;
 	};
 
 		// preprocess a nodePath to translate curly-bracketed date phrases to ISO
-	function translatePathDates(strPath) {
-		var strDblQuote = String.fromCharCode(34);
-		return strPath.replace(
-			/{[^}]+}/g, strDblQuote +
-				datePhraseToISO(strPath) + strDblQuote);
-	}
+	// translatePathDates = function (strPath) {
+	// 	var strDblQuote = String.fromCharCode(34),
+	// 		strExpand=strPath,
+	// 		rgxBracketed = /{[^{}]+}/, oMatch, strMatch, strDate;
+
+	// 	oMatch=rgxBracketed.exec(strExpand);
+	// 	while (oMatch) {
+	// 		strMatch = oMatch[0];
+	// 		strDate = datePhraseToISO(strMatch);
+	// 		strExpand = strExpand.replace(
+	// 				strMatch, strDblQuote + strDate + strDblQuote, "g");
+	// 		oMatch=rgxBracketed.exec(strExpand);
+	// 	}
+	// 	return strExpand;
+	// };
 
 	this.readDatePhrase = function(strPhrase, iWeekStart) {
 		return phraseToDate(strPhrase, iWeekStart);
@@ -2069,14 +2098,6 @@ function SmallTime() {
 		}
 	}
 
-	// preprocess a nodePath to translate curly-bracketed date phrases to ISO
-	this.translatePathDates = function (strPath) {
-		var strDblQuote = String.fromCharCode(34);
-		return strPath.replace(
-			/{[^}]+}/g, strDblQuote +
-				datePhraseToISO(strPath) + strDblQuote);
-	};
-
 	// if a time specified for today has already passed, assume tomorrow
 	function adjustDay(dteAnchor) {
 		if (dteAnchor < new Date()) {
@@ -2086,7 +2107,7 @@ function SmallTime() {
 		}
 	}
 
-	// informal phrases like "now +7d", "thu", jan 12 2pm" to .js Date()
+	// informal phrases like 'now +7d', 'thu', jan 12 2pm' to .js Date()
 	function phraseToDate(strPhrase, iWeekStart) {
 		if (typeof iWeekStart === "undefined" || iWeekStart === null) {
 			iWeekStart = 1; //Monday
