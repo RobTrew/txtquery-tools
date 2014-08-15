@@ -1,6 +1,8 @@
 #!/bin/bash
 # Author: Rob Trew, 2014
 
+# ver 0.2
+
 # SPECIFY DEFAULT MESSAGE COLOR MODEL, VALUE RANGES, CYCLE COUNT
 
 TRANSFORM_CLIPBOARD=1  #0 (or empty) to leave plain text version in clipboard, 1 to put RTF or 2 to put HTML in clipboard)
@@ -27,11 +29,11 @@ if [ ! -z "$CLIPTEXT" ]; then
 	MSG="$CLIPTEXT"
 fi
 
-quote() {
-    echo "$1" | sed "s/\([^[:alpha:]]\)/\\\\\1/g"
+escape() {
+    echo "$1" | sed "s/\([^[:alnum:]]\)/\\\\\1/g"
 }
 
-CLEAN=$(quote "$MSG")
+CLEAN=$(escape "$MSG")
 
 JSC="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc"
 COLORSPANS=$("$JSC" -e "
