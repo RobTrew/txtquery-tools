@@ -2041,7 +2041,7 @@ function SmallTime() {
 	};
 
 		// preprocess a nodePath to translate curly-bracketed date phrases to ISO
-	// translatePathDates = function (strPath) {
+	// function translatePathDates(strPath) {
 	// 	var strDblQuote = String.fromCharCode(34),
 	// 		strExpand=strPath,
 	// 		rgxBracketed = /{[^{}]+}/, oMatch, strMatch, strDate;
@@ -2055,7 +2055,7 @@ function SmallTime() {
 	// 		oMatch=rgxBracketed.exec(strExpand);
 	// 	}
 	// 	return strExpand;
-	// };
+	// }
 
 	this.readDatePhrase = function(strPhrase, iWeekStart) {
 		return phraseToDate(strPhrase, iWeekStart);
