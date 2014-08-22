@@ -1,14 +1,14 @@
 #!/bin/bash
 # Author: Rob Trew, 2014
 
-# ver 0.2
+# ver 0.3
 
 # SPECIFY DEFAULT MESSAGE COLOR MODEL, VALUE RANGES, CYCLE COUNT
 
 TRANSFORM_CLIPBOARD=1  #0 (or empty) to leave plain text version in clipboard, 1 to put RTF or 2 to put HTML in clipboard)
 MSG="abracadabracadabracadabracadabra"
 FONTFACE="Courier"
-FONTSIZE="16"
+FONTSIZE="4"
 SCHEME="BlackToRed" # Choose a key from set of scheme names in 'var options' below, or add a scheme
 
 # TO USE:
@@ -26,26 +26,31 @@ SCHEME="BlackToRed" # Choose a key from set of scheme names in 'var options' bel
 
 CLIPTEXT=$(pbpaste -Prefer txt)
 if [ ! -z "$CLIPTEXT" ]; then
-	MSG="$CLIPTEXT"
+	read -d '' String <<"EOF"
 fi
 
 escape() {
-    echo "$1" | sed "s/\([^[:alnum:]]\)/\\\\\1/g"
+    echo "$1" | sed "s/\([^\s[:alnum:]]\)/\\\\\1/g"
 }
-
-CLEAN=$(escape "$MSG")
+CLEAN="'$(escape "$MSG")'"
+echo "$CLEAN"
+echo "next"
 
 JSC="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc"
 COLORSPANS=$("$JSC" -e "
 
-var	options = {'msg':'$CLEAN', 'fontface':'$FONTFACE','fontsize':$FONTSIZE},
+var strEncoded = encodeURIComponent("$CLEAN");
+print(strEncoded);
+throw { name: 'done', message: 'thats it' };
+
+var	options = {'msg':strEncoded, 'fontface':'$FONTFACE','fontsize':$FONTSIZE},
 	dctPalette = {
 		'BlackToRed' : {'model':'hsl', 'percent':[false, true, true],
 						p1:[255, 0], p2:[20, 100], p3:[20, 50], cycles:2},
 		'Gray' : {'model':'rgb', 'percent':[false, false, false],
 						p1:[255, 40], p2:[255, 40], p3:[255, 40], cycles:2},
 		'RainBow' : {'model':'hsl', 'percent':[false, true, true],
-						p1:[0, 255], p2:[100, 100], p3:[50, 50], cycles:2},
+						p1:[255, 0], p2:[100, 100], p3:[50, 50], cycles:2},
 		'RedPink' : {'model':'hsl', 'percent':[false, true, true],
 					p1:[0, 0], p2:[100, 100], p3:[95, 50], cycles:2},
 		'RedGrey' : {'model':'hsl', 'percent':[false, true, true],
@@ -56,7 +61,11 @@ var	options = {'msg':'$CLEAN', 'fontface':'$FONTFACE','fontsize':$FONTSIZE},
 	dctScheme=dctPalette['$SCHEME'];
 
 function colorSpans(options) {
+	
+	return encodeURIComponent(options.msg);
+	
 	var	strMsg = options.msg,
+		strEncoded=encodeURIComponent(strMsg),
 		lngChars = strMsg.length,
 		nCycles = options.cycles * Math.PI,
 		lstP1=options.p1,
@@ -74,7 +83,9 @@ function colorSpans(options) {
 		strVal='', lstSpan=[],lstHTML=[],
 		nTheta, rPropn,
 		i,j;
-
+		
+	return strEncoded;
+	
 	for (i=0; i<lngChars; i+=1) {
 
 		//Assemble a span for this char,
@@ -84,7 +95,7 @@ function colorSpans(options) {
 		for (j=0; j<3; j+=1) {
 			nRange=lstRange[j];
 			if(nRange) {
-				strVal=Math.round(lstStart[j]+(rPropn * lstRange[j])).toString();
+				strVal=Math.round(lstStart[j]+(rPropn * nRange)).toString();
 			} else {
 				strVal=lstFixed[j];
 			}
