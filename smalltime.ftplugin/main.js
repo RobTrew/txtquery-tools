@@ -61,11 +61,14 @@ define(function(require, exports, module) {
 
 		// preprocess a nodePath to translate curly-bracketed date phrases to ISO
 	this.translatePathDates = function (strPath) {
+		debugger;
 		return pathToISO(strPath);
 	};
 
 		// preprocess a nodePath to translate curly-bracketed date phrases to ISO
-	translatePathDates = pathToISO(strPath);
+	function translatePathDates(strPath) {
+		return pathToISO(strPath);
+	}
 
 	function pathToISO(strPath) {
 		debugger;

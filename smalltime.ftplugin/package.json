@@ -1,6 +1,6 @@
 {
     "name": "Exports informal/relative date phrase translation functions",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "description": "Library functions used by other plugins",
     "engines": {
         "foldingtext": ">=2.0.0",

@@ -20,6 +20,7 @@ define(function(require, exports, module) {
 		Editor;
 
 	function translatePhrase(strPhrase) {
+		debugger;
 		if (strPhrase && ! strPhrase.match(/^ +$/)) {
 			var oMatch = /(\@\w+\()([^\)]*)\)/.exec(strPhrase),
 				strKey='', strVal='', strDate='';
