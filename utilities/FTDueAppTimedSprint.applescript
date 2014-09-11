@@ -1,4 +1,4 @@
-property pTitle : "Current line as timed Due.app sprint @mins(N)"property pVer : "0.3"property pAuthor : "Rob Trew"property plngDefaultMins : 55property pstrMinutesTag : "mins" -- eg @mins(30)property pstrPomodoroTag : "pom" -- eg @pom or @pom(2) but see plngMinutesPerPomodoro below-- EXCHANGE RATE: MINUTES PER POMODORO UNIT:-- set plngMinutesPerPomodoro below to 1 if @pom(2) just means two minutes -- but set for example, to 30 if @pom(2) is an hour-- @pom and @pom(1) are interchangeableproperty plngMinutesPerPomodoro : 1 -- OR 25 ETC ?property pDescription : "
+property pTitle : "Current line as timed Due.app sprint @mins(N)"property pVer : "0.3"property pAuthor : "Rob Trew"property plngDefaultMins : 55property pstrMinutesTag : "mins" -- eg @mins(30)property pstrPomodoroTag : "pom" -- eg @pom or @pom(2) but see plngMinutesPerPomodoro below-- EXCHANGE RATE: MINUTES PER POMODORO UNIT:-- set plngMinutesPerPomodoro below to 1 if @pom(2) just means two minutes -- but set for example, to 30 if @pom(2) is an hour-- @pom and @pom(1) are interchangeableproperty plngMinutesPerPomodoro : 25 -- if we just write @pom OR 1 if we prefer to write @pom(25) property pDescription : "
 
 	FIRST ADJUST SETTINGS:
 	Edit values above for:
@@ -42,7 +42,7 @@ property pTitle : "Current line as timed Due.app sprint @mins(N)"property pVer 
 			strPomTag = options.pomtag,
 			lngMinsPerPom = options.pomodoromins,
 			lngMins, lngPom, strPom,
-			strText, strURL, i,j;
+			strText, strURL, i, j;
 
 		// ITERATE THROUGH MULTIPLE SELECTIONS OF ONE OR MORE LINES EACH
 		lstSelns.forEach(function(rngSeln) {

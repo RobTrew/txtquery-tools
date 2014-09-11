@@ -1,4 +1,4 @@
-property pTitle : "TP3 Move line(s) to new section"property pVer : "0.02"property pAuthor : "RobTrew"property pLicense : "MIT: ALL copies should include the license notice at https://github.com/RobTrew/txtquery-tools"property pUse : "
+property pTitle : "TP3 Move line(s) to new section"property pVer : "0.03"property pAuthor : "RobTrew"property pLicense : "MIT: ALL copies should include the license notice at https://github.com/RobTrew/txtquery-tools"property pUse : "
 
 	1. Select one or more lines in TaskPaper 3 Dev
 	2. Run this script and choose a target section from the menu
@@ -55,6 +55,7 @@ property pTitle : "TP3 Move line(s) to new section"property pVer : "0.02"prope
 				lstPath.push(libNodePath.calculateMinNodePath(oHead));
 				lstMenu.push(
 					[
+						Array(oHead.typeIndentLevel()+1).join('→'),
 						oHead.text(),
 						':'
 					].join('')
