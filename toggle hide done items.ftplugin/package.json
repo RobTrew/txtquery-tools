@@ -1,6 +1,6 @@
 {
   "name": "Toggle Hide Done Items",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Toggles visibility of @done items on and off. See Edit > Run Command",
   "homepage": "https://github.com/RobTrew/txtquery-tools",
   "engines": {

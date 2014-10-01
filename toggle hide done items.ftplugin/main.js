@@ -4,12 +4,30 @@ define(function(require, exports, module) {
 	Extensions.addCommand({
 		name: 'toggle hide done items',
 		description: 'Toggles between hiding @done items and showing all lines',
-		performCommand: function (editor) {
-			var strHideDone = '//not @done';
-			if (editor.nodePath().nodePathString !== strHideDone)
-				editor.setNodePath(strHideDone);
-			else
-				editor.setNodePath('///*');
+		performCommand: function(editor) {
+			var strActivePath = editor.nodePath().nodePathString,
+				lstNodes,
+				strExceptDone = ' except //@done',
+				lngChars=strExceptDone.length,
+				strToggledPath, lngStart;
+
+			switch (strActivePath) {
+				case '///*':
+					strToggledPath = '//not @done';
+					break;
+				case '//not @done':
+					strToggledPath = '///*';
+					break;
+				default :
+					lngStart = strActivePath.length-lngChars;
+					if (strActivePath.indexOf(
+							' except //@done', lngStart) == -1)
+						strToggledPath = strActivePath + strExceptDone;
+					else
+						strToggledPath = strActivePath.substring(0, lngStart);
+					break;
+			}
+			editor.setNodePath(strToggledPath);
 		}
 	});
 
