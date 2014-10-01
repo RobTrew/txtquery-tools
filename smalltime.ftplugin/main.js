@@ -61,7 +61,6 @@ define(function(require, exports, module) {
 
 		// preprocess a nodePath to translate curly-bracketed date phrases to ISO
 	this.translatePathDates = function (strPath) {
-		debugger;
 		return pathToISO(strPath);
 	};
 
@@ -71,7 +70,6 @@ define(function(require, exports, module) {
 	}
 
 	function pathToISO(strPath) {
-		debugger;
 		var strDblQuote = String.fromCharCode(34),
 			strExpand=strPath,
 			rgxBracketed = /{[^{}]+}/, oMatch, strMatch, strDate;
