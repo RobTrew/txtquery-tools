@@ -1,0 +1,10 @@
+{
+  "name": "Toggle Hide Done Items",
+  "version": "1.0.0",
+  "description": "Toggles visibility of @done items on and off. See Edit > Run Command",
+  "homepage": "https://github.com/RobTrew/txtquery-tools",
+  "engines": {
+    "foldingtext": ">2.0.0",
+    "taskpaper": ">3.0.0"
+  }
+}
