@@ -144,12 +144,4 @@ define(function(require, exports, module) {
 		performCommand: translateDateTags
 	});
 
-	Extensions.add('com.foldingtext.editor.init', function(editor) {
-		Editor = editor;
-
-		Editor.addKeyMap({
-			"Shift-Cmd-U" : 'translate date tags'
-		});
-	});
-
 });
