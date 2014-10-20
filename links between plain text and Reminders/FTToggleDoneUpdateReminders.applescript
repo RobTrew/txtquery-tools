@@ -1,5 +1,5 @@
 property pTitle : "Toggle @done in selected FT lines, updating any linked Reminder"
-property pVer : "0.4"
+property pVer : "0.5" -- Checked for Yosemite
 property pAuthor : "Rob Trew"
 
 on run
