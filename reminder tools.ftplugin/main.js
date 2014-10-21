@@ -12,7 +12,7 @@ define(function(require, exports, module) {
 		dateLogic = require('../smalltime.ftplugin/main.js'),
 		Editor;
 
-	function updateAndReadForLink(dctArgs) {
+	function updateAndReadForLink(Editor, dctArgs) {
 
 		var	lstResults = translateDateTags(Editor, dctArgs),
 			node = lstResults[0], strLine = node.line(),
@@ -27,7 +27,7 @@ define(function(require, exports, module) {
 			strTag = lstHeat[i];
 			if (strTag.charAt(0) !== '@') {strTag = ('@' + strTag);}
 			if (strLine.indexOf(strTag) !== -1) {
-				if (i > 2) {i=2;}
+				if (i > 2) i=2;
 				dctReturn.heat = i+1;
 				break;
 			}
@@ -38,18 +38,13 @@ define(function(require, exports, module) {
 		if (oMatch) {
 			dctReturn.uuid = oMatch[1];
 			dctReturn.text = strText.substring(0, oMatch.index-1);
-		} else {
-			dctReturn.text = strText;
-		}
+		} else dctReturn.text = strText;
 
 		//translate any linklabel
 		if (strLabel) {
 			dteAlarm=dctReturn['alarmtime'];
-			if (dteAlarm) {
-				strLabel=dateLogic.timeEmoji(strLabel, dteAlarm);
-			} else {
-				strLabel=dateLogic.timeEmoji(strLabel);
-			}
+			if (dteAlarm) strLabel=dateLogic.timeEmoji(strLabel, dteAlarm);
+			else strLabel=dateLogic.timeEmoji(strLabel);
 		} else strLabel='??';
 		dctReturn['linklabel']=strLabel;
 
@@ -76,9 +71,8 @@ define(function(require, exports, module) {
 		// other date tags, and priority tags
 		if (typeof dctArgs !== 'undefined') {
 			strAlarmKey = dctArgs.alarm || 'alarm';
-			if (strAlarmKey.charAt(0) === '@') {
+			if (strAlarmKey.charAt(0) === '@')
 				strAlarmKey = strAlarmKey.substring(1);
-			}
 			lstUpdateTags = dctArgs.others || [];
 			lstUpdateTags.push(strAlarmKey);
 		}
@@ -86,9 +80,8 @@ define(function(require, exports, module) {
 		lngTag = lstUpdateTags.length;
 		for (i=0; i<lngTag; i++) {
 			strKey = lstUpdateTags[i];
-			if (strKey.charAt(0) === '@') {
+			if (strKey.charAt(0) === '@')
 				lstUpdateTags[i] = strKey.substring(1);
-			}
 		}
 		// normalise any date or date adjustment phrases in date tags to ISO
 		tree.beginUpdates();
@@ -110,9 +103,9 @@ define(function(require, exports, module) {
 					// collect dates for calling script
 					lngSeconds = ~~(dteUpdated.valueOf() / 1000);
 					dctReturn['alarmlist']=dateList(dteUpdated);
-					if (strKey !== strAlarmKey) {
+					if (strKey !== strAlarmKey)
 						dctReturn[strKey] = lngSeconds;
-					} else {
+					else {
 						dctReturn.alarm = lngSeconds;
 						dctReturn.datetext = strVal;
 						dctReturn.iso = strTrans;
