@@ -1,5 +1,5 @@
 property pTitle : "Open active FoldingText document in Marked 2"
-property pVer : "0.4"
+property pVer : "0.5"
 
 property pblnPositionWindows : true -- Set this to false to disable the window positioning at the end of the script
 
@@ -55,7 +55,7 @@ tell application "System Events"
 			if lstRightProc is not equal to {} then
 				try
 					set winRight to front window of (item 1 of lstRightProc)
-					tell winRight to set {position, size} to {{lngLeft, 22}, {lngWidth, lngAppHeight}}
+					tell winRight to set {position, size} to {{lngLeft, 22}, {lngWidth - lngLeft, lngAppHeight}}
 				end try
 			end if
 		end if
