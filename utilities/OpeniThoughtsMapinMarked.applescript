@@ -1,6 +1,5 @@
 property pTitle : "Open active iThoughtsX map in Marked 2"
-property pVer : "0.3"
-
+property pVer : "0.4"
 
 property pblnPositionWindows : true -- Set this to false to disable the window positioning at the end of the script
 
@@ -10,7 +9,7 @@ property pblnPositionWindows : true -- Set this to false to disable the window p
 property pX : missing value
 property pY : missing value
 
-property pstrMarked : "Marked 2"
+property pstrMarked : "Marked"
 property pstrThoughts : "iThoughtsX"
 
 property rLeftProportion : 1 / 3 -- what horizontal proportion of the screen for the app to the left ?
@@ -18,9 +17,9 @@ property plstApps : {pstrMarked, pstrThoughts} -- (first app to left, second to 
 
 tell application "System Events"
 	-- OPEN CURRENT iThoughtsX MAP IN MARKED 2
-	set lstProc to application processes where name contains pstrMarked
+	set lstProc to application processes where name contains pstrThoughts
 	if lstProc is not equal to {} then
-		set winThoughts to front window of (item 1 of lstProc)
+		set winThoughts to front window of item 1 of lstProc
 		set strURL to value of (attribute "AXDocument" of winThoughts)
 		
 		do shell script "open -a Marked\\ 2 " & quoted form of strURL
@@ -37,17 +36,23 @@ tell application "System Events"
 			set lngLeft to (lngWidth * rLeftProportion) as integer
 			
 			-- LEFT APP WINDOW
+			set lstLeftProc to {}
 			set lstLeftProc to application processes where name contains (item 1 of plstApps)
 			if lstLeftProc is not equal to {} then
+				try
 				set winLeft to front window of (item 1 of lstLeftProc)
 				tell winLeft to set {position, size} to {{0, 22}, {lngLeft, lngHeight}}
+				end try
 			end if
 			
 			-- RIGHT APP WINDOW
+			set lstRightProc to {}
 			set lstRightProc to application processes where name contains (item 2 of plstApps)
 			if lstRightProc is not equal to {} then
+				try
 				set winRight to front window of (item 1 of lstRightProc)
 				tell winRight to set {position, size} to {{lngLeft, 22}, {lngWidth, lngAppHeight}}
+				end try
 			end if
 		end if
 	end if
