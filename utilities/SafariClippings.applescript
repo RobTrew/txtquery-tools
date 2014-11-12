@@ -1,7 +1,7 @@
 function run() {
 	var dct = {
 		title: "Append Safari clipboard to end of file",
-		ver: "0.2",
+		ver: "0.3",
 		description: "Creates MD header with page title, url & timestamp",
 		author: "RobTrew copyright 2014",
 		license: "MIT",
@@ -12,10 +12,11 @@ function run() {
 		clipfile: "$HOME/Library/Application Support/Notational Velocity/Clippings.txt",
 		clipheadings: "### ",
 		urlprefix: "- ",
-		datetimetag: "clipped",
+		cliptimetag: "clip",
 		useNSnotification: false, // turn off for KeyBoard Maestro
 		clippedsound: 'Pop',
-		problemsound: 'Blow'
+		problemsound: 'Blow',
+		encoding: 'en_US.UTF-8'
 	};
 	//ALTERNATIVE SOUND NAMES
 	//Basso	Frog Hero Pop Submarine
@@ -75,25 +76,38 @@ function run() {
 		oWindow = appSafari.windows[0],
 		oTab = oWindow.tabs[0],
 		strName = oWindow.name(),
+		strURL = oTab.url(),
+		strLink = '[' + strName + '](' + strURL + ')',
 		strHeading, strRefce, strCmd,
-		strPrefix = '',
+		strClip = '',
 		strQuotedPath = '"' + dctOptions.clipfile + '"',
 		oBriefNotify = $.BriefNotify.alloc.init,
 		strMsg, strDetail, strSound = '',
+		strLastPage='',
+		strTag='@' + dctOptions.cliptimetag + "(" + fmtTP(new Date()) + ")",
 		varResult;
 
 	app.includeStandardAdditions = true;
+	
+	// Get most recent link (if any, in clippings file)
+	strCMD="CLIPFILE=" + strQuotedPath + ";if [ -e \"$CLIPFILE\" ]; then cat -n \"$CLIPFILE\" | sort -t: -k 1nr,1 | grep -o -m 1 \'\\[.*\\](.*)\' ; fi"
+	try {
+		strLastPage=app.doShellScript(strCMD);
+	} catch (e) { strLastPage=''};
+	
+	if (strLastPage !== strLink) {
+		// Creating new heading from web page name and MD link to URL
+		strHeading = dctOptions.clipheadings + strName;
+		strRefce = dctOptions.urlprefix + strLink;
+		strClip = [strHeading, strRefce, ''].join('\n') + '\n\n';
+		
+		// and append heading and clipboard text to the end of the file
+		strCMD = 'LANG=' + dctOptions.encoding + '; echo ' + shellEscaped(strClip) + ' >> ' + strQuotedPath +
+			'; pbpaste >> ' + strQuotedPath + ' ; printf " ' + strTag + '\n\n" >> ' + strQuotedPath;
+	} else {
+		strCMD = 'LANG=' + dctOptions.encoding + '; pbpaste >> ' + strQuotedPath + ' ; printf " ' + strTag + '\n\n" >> ' + strQuotedPath;
+	}
 
-	// Creating heading from web page name and MD link to URL
-	strHeading = dctOptions.clipheadings + strName + '  @' +
-		dctOptions.datetimetag + "(" + fmtTP(new Date()) + ")";
-	strRefce = dctOptions.urlprefix +
-		'[' + oWindow.name() + '](' + oTab.url() + ')';
-	strPrefix = [strHeading, strRefce, ''].join('\n') + '\n\n';
-
-	// and append heading and clipboard text to the end of the file
-	strCMD = 'echo ' + shellEscaped(strPrefix) + ' >> ' + strQuotedPath +
-		'; pbpaste >> ' + strQuotedPath + ' ; printf "\n\n" >> ' + strQuotedPath;
 
 	try {
 		varResult = app.doShellScript(strCMD);
@@ -103,7 +117,7 @@ function run() {
 
 	if (!varResult) {
 		strMsg = "Appended to " + dctOptions.clipfile;
-		strDetail = strPrefix;
+		strDetail = strLink;
 		strSound = dctOptions.clippedsound;
 	} else {
 		strMsg = "NOT clipped ...";
