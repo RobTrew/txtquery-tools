@@ -16,7 +16,7 @@ function run() {
 	var appSafari = Application("Safari"),
 		lstWindows = appSafari.windows();
 
-	if (lstWindows.length < 2 || lstWindows[0].id === -1) return '';
+	if (lstWindows.length < 1 || lstWindows[0].id === -1) return '';
 
 	var app = Application.currentApplication(),
 		oTab = appSafari.windows[0].tabs[0],
