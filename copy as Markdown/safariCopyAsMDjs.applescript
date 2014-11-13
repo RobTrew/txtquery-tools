@@ -5,6 +5,15 @@
 //
 function run() {
 	/*jshint multistr: true */
+	
+	//var dct = {
+	//	title: "Copy as Markdown (for Safari)",
+	//	ver: "0.1",
+	//	description: "Runs HTML of Safari selection through html2text.py",
+	//	author: "RobTrew copyright 2014",
+	//	license: "MIT",
+	//	site: "https://github.com/RobTrew/txtquery-tools"
+	//};
 
 	// Compacted string of simple .js code for copying Safari selection as HTML
 	var strFnHTMLSeln = "function selnAsHTML(){var c=window.getSelection(),\
@@ -22,7 +31,7 @@ function run() {
 		oTab = appSafari.windows[0].tabs[0],
 		strHTML = appSafari.doJavaScript(strFnHTMLSeln, { in : oTab }),
 		strCMD, lstPath, strPyPath;
-
+		
 	// APPLY html2text.py (must be in the same folder as this script) to convert to MD
 	// Also copy to clibboard
 	app.includeStandardAdditions = true;
