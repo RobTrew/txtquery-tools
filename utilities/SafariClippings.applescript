@@ -103,9 +103,9 @@ function run() {
 		
 		// and append heading and clipboard text to the end of the file
 		strCMD = 'LANG=' + dctOptions.encoding + '; echo ' + shellEscaped(strClip) + ' >> ' + strQuotedPath +
-			'; pbpaste >> ' + strQuotedPath + ' ; printf " ' + strTag + '\n\n" >> ' + strQuotedPath;
+			'; pbpaste -Prefer txt >> ' + strQuotedPath + ' ; printf " ' + strTag + '\n\n" >> ' + strQuotedPath;
 	} else {
-		strCMD = 'LANG=' + dctOptions.encoding + '; pbpaste >> ' + strQuotedPath + ' ; printf " ' + strTag + '\n\n" >> ' + strQuotedPath;
+		strCMD = 'LANG=' + dctOptions.encoding + '; pbpaste -Prefer txt >> ' + strQuotedPath + ' ; printf " ' + strTag + '\n\n" >> ' + strQuotedPath;
 	}
 
 
@@ -129,6 +129,6 @@ function run() {
 		$.NSUserNotificationCenter.defaultUserNotificationCenter.delegate = oBriefNotify;
 		postNote(strMsg, strDetail, strSound);
 	}
-	return strDetail;
+	return strLink;
 
 }
