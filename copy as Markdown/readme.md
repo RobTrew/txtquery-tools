@@ -14,15 +14,14 @@
 
 ### Installation
 - Use OS X Yosemite Script Editor to save a copy of [safariCopyAsMDjs.applescript](./safariCopyAsMDjs.applescript) as a compiled Javascript .scpt file
-		![SaveAsJavasScript-scpt.png](./SaveAsJavasScript-scpt.png)
+
+![](./SaveAsJavasScript-scpt.png)
 		
 - <font color=red>Place a copy of the [html2text.py](https://github.com/aaronsw/html2text) text file in the same folder as this script</font>.
 
 - Assign a keyboard shortcut to safariCopyAsMDjs.scpt 
 	- with something like [Keyboard Maestro](http://www.keyboardmaestro.com)
-			![KMAction.png](./KMAction.png)
-	- or [Fastscripts](http://www.red-sweater.com/fastscripts/) 
 
-
-http://www.red-sweater.com/fastscripts/
-
+![](./KMAction.png)
+			
+- or [Fastscripts](http://www.red-sweater.com/fastscripts/) 
