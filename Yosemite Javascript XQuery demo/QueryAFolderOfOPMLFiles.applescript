@@ -5,7 +5,7 @@
 // 2. Run this script, choosing (from the dialog which pops up) the folder containing the OPML files
 
 
-// Robin Trew Feb 2014 
+// Copyright Robin Trew Feb 2015 
 
 
 function run() {
