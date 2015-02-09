@@ -1,0 +1,133 @@
+
+
+# aggregate @priority(1)
+
+## make earth @priority(2)
+- think derivation hypothesis @start(2015-03-02) @priority(3) @due(2015-02-07 04:00) @pom(15) @done(2015-02-20 10:00) @status(grade)
+	- aggregate earth problem with lambda @start(2015-03-08) @status(grade) @priority(1) @alert(2015-03-01 14:30) @pom(85) @mins(40) @due(2015-03-01 17:30)
+	- aggregate termite mound company in the forest
+	- call mountain time in a boat @priority(1)
+- work water problem @pom(90) @start(2015-02-16)
+	- summarise weaver theorem after breakfast @pom(20) @priority(1) @due(2015-02-23 10:30) @status(grade) @alert(2015-03-04 20:30) @start(2015-03-08)
+	- try problem derivation along the river @start(2015-02-03) @priority(1) @alert(2015-02-26 15:00) @status(grade) @pom(70) @done(2015-02-28 14:00)
+	- think thing company on the sea @status(wait) @mins(35) @done(2015-02-19 18:00)
+- work mountain company @priority(3) @status(grade) @pom(60) @due(2015-02-15 07:30) @start(2015-02-05) @alert(2015-02-11 10:00)
+	- call mountain life in the forest @start(2015-02-12) @done(2015-02-02 22:00) @mins(20) @pom(15) @due(2015-02-07 20:00) @alert(2015-02-19 05:00) @priority(3)
+	- give method earth before supper @start(2015-02-03) @due(2015-02-19 20:30) @alert(2015-02-16 06:00) @done(2015-03-06 10:30) @status(wait) @pom(35) @priority(1)
+	- call method earth after breakfast @alert(2015-02-21 05:30) @done(2015-02-05 23:00) @priority(3) @due(2015-02-21 17:00) @start(2015-02-27) @pom(90)
+
+## think time @mins(95) @due(2015-02-05 01:00)
+- drink weaver sandwich @start(2015-03-08)
+	- give water contradiction in the forest @mins(85)
+	- aggregate footsoldier sandwich along the river @due(2015-02-13 13:00) @status(read) @done(2015-02-08 00:30) @priority(3)
+	- derive thing umbrella with lambda @status(grade) @mins(10) @start(2015-02-12) @priority(3) @alert(2015-02-12 03:00) @due(2015-02-08 08:00)
+- drink thing question @due(2015-02-15 14:00) @mins(25) @done(2015-02-02 09:00)
+	- link toothbrush contradiction on the sea
+	- give termite mound derivation while commuting @status(grade) @priority(3) @pom(15) @due(2015-02-23 23:00) @alert(2015-02-06 22:30) @mins(95)
+	- work footsoldier assumption in the forest @alert(2015-02-19 17:00) @start(2015-02-07) @priority(3) @due(2015-02-26 23:30)
+- call mountain theorem @mins(5) @done(2015-02-17 19:00) @start(2015-02-17) @priority(1) @due(2015-02-19 03:30) @alert(2015-02-19 04:30)
+	- think company book on the mountain @start(2015-02-10) @mins(30) @priority(3)
+	- derive group derivation at home @priority(2)
+	- derive system earth on the sea @done(2015-02-03 06:30) @priority(3) @start(2015-02-09) @due(2015-02-23 22:30) @status(read) @mins(10)
+
+## give earth @pom(40) @start(2015-03-04) @status(grade)
+- call system weaver @status(read)
+	- work world group by a bridge @due(2015-02-20 22:00) @pom(55) @priority(2)
+	- think umbrella problem before supper @start(2015-03-08) @done(2015-02-05 07:00) @status(grade) @alert(2015-02-06 22:00) @priority(2) @due(2015-02-18 02:00) @mins(45)
+	- aggregate system problem at home @done(2015-02-09 05:00) @due(2015-02-22 07:00) @status(wait) @start(2015-02-17)
+- work water company @status(throw) @start(2015-02-04) @alert(2015-02-27 21:00)
+	- think umbrella theorem in a boat @done(2015-02-09 01:00) @status(throw) @priority(3) @due(2015-02-16 20:00) @alert(2015-02-10 18:00)
+	- give life problem in a boat @pom(45)
+	- call group thing with lemma @done(2015-02-17) @pom(35) @due(2015-03-02 01:00) @alert(2015-02-03 14:00) @start(2015-02-09) @priority(3) @status(wait)
+- work umbrella assumption @due(2015-02-27 06:30)
+	- winnow system water in a boat @mins(70) @pom(75) @priority(1)
+	- think book theorem while commuting @pom(20) @status(throw) @alert(2015-02-28 07:00) @mins(55) @start(2015-02-11)
+	- winnow problem time after breakfast @start(2015-02-14)
+
+# call @start(2015-03-02) @alert(2015-02-21 21:00)
+
+## link thing @start(2015-03-06) @mins(65) @pom(90) @priority(1) @due(2015-02-16 13:30) @alert(2015-02-28 15:00)
+- give mountain function @pom(50) @priority(1)
+	- winnow book hypothesis while commuting @mins(50) @done(2015-02-09 11:00) @start(2015-02-25) @priority(3) @alert(2015-03-01 08:00) @status(throw) @due(2015-02-12 14:30)
+	- winnow earth life while commuting
+	- drink book system under the maples
+- summarise school hypothesis @alert(2015-02-22 20:00) @start(2015-02-03)
+	- winnow book time while commuting @start(2015-02-25) @priority(2) @done(2015-03-04 23:00)
+	- build footsoldier company before supper @done(2015-02-03 01:30) @alert(2015-02-16 11:00) @mins(20)
+	- drink method weaver by a bridge @pom(25) @alert(2015-02-09) @start(2015-02-26)
+- derive time sandwich @done(2015-02-15 15:00) @alert(2015-02-19 07:00) @start(2015-03-05) @due(2015-03-03 00:30) @status(grade)
+	- think question theorem with lambda @due(2015-03-01 19:00) @mins(95)
+	- think number theorem after breakfast @pom(60) @mins(25)
+	- call toothbrush weaver in a boat @status(wait) @mins(25) @pom(20)
+
+## call earth @priority(1) @start(2015-03-06) @pom(50) @status(throw)
+- build weaver derivation @start(2015-03-01) @alert(2015-02-04 01:00) @done(2015-03-04 20:00)
+	- build number group while commuting @start(2015-02-21) @mins(10) @done(2015-02-02 04:00) @due(2015-03-03 10:00) @status(wait) @pom(55) @alert(2015-02-02 08:00)
+	- try derivation group along the river @status(wait)
+	- work toothbrush life at lunch @priority(2) @done(2015-02-13 20:00) @status(wait) @mins(15) @due(2015-02-04 02:00) @pom(45)
+- summarise derivation weaver @pom(10) @priority(2) @alert(2015-03-03 03:00) @done(2015-02-24 07:00) @status(wait)
+	- build method school in a boat @mins(15) @start(2015-02-11) @status(read) @done(2015-02-21 00:30)
+	- try water life by a bridge @start(2015-03-01) @priority(1) @due(2015-03-03 13:00) @status(throw) @mins(65) @alert(2015-02-18 02:00)
+	- aggregate derivation program on the mountain @due(2015-02-05 16:00) @priority(3) @mins(65) @alert(2015-02-03 16:00) @pom(60) @start(2015-03-05)
+- winnow water time @alert(2015-02-15 13:30) @pom(60) @priority(2) @mins(80)
+	- drink thing company at the office
+	- give system assumption before supper @pom(10) @due(2015-02-28 09:00) @start(2015-02-17) @priority(1)
+	- think problem question tomorrow morning @done(2015-02-15 19:30) @priority(1) @status(wait) @alert(2015-02-18 09:30) @start(2015-02-02) @due(2015-02-21 16:00)
+
+## build earth @pom(80) @alert(2015-02-28 22:00) @mins(40) @start(2015-03-07) @priority(1) @status(grade)
+- work number school
+	- build life theorem by a bridge @start(2015-02-23) @priority(2) @done(2015-03-04 17:30) @pom(55) @due(2015-03-04 18:00)
+	- call group thing at lunch @alert(2015-02-13 09:30) @start(2015-02-25) @pom(50)
+	- give group group at the office @done(2015-02-09 06:00) @due(2015-02-17 10:00)
+- make time company @start(2015-03-05) @priority(3) @pom(80) @status(grade) @alert(2015-02-25 15:30) @due(2015-02-09 22:30) @done(2015-02-14 08:30)
+	- winnow toothbrush weaver tomorrow morning @done(2015-02-21 15:00) @status(wait)
+	- build program contradiction tomorrow morning @due(2015-02-14 18:30) @status(wait)
+	- call world life under the maples @start(2015-02-14) @pom(60) @alert(2015-03-08 22:30) @done(2015-03-04 05:00)
+- drink weaver world @status(grade) @done(2015-02-26 20:00) @due(2015-02-25 13:30) @alert(2015-02-06 05:00) @mins(25) @start(2015-02-12) @priority(3)
+	- build mountain function on the sea
+	- make termite mound book by a bridge @due(2015-02-09 01:00) @done(2015-02-22 19:30) @priority(1)
+	- winnow earth weaver in a boat @pom(60) @start(2015-02-26) @priority(3) @due(2015-02-22 13:00)
+
+# aggregate @start(2015-02-24) @alert(2015-02-02 12:00) @priority(1) @due(2015-02-14 19:00) @mins(35) @done(2015-02-28 03:00) @status(grade)
+
+## build number @alert(2015-03-07 23:00) @status(grade) @due(2015-02-25 10:00) @pom(95)
+- derive program question @pom(95) @done(2015-02-05 15:30) @start(2015-02-03)
+	- give problem world with lambda @mins(70) @due(2015-02-16 13:00) @done(2015-02-15 04:30) @status(throw) @priority(3)
+	- give company thing by a bridge
+	- winnow company school with lambda @alert(2015-02-09 18:00)
+- build system theorem @pom(65)
+	- winnow thing group in a boat @done(2015-02-13 17:00) @pom(60)
+	- build termite mound weaver after breakfast @start(2015-02-28) @due(2015-03-02 21:00) @status(throw) @pom(75) @priority(2) @alert(2015-02-08 20:00)
+	- give problem assumption at home @start(2015-02-09) @alert(2015-02-26 22:30)
+- try water question @done(2015-03-02 13:00)
+	- work umbrella thing along the river @start(2015-03-01) @pom(70) @due(2015-03-01 16:00) @mins(95) @alert(2015-02-02 01:30) @priority(2)
+	- work company footsoldier in the forest @start(2015-02-11) @due(2015-02-23 01:30)
+	- build derivation question while commuting
+
+## build life @pom(75) @start(2015-03-01) @done(2015-02-09) @priority(1) @mins(85) @alert(2015-02-09 10:30) @due(2015-02-14 13:30)
+- winnow life thing @start(2015-02-15)
+	- try group company while commuting @start(2015-02-12) @done(2015-02-06 13:00) @alert(2015-02-20 16:30) @mins(30) @status(grade) @pom(15) @priority(2)
+	- derive water function along the river @mins(95) @due(2015-02-26 04:30) @alert(2015-02-19 06:00) @done(2015-02-22 22:00) @start(2015-02-08) @status(grade) @pom(15)
+	- give number footsoldier at the office @start(2015-02-22) @status(wait) @priority(2) @mins(60) @done(2015-03-02 12:00)
+- summarise question function @done(2015-03-01 15:00) @due(2015-03-03 00:30) @alert(2015-02-07 18:30) @status(read) @start(2015-02-23)
+	- drink number derivation under the maples @priority(2) @pom(85) @status(read)
+	- give time question on the sea
+	- make earth umbrella at home @priority(3)
+- make program earth @mins(80) @status(read) @priority(3)
+	- winnow derivation company at the office @priority(1) @start(2015-02-21) @due(2015-02-06 20:30)
+	- give time footsoldier before supper
+	- drink footsoldier life in a boat @due(2015-02-03 02:30) @alert(2015-02-04 07:00)
+
+## make mountain @done(2015-03-04 05:00) @priority(3) @alert(2015-02-28 13:00) @status(throw) @mins(65)
+- drink thing hypothesis @due(2015-02-27 13:00) @status(wait) @mins(65) @pom(70) @done(2015-02-08 11:00) @alert(2015-02-06 22:00) @priority(1)
+	- work question problem after breakfast @start(2015-02-15) @due(2015-03-07 08:30) @done(2015-02-08 06:30) @status(grade) @mins(70) @priority(1) @pom(30)
+	- drink question water with lambda
+	- try question weaver while commuting @done(2015-02-10 11:30) @due(2015-03-06 07:00) @mins(65)
+- give mountain group @priority(1) @start(2015-02-11) @mins(25) @due(2015-03-07 01:00)
+	- give question hypothesis at home @due(2015-02-22 12:30)
+	- work world derivation while commuting @mins(40) @alert(2015-03-02 07:30) @status(grade) @done(2015-02-04 10:00) @due(2015-02-16 03:30) @start(2015-02-22)
+	- winnow company group at home
+- drink thing life
+	- try life world at home @status(wait) @done(2015-02-16 17:00) @pom(95) @mins(35) @due(2015-02-05 11:30) @start(2015-02-18) @priority(3)
+	- drink water question with lambda
+	- winnow number problem with lemma @priority(1) @mins(30)
