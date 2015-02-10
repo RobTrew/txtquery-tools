@@ -34,8 +34,10 @@ The results will be displayed in [Marked 2](http://marked2app.com).
 
 ##### References
 
-- [XQuery 1.0](http://www.w3.org/TR/xquery/)
+- [XQuery/FLWOR Expression](http://en.wikibooks.org/wiki/XQuery/FLWOR_Expression)
 - [XQuery – Search Across a Variety of XML Data](http://shop.oreilly.com/product/9780596006341.do)
+- [XQuery 1.0](http://www.w3.org/TR/xquery/)
+
 - [NSXMLNode.objectsForQuery](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSXMLNode_Class/index.html#//apple_ref/occ/instm/NSXMLNode/objectsForXQuery:error:)
 
 
