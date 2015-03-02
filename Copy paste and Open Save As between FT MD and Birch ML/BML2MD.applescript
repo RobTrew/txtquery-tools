@@ -266,7 +266,7 @@ function run() {
 		if (!strHTML)
 			strInPath = (
 				app.chooseFile({
-					withPrompt: "Choose <UL><LI> HTML file:"
+					withPrompt: "Choose BML (<UL><LI> HTML) file:"
 				})
 			).toString(),
 			strHTML = strInPath ? readTextFromFile(strInPath) : '';
@@ -311,7 +311,7 @@ function run() {
 			}).toString();
 
 			nsMD = $.NSString.alloc.initWithUTF8String(strMD);
-			nsMD.writeToFileAtomically(strOutPath, true);
+			nsMD.writeToFileAtomicallyEncodingError(strOutPath, false, $.NSUTF8StringEncoding, null);
 			strMsg = "MD saved to " + strOutName;
 			app.displayNotification(strMsg, {
 				withTitle: "UL HTML --> MD ",
