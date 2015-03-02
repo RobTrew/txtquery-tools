@@ -2,7 +2,7 @@ function run() {
 	'use strict';
 	/* jshint multistr: true */
 	var pTitle = "FT save as Birch bml/html outline",
-		pVer = "0.9",
+		pVer = "0.11",
 		pAuthor = "Rob Trew",
 		pSite = "https://github.com/RobTrew/txtquery-tools",
 		pComment =
@@ -14,7 +14,7 @@ function run() {
 		",
 		pblnDebug = 0,
 		pblnToFile = 1, // SAVE AS AN BML FILE ?
-		pblnToClipboard = 1; // COPY BML TO CLIPBOARD ?
+		pblnToClipboard = 0; // COPY BML TO CLIPBOARD ?
 
 
 	//OPTIONS: 
@@ -32,7 +32,7 @@ function run() {
 	var fnScript =
 		function (editor, options) {
 			// FoldingText code here
-			
+
 			// SHARED REGEXES
 			var rgxAmp = /&/g,
 				rgxApos = /\'/g,
@@ -40,12 +40,15 @@ function run() {
 				rgxLt = /</g,
 				rgxGt = />/g,
 				rgxCode = /`([^\n\r]+)`/g,
-				rgxBold = /\*\*([^\n\r]+)\*\*/g,
-				rgxItalic = /\*([^\n\r]+)\*/g;
+				rgxBold = /\*\*([^\*\n\r]+)\*\*/g,
+				rgxItalic = /[\*_]([^\*_\n\r]+)[\*_]/g,
+				rgxImage = /!\[([^\]]*)]\(([^(]+)\)/g,
+				rgxLink = /\[([^\]]+)]\(([^(]+)\)/g;
+
 
 			// FIND THE ROOT NODES AMONG THE SELECTED LINES
 			// (Ignoring any children of lines already seen)
-			
+
 			// editorState --> [ftNode]
 			function selectedRoots() {
 				var lstRoots = [],
@@ -72,6 +75,7 @@ function run() {
 					if (oNode.type() !== 'empty') {
 						dctNode = {
 							text: oNode.text(),
+							line: oNode.line(),
 							posn: oNode.lineTextStart(),
 							type: oNode.type(),
 							parent: oParent
@@ -94,16 +98,7 @@ function run() {
 			}
 
 
-			// ** --> <b>; * --> <i>, ` --> <code>
-			function mdHTML(strMD) {
-				return strMD.replace(
-					rgxBold, '<b>$1</b>'
-				).replace(
-					rgxItalic, '<i>$1</i>'
-				).replace(
-					rgxCode, '<code>$1</code>'
-				);
-			}
+
 
 
 			// TRANSLATE A LIST OF {txt, chiln} NODES AND THEIR DESCENDANTS INTO UL
@@ -154,27 +149,76 @@ function run() {
 						strDeeper = strIndent + '  ',
 						strChildIndent = strDeeper + '  ',
 						blnCollapsed = blnHidden,
+						blnFencing = false,
 						dctTags, lstChiln, dctNode, oChild,
-						strKey, strID;
+						strKey, strID, strTypePfx, strType, strText, strLang;
+
+					// strMDLink.replace.match --> strOut
+					function fnLinkMD2HTML(match, p1, p2) {
+						return '<a href=' + quoteAttr(p2) + '>' + p1 + '</a>';
+					}
+
+					// strMDImg.replace.match --> strOut
+					function fnImgMD2HTML(match, p1, p2) {
+						return '<img alt=' + p1 + ' src=' + quoteAttr(p2) + '>';
+					}
+
+					// ** --> <b>; * --> <i>, ` --> <code>, []() --> <a> ![]() --> <img> 
+					function mdHTML(strMD) {
+						return strMD.replace(
+							rgxBold, '<b>$1</b>'
+						).replace(
+							rgxItalic, '<i>$1</i>'
+						).replace(
+							rgxCode, '<code>$1</code>'
+						).replace(
+							rgxImage, fnImgMD2HTML
+						).replace(
+							rgxLink, fnLinkMD2HTML
+						);
+					}
 
 					for (var i = 0, lng = lstNest.length; i < lng; i++) {
 						dctNode = lstNest[i];
-						
+
 						// Locally unique identifier [A-Za-z0-9_]{8}
 						strID = localUID(8);
+
+						// FT type of node
+						strType = dctNode.type;
 						strOut = strOut + strIndent + strLiStart +
-							' id="' + strID + '"';
+							' id="' + strID + '" data-type="' + strType + '"';
+
+
+						strTypePfx = strType.substring(0, 2);
+						if (blnFencing || strTypePfx === 'fe') {
+
+							if (strType.length > 10) {
+								strText = '';
+								blnFencing = (strType === 'fencedcodetopboundary');
+								if (blnFencing) {
+									strLang = dctNode.text.substring(3).trim();
+									if (strLang)
+										strOut = strOut + ' data-language="' + strLang + '"';
+								}
+							} else strText = entityEncoded(dctNode.line);
+						} else strText = mdHTML(dctNode.text);
+
 
 						// ANY FURTHER ATTRIBUTES OF THE LI
 						dctTags = dctNode.tags;
-						// if (dctTags) {
-						// 	for (strKey in dctTags) {
-						// 		strOut = strOut + ' data-' + strKey +
-						// 			'=' + quoteAttr(dctTags[strKey]);
-						// 	}
-						// }
-						strOut = strOut + strParentClose + strDeeper + strPStart +
-							mdHTML(dctNode.text) + strPClose;
+						if (dctTags) {
+							for (strKey in dctTags) {
+								if (strKey !== 'language') { //??
+									strOut = strOut + ' data-' + strKey +
+										'=' + quoteAttr(dctTags[strKey]);
+								}
+							}
+						}
+
+
+						strOut = strOut + strParentClose + strDeeper +
+							strPStart + strText + strPClose;
 
 						// wrap any children in a <ul> before closing the <li>
 						lstChiln = dctNode.nest;
@@ -196,7 +240,7 @@ function run() {
 
 					return strOut;
 				}
-				
+
 				// WALK THROUGH THE TREE, BUILDING AN ul OUTLINE STRING
 				strOutline = ulOutline(lstRoots, '      ', false);
 
@@ -211,7 +255,7 @@ function run() {
 			}
 
 
-			
+
 			// n --> strRandom  (first alphabetic, then AlphaNumeric | '_'
 			function localUID(lngChars) {
 				var strAlphaSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
@@ -219,13 +263,13 @@ function run() {
 					strFullSet = strAlphaSet + strOtherSet,
 					lngFull = strFullSet.length,
 					str = strAlphaSet.charAt(Math.random() * strAlphaSet.length | 0),
-					lngRest = lngChars-1;
-					
+					lngRest = lngChars - 1;
+
 				while (lngRest--)
 					str = str + strFullSet.charAt(Math.random() * lngFull | 0);
 				return str;
 			}
-	
+
 			// str --> str
 			function quoteAttr(s) {
 				return '"' + (('' + s) /* Forces the conversion to string. */
@@ -235,7 +279,7 @@ function run() {
 					.replace(rgxLt, '&lt;')
 					.replace(rgxGt, '&gt;')) + '"';
 			}
-			
+
 			// str --> str
 			function entityEncoded(str) {
 				return str.replace(/[\u00A0-\u9999<>\&]/gim, function (i) {
@@ -319,8 +363,10 @@ function run() {
 		strUL = fnProcess({
 			script: fnScript.toString(),
 			withOptions: {
-				wholedoc: pblnWholeDoc			}
+				wholedoc: pblnWholeDoc
+			}
 		});
+
 
 		if (strUL.indexOf('<!DOCTYPE html>' !== 1)) {
 			if (pblnToClipboard) {
@@ -342,7 +388,8 @@ function run() {
 					if (pathul) {
 						strUlPath = pathul.toString();
 						nsul = $.NSString.alloc.initWithUTF8String(strUL);
-						nsul.writeToFileAtomicallyEncodingError(strUlPath, false, $.NSUTF8StringEncoding, null);
+						nsul.writeToFileAtomicallyEncodingError(
+							strUlPath, false, $.NSUTF8StringEncoding, null);
 					}
 				} else strMsg =
 					"Save active file before exporting to BML (HTML <UL>) outline ...";
