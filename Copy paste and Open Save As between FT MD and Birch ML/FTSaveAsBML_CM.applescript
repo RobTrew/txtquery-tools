@@ -11,6 +11,9 @@ function run() {
 			- Each <li> has a <p> element, and may have a nested <ul>\
 			- FoldingText @key(value) pairs become <li> attributes with string values\
 			- FoldingText @tags with no value ? <li> attributes with value 1\
+			\
+			- This version uses CommonMark rather than FT line type names for\
+			  compatibility with Jesse Grosjean's Birch-Markdown package\
 		",
 		pblnDebug = 0,
 		pblnToFile = 1, // SAVE AS AN BML FILE ?
@@ -165,17 +168,19 @@ function run() {
 
 					// ** --> <b>; * --> <i>, ` --> <code>, []() --> <a> ![]() --> <img> 
 					function mdHTML(strMD) {
-						return strMD.replace(
-							rgxBold, '<b>$1</b>'
-						).replace(
-							rgxItalic, '<i>$1</i>'
-						).replace(
-							rgxCode, '<code>$1</code>'
-						).replace(
-							rgxImage, fnImgMD2HTML
-						).replace(
-							rgxLink, fnLinkMD2HTML
-						);
+						if (strMD !== '```') {
+							return strMD.replace(
+								rgxBold, '<b>$1</b>'
+							).replace(
+								rgxItalic, '<i>$1</i>'
+							).replace(
+								rgxCode, '<code>$1</code>'
+							).replace(
+								rgxImage, fnImgMD2HTML
+							).replace(
+								rgxLink, fnLinkMD2HTML
+							);
+						} else return '';
 					}
 
 					for (var i = 0, lng = lstNest.length; i < lng; i++) {
@@ -183,11 +188,12 @@ function run() {
 
 						// Locally unique identifier [A-Za-z0-9_]{8}
 						strID = localUID(8);
+						strOut = strOut + strIndent + strLiStart + ' id="' + strID + '"';
 
-						// FT type of node
-						strType = dctNode.type;
-						strOut = strOut + strIndent + strLiStart +
-							' id="' + strID + '" data-type="' + strType + '"';
+						// Any CommonMark name of FT type of node
+						strType = cmName(dctNode.type);
+						if (strType)
+							strOut = strOut + ' data-type="' + strType + '"';
 
 
 						strTypePfx = strType.substring(0, 2);
@@ -252,6 +258,32 @@ function run() {
 				strUL = [strHead, strOutline, strTail].join('');
 				//strUl = strOutline;
 				return strUL;
+			}
+
+
+
+			// strFTNodeType --> strCommonMarkNodeType
+			function cmName(str) {
+				var strInit = str[0],
+					strNext = str[1],
+					strName = '';
+
+				if (strInit > 'h') {
+					if (strInit > 'o' && (strNext === 'n')) strName = 'Bullet';
+					else if (strNext === 'r') strName = 'Ordered';
+				} else if (strInit < 'h') {
+					if (strInit === 'f' && (strNext === 'e')) strName = 'CodeBlock';
+					else if (strInit < 'c') {
+						if (strNext === 'l') strName = 'BlockQuote';
+						else if (strNext === 'o') strName = 'Paragraph';
+					} else if (strInit === 'c') strName = 'CodeBlock';
+				} else {
+					strNext = str[1];
+					if (strNext < 'o') strName = 'Header';
+					else if (strNext > 'o') strName = 'HtmlBlock';
+					else strName = 'HorizontalRule';
+				}
+				return strName;
 			}
 
 
