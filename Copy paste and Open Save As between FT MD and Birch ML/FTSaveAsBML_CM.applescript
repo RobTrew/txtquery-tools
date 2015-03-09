@@ -2,7 +2,7 @@ function run() {
 	'use strict';
 	/* jshint multistr: true */
 	var pTitle = "FT save as Birch bml/html outline",
-		pVer = "0.12",
+		pVer = "0.14",
 		pAuthor = "Rob Trew",
 		pSite = "https://github.com/RobTrew/txtquery-tools",
 		pComment =
@@ -156,6 +156,38 @@ function run() {
 						dctTags, lstChiln, dctNode, oChild,
 						strKey, strID, strTypePfx, strType, strText, strLang;
 
+					var C = 99,
+						E = 101,
+						F = 102,
+						H = 104,
+						L = 108,
+						N = 110,
+						O = 111,
+						R = 114;
+
+					// strFoldingTextTypeName --> strCommonMarkTypeName
+ 					function cmName(str) {
+						var iInit = str.charCodeAt(0),
+							iNext = str.charCodeAt(1),
+							strName = '';
+
+						if (iInit > H) {
+							if (iInit > O && (iNext === N)) strName = 'Bullet';
+							else if (iNext === R) strName = 'Ordered';
+						} else if (iInit < H) {
+							if (iInit === F && (iNext === E)) strName = 'CodeBlock';
+							else if (iInit < C) {
+								if (iNext === L) strName = 'BlockQuote';
+								else if (iNext === O) strName = 'Paragraph';
+							} else if (iInit === C) strName = 'CodeBlock';
+						} else {
+							if (iNext < O) strName = 'Header';
+							else if (iNext > O) strName = 'HtmlBlock';
+							else strName = 'HorizontalRule';
+						}
+						return strName;
+					}
+
 					// strMDLink.replace.match --> strOut
 					function fnLinkMD2HTML(match, p1, p2) {
 						return '<a href=' + quoteAttr(p2) + '>' + p1 + '</a>';
@@ -259,34 +291,6 @@ function run() {
 				//strUl = strOutline;
 				return strUL;
 			}
-
-
-
-			// strFTNodeType --> strCommonMarkNodeType
-			function cmName(str) {
-				var strInit = str[0],
-					strNext = str[1],
-					strName = '';
-
-				if (strInit > 'h') {
-					if (strInit > 'o' && (strNext === 'n')) strName = 'Bullet';
-					else if (strNext === 'r') strName = 'Ordered';
-				} else if (strInit < 'h') {
-					if (strInit === 'f' && (strNext === 'e')) strName = 'CodeBlock';
-					else if (strInit < 'c') {
-						if (strNext === 'l') strName = 'BlockQuote';
-						else if (strNext === 'o') strName = 'Paragraph';
-					} else if (strInit === 'c') strName = 'CodeBlock';
-				} else {
-					strNext = str[1];
-					if (strNext < 'o') strName = 'Header';
-					else if (strNext > 'o') strName = 'HtmlBlock';
-					else strName = 'HorizontalRule';
-				}
-				return strName;
-			}
-
-
 
 			// n --> strRandom  (first alphabetic, then AlphaNumeric | '_'
 			function localUID(lngChars) {
