@@ -156,64 +156,7 @@ function run() {
 						dctTags, lstChiln, dctNode, oChild,
 						strKey, strID, strTypePfx, strType, strText, strLang;
 
-					var C = 99,
-						E = 101,
-						F = 102,
-						H = 104,
-						L = 108,
-						N = 110,
-						O = 111,
-						R = 114;
 
-					// strFoldingTextTypeName --> strCommonMarkTypeName
- 					function cmName(str) {
-						var iInit = str.charCodeAt(0),
-							iNext = str.charCodeAt(1),
-							strName = '';
-
-						if (iInit > H) {
-							if (iInit > O && (iNext === N)) strName = 'Bullet';
-							else if (iNext === R) strName = 'Ordered';
-						} else if (iInit < H) {
-							if (iInit === F && (iNext === E)) strName = 'CodeBlock';
-							else if (iInit < C) {
-								if (iNext === L) strName = 'BlockQuote';
-								else if (iNext === O) strName = 'Paragraph';
-							} else if (iInit === C) strName = 'CodeBlock';
-						} else {
-							if (iNext < O) strName = 'Header';
-							else if (iNext > O) strName = 'HtmlBlock';
-							else strName = 'HorizontalRule';
-						}
-						return strName;
-					}
-
-					// strMDLink.replace.match --> strOut
-					function fnLinkMD2HTML(match, p1, p2) {
-						return '<a href=' + quoteAttr(p2) + '>' + p1 + '</a>';
-					}
-
-					// strMDImg.replace.match --> strOut
-					function fnImgMD2HTML(match, p1, p2) {
-						return '<img alt=' + p1 + ' src=' + quoteAttr(p2) + '>';
-					}
-
-					// ** --> <b>; * --> <i>, ` --> <code>, []() --> <a> ![]() --> <img> 
-					function mdHTML(strMD) {
-						if (strMD !== '```') {
-							return strMD.replace(
-								rgxBold, '<b>$1</b>'
-							).replace(
-								rgxItalic, '<i>$1</i>'
-							).replace(
-								rgxCode, '<code>$1</code>'
-							).replace(
-								rgxImage, fnImgMD2HTML
-							).replace(
-								rgxLink, fnLinkMD2HTML
-							);
-						} else return '';
-					}
 
 					for (var i = 0, lng = lstNest.length; i < lng; i++) {
 						dctNode = lstNest[i];
@@ -291,6 +234,69 @@ function run() {
 				//strUl = strOutline;
 				return strUL;
 			}
+
+			// Letters at start of FT type names [for cmName()]
+			var C = 99,
+				E = 101,
+				F = 102,
+				H = 104,
+				L = 108,
+				N = 110,
+				O = 111,
+				R = 114;
+
+
+			// strFoldingTextTypeName --> strCommonMarkTypeName
+			function cmName(str) {
+				var iInit = str.charCodeAt(0),
+					iNext = str.charCodeAt(1),
+					strName = '';
+
+				if (iInit > H) {
+					if (iInit > O && (iNext === N)) strName = 'Bullet';
+					else if (iNext === R) strName = 'Ordered';
+				} else if (iInit < H) {
+					if (iInit === F && (iNext === E)) strName = 'CodeBlock';
+					else if (iInit < C) {
+						if (iNext === L) strName = 'BlockQuote';
+						else if (iNext === O) strName = 'Paragraph';
+					} else if (iInit === C) strName = 'CodeBlock';
+				} else {
+					if (iNext < O) strName = 'Header';
+					else if (iNext > O) strName = 'HtmlBlock';
+					else strName = 'HorizontalRule';
+				}
+				return strName;
+			}
+
+			// strMDLink.replace.match --> strOut
+			function fnLinkMD2HTML(match, p1, p2) {
+				return '<a href=' + quoteAttr(p2) + '>' + p1 + '</a>';
+			}
+
+			// strMDImg.replace.match --> strOut
+			function fnImgMD2HTML(match, p1, p2) {
+				return '<img alt=' + p1 + ' src=' + quoteAttr(p2) + '>';
+			}
+
+			// ** --> <b>; * --> <i>, ` --> <code>, []() --> <a> ![]() --> <img> 
+			function mdHTML(strMD) {
+				if (strMD !== '```') {
+					return strMD.replace(
+						rgxBold, '<b>$1</b>'
+					).replace(
+						rgxItalic, '<i>$1</i>'
+					).replace(
+						rgxCode, '<code>$1</code>'
+					).replace(
+						rgxImage, fnImgMD2HTML
+					).replace(
+						rgxLink, fnLinkMD2HTML
+					);
+				} else return '';
+			}
+
+
 
 			// n --> strRandom  (first alphabetic, then AlphaNumeric | '_'
 			function localUID(lngChars) {
