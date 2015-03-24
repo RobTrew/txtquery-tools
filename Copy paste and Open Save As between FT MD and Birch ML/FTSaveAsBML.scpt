@@ -1,8 +1,8 @@
-function run() {
+JsOsaDAS1.001.00bplist00ÑVscript_1<function run() {
 	'use strict';
 	/* jshint multistr: true */
 	var pTitle = "FT save as Birch bml/html outline",
-		pVer = "0.14",
+		pVer = "0.15",
 		pAuthor = "Rob Trew",
 		pSite = "https://github.com/RobTrew/txtquery-tools",
 		pComment =
@@ -118,7 +118,7 @@ function run() {
 						'    <style type="text/css">p { white-space: pre-wrap; }</style>',
 						'  </head>',
 						'  <body>',
-						'    <ul id="Birch.Root">\n'
+						'    <ul id="Birch">\n'
 					],
 					lstUlTail = [
 						'    </ul>',
@@ -452,4 +452,4 @@ function run() {
 		return false;
 	}
 	return "Saved to " + strUlPath;
-}
+}                              1Rjscr  úÞÞ­

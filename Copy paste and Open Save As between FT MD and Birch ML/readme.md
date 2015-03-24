@@ -2,7 +2,7 @@
 
 A couple of Yosemite Javascript for Applications [scripts](https://github.com/RobTrew/txtquery-tools/tree/master/Copy%20paste%20and%20Open%20Save%20As%20between%20FT%20MD%20and%20Birch%20ML) which can be run from Script Editor or assigned to keystrokes with something like Keyboard Maestro.
 
-1. [FoldingText / MD --> Birch outline (CommonMark compatible)](https://github.com/RobTrew/txtquery-tools/blob/master/Copy%20paste%20and%20Open%20Save%20As%20between%20FT%20MD%20and%20Birch%20ML/FTSaveAsBML_CM.applescript)
+1. [FoldingText / MD --> Birch outline](https://github.com/RobTrew/txtquery-tools/blob/master/Copy%20paste%20and%20Open%20Save%20As%20between%20FT%20MD%20and%20Birch%20ML/FTSaveAsBML.applescript)
 3. [Birch outline --> FoldingText MD format](https://github.com/RobTrew/txtquery-tools/blob/master/Copy%20paste%20and%20Open%20Save%20As%20between%20FT%20MD%20and%20Birch%20ML/BML2MD.applescript)
 
 [Both](https://github.com/RobTrew/txtquery-tools/tree/master/Copy%20paste%20and%20Open%20Save%20As%20between%20FT%20MD%20and%20Birch%20ML) can be used either for clipboard copy paste or for file system Open and Save As

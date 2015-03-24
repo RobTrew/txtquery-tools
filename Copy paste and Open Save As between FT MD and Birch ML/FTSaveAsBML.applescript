@@ -2,7 +2,7 @@ function run() {
 	'use strict';
 	/* jshint multistr: true */
 	var pTitle = "FT save as Birch bml/html outline",
-		pVer = "0.12",
+		pVer = "0.15",
 		pAuthor = "Rob Trew",
 		pSite = "https://github.com/RobTrew/txtquery-tools",
 		pComment =
@@ -11,6 +11,9 @@ function run() {
 			- Each <li> has a <p> element, and may have a nested <ul>\
 			- FoldingText @key(value) pairs become <li> attributes with string values\
 			- FoldingText @tags with no value ? <li> attributes with value 1\
+			\
+			- This version uses CommonMark rather than FT line type names for\
+			  compatibility with Jesse Grosjean's Birch-Markdown package\
 		",
 		pblnDebug = 0,
 		pblnToFile = 1, // SAVE AS AN BML FILE ?
@@ -115,7 +118,7 @@ function run() {
 						'    <style type="text/css">p { white-space: pre-wrap; }</style>',
 						'  </head>',
 						'  <body>',
-						'    <ul id="Birch.Root">\n'
+						'    <ul id="Birch">\n'
 					],
 					lstUlTail = [
 						'    </ul>',
@@ -153,41 +156,19 @@ function run() {
 						dctTags, lstChiln, dctNode, oChild,
 						strKey, strID, strTypePfx, strType, strText, strLang;
 
-					// strMDLink.replace.match --> strOut
-					function fnLinkMD2HTML(match, p1, p2) {
-						return '<a href=' + quoteAttr(p2) + '>' + p1 + '</a>';
-					}
 
-					// strMDImg.replace.match --> strOut
-					function fnImgMD2HTML(match, p1, p2) {
-						return '<img alt=' + p1 + ' src=' + quoteAttr(p2) + '>';
-					}
-
-					// ** --> <b>; * --> <i>, ` --> <code>, []() --> <a> ![]() --> <img> 
-					function mdHTML(strMD) {
-						return strMD.replace(
-							rgxBold, '<b>$1</b>'
-						).replace(
-							rgxItalic, '<i>$1</i>'
-						).replace(
-							rgxCode, '<code>$1</code>'
-						).replace(
-							rgxImage, fnImgMD2HTML
-						).replace(
-							rgxLink, fnLinkMD2HTML
-						);
-					}
 
 					for (var i = 0, lng = lstNest.length; i < lng; i++) {
 						dctNode = lstNest[i];
 
 						// Locally unique identifier [A-Za-z0-9_]{8}
 						strID = localUID(8);
+						strOut = strOut + strIndent + strLiStart + ' id="' + strID + '"';
 
-						// FT type of node
-						strType = dctNode.type;
-						strOut = strOut + strIndent + strLiStart +
-							' id="' + strID + '" data-type="' + strType + '"';
+						// Any CommonMark name of FT type of node
+						strType = cmName(dctNode.type);
+						if (strType)
+							strOut = strOut + ' data-type="' + strType + '"';
 
 
 						strTypePfx = strType.substring(0, 2);
@@ -252,6 +233,67 @@ function run() {
 				strUL = [strHead, strOutline, strTail].join('');
 				//strUl = strOutline;
 				return strUL;
+			}
+
+			// Letters at start of FT type names [for cmName()]
+			var C = 99,
+				E = 101,
+				F = 102,
+				H = 104,
+				L = 108,
+				N = 110,
+				O = 111,
+				R = 114;
+
+
+			// strFoldingTextTypeName --> strCommonMarkTypeName
+			function cmName(str) {
+				var iInit = str.charCodeAt(0),
+					iNext = str.charCodeAt(1),
+					strName = '';
+
+				if (iInit > H) {
+					if (iInit > O && (iNext === N)) strName = 'Bullet';
+					else if (iNext === R) strName = 'Ordered';
+				} else if (iInit < H) {
+					if (iInit === F && (iNext === E)) strName = 'CodeBlock';
+					else if (iInit < C) {
+						if (iNext === L) strName = 'BlockQuote';
+						else if (iNext === O) strName = 'Paragraph';
+					} else if (iInit === C) strName = 'CodeBlock';
+				} else {
+					if (iNext < O) strName = 'Header';
+					else if (iNext > O) strName = 'HtmlBlock';
+					else strName = 'HorizontalRule';
+				}
+				return strName;
+			}
+
+			// strMDLink.replace.match --> strOut
+			function fnLinkMD2HTML(match, p1, p2) {
+				return '<a href=' + quoteAttr(p2) + '>' + p1 + '</a>';
+			}
+
+			// strMDImg.replace.match --> strOut
+			function fnImgMD2HTML(match, p1, p2) {
+				return '<img alt=' + p1 + ' src=' + quoteAttr(p2) + '>';
+			}
+
+			// ** --> <b>; * --> <i>, ` --> <code>, []() --> <a> ![]() --> <img> 
+			function mdHTML(strMD) {
+				if (strMD !== '```') {
+					return strMD.replace(
+						rgxBold, '<b>$1</b>'
+					).replace(
+						rgxItalic, '<i>$1</i>'
+					).replace(
+						rgxCode, '<code>$1</code>'
+					).replace(
+						rgxImage, fnImgMD2HTML
+					).replace(
+						rgxLink, fnLinkMD2HTML
+					);
+				} else return '';
 			}
 
 
