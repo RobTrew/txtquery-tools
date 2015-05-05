@@ -1,4 +1,4 @@
-// Translate BML HTML file (or clipboard contents) to FT / MD text
+JsOsaDAS1.001.00bplist00ÑVscript_$,// Translate BML HTML file (or clipboard contents) to FT / MD text
 // and copy output to clipboard, or save as text file.
 
 // RobTrew 2015
@@ -380,4 +380,4 @@ function run() {
 	}
 
 	return main()
-}
+}                              $Bjscr  úÞÞ­
