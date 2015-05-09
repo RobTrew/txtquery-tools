@@ -1,4 +1,4 @@
-#### FoldingText MD ⇄ FT for Atom light HTML (.ftml) outlines
+#### FoldingText MD ⇄ FoldingText for Atom HTML (.ftml) outlines
 
 A couple of Yosemite Javascript for Applications Scripts which can be run from Script Editor or assigned to keystrokes with something like Keyboard Maestro.
 
