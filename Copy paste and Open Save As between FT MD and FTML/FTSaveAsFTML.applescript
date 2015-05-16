@@ -2,7 +2,7 @@ function run() {
 	'use strict';
 	/* jshint multistr: true */
 	var pTitle = "FT save as FT for Atom ftml (html) outline",
-		pVer = "0.16",
+		pVer = "0.17",
 		pAuthor = "Rob Trew",
 		pSite = "https://github.com/RobTrew/txtquery-tools",
 		pComment =
@@ -45,7 +45,6 @@ function run() {
 				rgxItalic = /[\*_]([^\*_\n\r]+)[\*_]/g,
 				rgxImage = /!\[([^\]]*)]\(([^(]+)\)/g,
 				rgxLink = /\[([^\]]+)]\(([^(]+)\)/g;
-
 
 			// FIND THE ROOT NODES AMONG THE SELECTED LINES
 			// (Ignoring any children of lines already seen)
@@ -280,21 +279,21 @@ function run() {
 			// ** --> <b>; * --> <i>, ` --> <code>, []() --> <a> ![]() --> <img> 
 			function mdHTML(strMD) {
 				if (strMD !== '```') {
-					return strMD.replace(
-						rgxBold, '<b>$1</b>'
-					).replace(
-						rgxItalic, '<i>$1</i>'
-					).replace(
-						rgxCode, '<code>$1</code>'
-					).replace(
-						rgxImage, fnImgMD2HTML
-					).replace(
-						rgxLink, fnLinkMD2HTML
+					return entityEncoded(
+						strMD.replace(
+							rgxBold, '<b>$1</b>'
+						).replace(
+							rgxItalic, '<i>$1</i>'
+						).replace(
+							rgxCode, '<code>$1</code>'
+						).replace(
+							rgxImage, fnImgMD2HTML
+						).replace(
+							rgxLink, fnLinkMD2HTML
+						)
 					);
 				} else return '';
 			}
-
-
 
 			// n --> strRandom  (first alphabetic, then AlphaNumeric | '_'
 			function localUID(lngChars) {

@@ -1,4 +1,4 @@
-JsOsaDAS1.001.00bplist00бVscript_1+function run() {
+JsOsaDAS1.001.00bplist00бVscript_1,function run() {
 	'use strict';
 	/* jshint multistr: true */
 	var pTitle = "FT save as FT for Atom ftml (html) outline",
@@ -14,8 +14,8 @@ JsOsaDAS1.001.00bplist00бVscript_1+function run() {
 			- This version uses CommonMark rather than FT line type names \
 		",
 		pblnDebug = 0,
-		pblnToFile = 1, // SAVE AS AN FTML FILE ?
-		pblnToClipboard = 0; // COPY FTML TO CLIPBOARD ?
+		pblnToFile = 0, // SAVE AS AN FTML FILE ?
+		pblnToClipboard = 1; // COPY FTML TO CLIPBOARD ?
 
 
 	//OPTIONS: 
@@ -45,6 +45,7 @@ JsOsaDAS1.001.00bplist00бVscript_1+function run() {
 				rgxItalic = /[\*_]([^\*_\n\r]+)[\*_]/g,
 				rgxImage = /!\[([^\]]*)]\(([^(]+)\)/g,
 				rgxLink = /\[([^\]]+)]\(([^(]+)\)/g;
+
 
 			// FIND THE ROOT NODES AMONG THE SELECTED LINES
 			// (Ignoring any children of lines already seen)
@@ -449,4 +450,4 @@ JsOsaDAS1.001.00bplist00бVscript_1+function run() {
 		return false;
 	}
 	return "Saved to " + strUlPath;
-}                              1A jscr  њоо­
+}                              1Bjscr  њоо­
