@@ -253,9 +253,7 @@ function run() {
 		if (!lst) return;
 		i = lst.length;
 		if (i) {
-			while (i--) {
-				lst[i] = ObjC.unwrap(lst[i]);
-			}
+			while (i--) lst[i] = ObjC.unwrap(lst[i]);
 
 			if (blnOpenPerspectiveInMarked) {
 
