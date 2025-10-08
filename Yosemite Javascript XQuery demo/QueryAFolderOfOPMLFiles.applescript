@@ -239,6 +239,8 @@ function run() {
 		docXML = $.NSXMLDocument.alloc.initWithXMLStringOptionsError(
 			strXML, $.NSXMLDocumentXInclude, null
 		);
+		
+		return strXML
 
 		// THEN APPLY THE QUERY ...
 		lst = ObjC.unwrap(docXML.objectsForXQueryError(
